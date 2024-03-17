@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 14:10:02 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/03/17 16:01:12 by vsozonof         ###   ########.fr       */
+/*   Created: 2024/03/17 16:01:16 by vsozonof          #+#    #+#             */
+/*   Updated: 2024/03/17 16:08:39 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+void	initialize_struct(t_data *data)
 {
-	t_data	data;
-
-	initialize_struct(&data);
-	if (parsing_manager(&data, argc, argv))
-		return (1);
-	return (0);
+	data->map = NULL;
+	data->north_texture = NULL;
+	data->south_texture = NULL;
+	data->east_texture = NULL;
+	data->west_texture = NULL;
+	data->ceiling_color = NULL;
+	data->floor_color = NULL;
 }

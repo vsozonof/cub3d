@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:46:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/03/11 13:37:53 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:04:38 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,55 @@ int	is_valid_name(char *map_name)
 {
 	char	*ext;
 
-	ft_printf("\e[1;37m");
-	ft_printf("🧊 Cub3D: Checking file name ...\t");
-	ft_printf("\e[0;37m");
+	pr_msg(CHECK_F_NAME, 0);
 	ext = ft_strnstr(map_name, ".cub", ft_strlen(map_name));
-	if (ext[4] != '\0' || !ext)
+	if (!ext || ext[4] != '\0')
 	{
-		ft_printf("\r");
-		ft_printf("\e[1;31m");
-		ft_printf("🧊 Cub3D: Checking file name ...\tKO X\n");
-		ft_printf("\e[0;37m");
+		pr_msg(CHECK_F_NAME, 1);
 		return (pr_error("Invalid file name"));
 	}
-	ft_printf("\r");
-	ft_printf("\e[1;32m");
-	ft_printf("🧊 Cub3D: Checking file name ...\tOK ✔\n");
-	ft_printf("\e[0;37m");
+	pr_msg(CHECK_F_NAME, 2);
+	return (0);
+}
+
+int	open_map(char *map_name)
+{
+	int	fd;
+
+	pr_msg(OPEN_FILE, 0);
+	fd = open(map_name, O_RDONLY);
+	if (fd == -1)
+	{
+		pr_msg(OPEN_FILE, 1);
+		pr_error("open() failure.");
+		return (-1);
+	}
+	pr_msg(OPEN_FILE, 2);
+	return (fd);
+}
+
+int	read_map(t_data *data)
+{
+	char	*line;
+
+	pr_msg(READ_MAP, 0);
+	line = get_next_line(data->fd);
+	if (!line)
+	{
+		pr_msg(READ_MAP, 1);
+		return (pr_error("Map file is empty."));
+	}
+	while (line)
+	{
+		data->map = strjoin_and_free(data->map, line);
+		if (!data->map)
+		{
+			pr_msg(READ_MAP, 1);
+			return (pr_error("Malloc() error."));
+		}
+		line = get_next_line(data->fd);
+	}
+	pr_msg(READ_MAP, 2);
 	return (0);
 }
 
@@ -39,45 +72,22 @@ int	argument_checker(t_data *data)
 {
 	if (is_valid_name(data->map_name))
 		return (1);
-	ft_printf("\e[1;37m");
-	ft_printf("🧊 Cub3D: Opening file ...\t");
-	ft_printf("\e[0;37m");
-	data->fd = open(data->map_name, O_RDONLY);
+	data->fd = open_map(data->map_name);
 	if (data->fd == -1)
-	{
-		ft_printf("\r");
-		ft_printf("\e[1;31m");
-		ft_printf("🧊 Cub3D: Opening map file ...\t\tKO X\n");
-		ft_printf("\e[0;37m");
-		return (pr_error("open() failure."));
-	}
-	ft_printf("\r");
-	ft_printf("\e[1;32m");
-	ft_printf("🧊 Cub3D: Opening file ...\t\tOK ✔\n");
-	ft_printf("\e[0;37m");
+		return (1);
+	if (read_map(data))
+		return (1);
 	return (0);
 }
 
-int	parsing_manager(t_data *data, int argc, char **argv)
+int	is_there_enough_args(int n)
 {
-	pr_parsing_start();
-	ft_printf("\e[1;37m");
-	ft_printf("🧊 Cub3D: Checking argument number ...\t");
-	ft_printf("\e[0;37m");
-	if (argc != 2)
+	pr_msg(CHECK_N_ARG, 0);
+	if (n != 2)
 	{
-		ft_printf("\r");
-		ft_printf("\e[1;31m");
-		ft_printf("🧊 Cub3D: Checking argument number ...\tKO X\n");
-		ft_printf("\e[0;37m");
+		pr_msg(CHECK_N_ARG, 1);
 		return (pr_error("Invalid amount of arguments."));
 	}
-	ft_printf("\r");
-	ft_printf("\e[1;32m");
-	ft_printf("🧊 Cub3D: Checking argument number ...\tOK ✔\n");
-	ft_printf("\e[0;37m");
-	data->map_name = argv[1];
-	if (argument_checker(data))
-		return (1);
+	pr_msg(CHECK_N_ARG, 2);
 	return (0);
 }

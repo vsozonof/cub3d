@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   params_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 14:10:02 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/03/17 16:01:12 by vsozonof         ###   ########.fr       */
+/*   Created: 2024/03/17 16:03:08 by vsozonof          #+#    #+#             */
+/*   Updated: 2024/03/17 16:35:04 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+int	map_file_parser(t_data *data)
 {
-	t_data	data;
-
-	initialize_struct(&data);
-	if (parsing_manager(&data, argc, argv))
+	if (texture_path_getter(data, 0))
 		return (1);
+	if (color_code_getter(data, 0))
+		return (1);
+	// Check si tous les params ont été obtenus
 	return (0);
 }
