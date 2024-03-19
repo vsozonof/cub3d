@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:10:54 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/03/17 16:27:42 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:50:24 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,22 @@ int	texture_path_getter(t_data *data, int i)
 		if (data->map[i] == 'N' && data->map[i + 1] == 'O')
 		{
 			if (double_checker_1(data->map, &i, 1, data))
-				return (pr_error("Double north parameter detected."));
+				return (1);
 		}
 		else if (data->map[i] == 'S' && data->map[i + 1] == 'O')
 		{
 			if (double_checker_1(data->map, &i, 2, data))
-				return (pr_error("Double south parameter detected."));
+				return (1);
 		}
 		else if (data->map[i] == 'E' && data->map[i + 1] == 'A')
 		{
 			if (double_checker_1(data->map, &i, 3, data))
-				return (pr_error("Double east parameter detected."));
+				return (1);
 		}
 		else if (data->map[i] == 'W' && data->map[i + 1] == 'E')
 		{
 			if (double_checker_1(data->map, &i, 4, data))
-				return (pr_error("Double west parameter detected."));
+				return (1);
 		}
 		i++;
 	}
@@ -103,14 +103,14 @@ int	color_code_getter(t_data *data, int i)
 			if (!data->floor_color)
 				data->floor_color = extract_path(data->map, &i);
 			else
-				return (pr_error("Double floor color code detected."));
+				return (1);
 		}
 		else if (data->map[i] == 'C' && data->map[i + 1] == ' ')
 		{
 			if (!data->ceiling_color)
 				data->ceiling_color = extract_path(data->map, &i);
 			else
-				return (pr_error("Double ceiling color code detected."));
+				return (1);
 		}
 		i++;
 	}

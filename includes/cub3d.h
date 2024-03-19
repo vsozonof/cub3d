@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:11:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/03/17 16:28:47 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/03/19 08:31:36 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define CHECK_F_NAME	"Checking file name"
 # define OPEN_FILE		"Opening file"
 # define READ_MAP		"Reading map file"
+# define GET_PARAMS		"Gathering parameters"
 
 # include "../libft/includes/libft.h"
 # include "mlx.h"
@@ -55,6 +56,7 @@ char	*extract_path(char *str, int *i);
 // ! Printing
 void	pr_parsing_start(void);
 void	pr_msg(char *msg, int mode);
+void	pr_error_spe(char *msg, int *i);
 
 
 #endif
