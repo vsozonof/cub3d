@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:10:02 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/03/20 10:17:18 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:22:19 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ int	main(int argc, char **argv)
 	initialize_struct(&data);
 	if (parsing_manager(&data, argc, argv))
 		return (1);
-	exec_ta_vue(argc, argv);
+	// exec_ta_vue(argc, argv);
 	return (0);
 }
