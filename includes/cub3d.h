@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:11:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/03/19 08:31:36 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:21:27 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,31 @@ typedef struct s_data
 	int		fd;
 }	t_data;
 
+typedef struct s_game
+{
+	int		x;
+	int		y;
+	int		nb_item;
+	int		nb_exit;
+	int		nb_player;
+	int		p_x;
+	int		p_y;
+	int		exit_x;
+	int		exit_y;
+	int		exit;
+	int		p_mov;
+	int		mov;
+	void	*mlx;
+	void	*win;
+	char	**map;
+	char	*img_0;
+	char	*img_1;
+	char	*img_2;
+	char	*img_3;
+	char	*img_4;
+	char	*img_5;
+}		t_game;
+
 int		main(int argc, char **argv);
 void	initialize_struct(t_data *data);
 
@@ -57,6 +82,10 @@ char	*extract_path(char *str, int *i);
 void	pr_parsing_start(void);
 void	pr_msg(char *msg, int mode);
 void	pr_error_spe(char *msg, int *i);
+
+
+//graphic
+int	beginning_graphic(int argc, char **argv);
 
 
 #endif
