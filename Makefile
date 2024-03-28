@@ -6,7 +6,7 @@
 #    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 14:09:59 by vsozonof          #+#    #+#              #
-#    Updated: 2024/03/20 14:05:39 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/03/26 12:38:50 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS = main.c \
 	   parsing/texture_utils-1.c \
 	   parsing/printers/print-tools-1.c \
 	   graphic/graphic1.c \
+	   graphic/exemple_graphic.c \
 
 
 OBJS = $(SRCS:.c=.o)

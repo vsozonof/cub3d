@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:11:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/03/20 14:08:02 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:03:27 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_data
 // {
 // 	int		x;
 // 	int		y;
-// 	int		nb_item;
 // 	int		nb_exit;
 // 	int		nb_player;
 // 	int		p_x;
@@ -99,6 +98,12 @@ typedef struct s_rect
 	int color;
 }	t_rect;
 
+typedef struct s_info
+{
+    void	*mlx_ptr;
+    void	*win_ptr;
+}	t_info;
+
 int		main(int argc, char **argv);
 void	initialize_struct(t_data *data);
 
@@ -124,12 +129,12 @@ void	pr_error_spe(char *msg, int *i);
 
 //graphic
 void		img_pix_put(t_img *img, int x, int y, int color);
-int			render_rect(t_img *img, t_rect rect);
+int 		render_rect(t_info *info, t_rect rect);
 void		render_background(t_img *img, int color);
-int			handle_keypress(int keysym, t_data *data);
-int			render(t_data *data);
-int			exec_ta_vue(void);
-
-
+int			handle_keypress(int keysym, t_info *info);
+int			render(t_info *info);
+int			exec_manager(int argc, char **argv);
+int			exec_tmp(void);
+int			init_struct(t_game *game, char **argv);
 
 #endif

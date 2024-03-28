@@ -19,6 +19,6 @@ int	main(int argc, char **argv)
 	initialize_struct(&data);
 	if (parsing_manager(&data, argc, argv))
 		return (1);
-	// exec_ta_vue();
+	exec_manager(argc, argv);
 	return (0);
 }
