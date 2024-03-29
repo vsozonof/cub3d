@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:11:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/03/26 13:03:27 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/03/29 14:45:21 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,6 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct t_game
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_img	img;
-	int		cur_img;
-}	t_game;
-
 typedef struct s_rect
 {
 	int	x;
@@ -100,8 +92,15 @@ typedef struct s_rect
 
 typedef struct s_info
 {
-    void	*mlx_ptr;
-    void	*win_ptr;
+    void	*mlx;
+	void	*win;
+	t_img	img;
+	int		p_mov;
+	int		cur_img;
+	int		p_x;
+	int		p_y;
+	double	p_x_case;
+	double	p_y_case;
 }	t_info;
 
 int		main(int argc, char **argv);
@@ -133,8 +132,20 @@ int 		render_rect(t_info *info, t_rect rect);
 void		render_background(t_img *img, int color);
 int			handle_keypress(int keysym, t_info *info);
 int			render(t_info *info);
-int			exec_manager(int argc, char **argv);
+int			exec_manager(int argc, char **argv, t_data *data);
 int			exec_tmp(void);
-int			init_struct(t_game *game, char **argv);
+int			window_create(t_info *ptr);
+void		game_start(t_info *ptr);
+int			mouse_hook(t_info *ptr);
+int			get_key_hook(int keycode, t_info *ptr);
+void		close_windows_esc(t_info *ptr);
+int			essaie(t_data *data, t_info *ptr, char **argv);
+
+// graphic utils
+int			found_player_type(t_data *data);
+int			found_player_pos(char **argv);
+int			refresh_player_pos(char **argv, t_info *ptr);
+int			found_player_pos_x(char **argv);
+int			found_player_pos_y(char **argv);
 
 #endif

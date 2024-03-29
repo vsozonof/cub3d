@@ -6,14 +6,14 @@
 #    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 14:09:59 by vsozonof          #+#    #+#              #
-#    Updated: 2024/03/26 12:38:50 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/03/29 14:42:26 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -Iincludes -g3
+CFLAGS = -Wall -Werror -Wextra -Iincludes -I/usr/include -Imlx_linux -g3
 INCLUDES = -I/usr/include -Imlx
 
 BL=\033[1;34m
@@ -33,24 +33,26 @@ SRCS = main.c \
 	   parsing/printers/print-tools-1.c \
 	   graphic/graphic1.c \
 	   graphic/exemple_graphic.c \
+	   graphic/window_create.c \
+	   graphic/players_utils.c \
 
 
 OBJS = $(SRCS:.c=.o)
 
 RM = rm -f
 MLX_DIR = ./mlx
-MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
+MLX_FLAGS = -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
 
 all: init $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "\n$(RD)🧊 CUB3D -\t$(WH)$(BL)Linking $(OR)($<)$(WH)\r"
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -lreadline $(SRCS_LIB)
+	@$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) -o $(NAME) -lreadline $(SRCS_LIB)
 	@echo "                                   \r\c"
 
 %.o: %.c
 	@echo "$(RD)🧊 CUB3D -\t$(WH)$(BL)Compiling $(OR)($<)$(WH)\c\r"
-	@$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
+	@$(CC) $(CFLAGS) -Imlx_linux -c -o $@ $< $(INCLUDES)
 	@echo "                                   \r\c"
 
 init:
