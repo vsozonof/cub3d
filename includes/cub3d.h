@@ -6,12 +6,13 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:11:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/04/02 10:53:09 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/04/02 10:55:35 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
 
 # define CHECK_N_ARG	"Checking argument number"
 # define CHECK_F_NAME	"Checking file name"
@@ -21,8 +22,20 @@
 # define CHECK_PARAMS	"Checking parameters"
 # define INIT_MLX		"Initializing MiniLibX"
 
+#define WINDOW_WIDTH 600
+#define WINDOW_HEIGHT 300
+#define MLX_ERROR 1
+#define RED_PIXEL 0xFF0000
+#define GREEN_PIXEL 0xFF00
+#define WHITE_PIXEL 0xFFFFFF
+
 # include "../libft/includes/libft.h"
 # include "mlx.h"
+# include <stdlib.h>
+# include <stdio.h>
+# include <string.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 typedef struct s_data
 {
@@ -48,6 +61,61 @@ typedef struct s_utils
 	char	**floor_color;
 	char	**ceiling_color;
 }	t_utils;
+
+// typedef struct s_game
+// {
+// 	int		x;
+// 	int		y;
+// 	int		nb_exit;
+// 	int		nb_player;
+// 	int		p_x;
+// 	int		p_y;
+// 	int		exit_x;
+// 	int		exit_y;
+// 	int		exit;
+// 	int		p_mov;
+// 	int		mov;
+// 	void	*mlx;
+// 	void	*win;
+// 	char	**map;
+// 	char	*img_0;
+// 	char	*img_1;
+// 	char	*img_2;
+// 	char	*img_3;
+// 	char	*img_4;
+// 	char	*img_5;
+// }		t_game;
+
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp; /* bits per pixel */
+	int		line_len;
+	int		endian;
+}	t_img;
+
+typedef struct s_rect
+{
+	int	x;
+	int	y;
+	int width;
+	int height;
+	int color;
+}	t_rect;
+
+typedef struct s_info
+{
+    void	*mlx;
+	void	*win;
+	t_img	img;
+	int		p_mov;
+	int		cur_img;
+	int		p_x;
+	int		p_y;
+	double	p_x_case;
+	double	p_y_case;
+}	t_info;
 
 int		main(int argc, char **argv);
 void	initialize_struct(t_data *data, t_utils *utils);
@@ -87,5 +155,26 @@ void	pr_parsing_start(void);
 void	pr_msg(char *msg, int mode);
 void	pr_error_spe(char *msg, int *i);
 
+//graphic
+void		img_pix_put(t_img *img, int x, int y, int color);
+int 		render_rect(t_info *info, t_rect rect);
+void		render_background(t_img *img, int color);
+int			handle_keypress(int keysym, t_info *info);
+int			render(t_info *info);
+int			exec_manager(int argc, char **argv, t_data *data);
+int			exec_tmp(void);
+int			window_create(t_info *ptr);
+void		game_start(t_info *ptr);
+int			mouse_hook(t_info *ptr);
+int			get_key_hook(int keycode, t_info *ptr);
+void		close_windows_esc(t_info *ptr);
+int			essaie(t_data *data, t_info *ptr, char **argv);
+
+// graphic utils
+int			found_player_type(t_data *data);
+int			found_player_pos(char **argv);
+int			refresh_player_pos(char **argv, t_info *ptr);
+int			found_player_pos_x(char **argv);
+int			found_player_pos_y(char **argv);
 
 #endif

@@ -6,14 +6,14 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 14:09:59 by vsozonof          #+#    #+#              #
-#    Updated: 2024/03/30 14:17:36 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/04/02 10:55:56 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -Iincludes -g3
+CFLAGS = -Wall -Werror -Wextra -Iincludes -I/usr/include -Imlx_linux -g3
 INCLUDES = -I/usr/include -Imlx
 
 BL=\033[1;34m
@@ -34,13 +34,17 @@ SRCS = main.c \
 	   parsing/map_checker.c \
 	   parsing/wall_checker.c \
 	   parsing/printers/print-tools-1.c \
+	   graphic/graphic1.c \
+	   graphic/exemple_graphic.c \
+	   graphic/window_create.c \
+	   graphic/players_utils.c \
 
 
 OBJS = $(SRCS:.c=.o)
 
 RM = rm -f
 MLX_DIR = ./mlx
-MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
+MLX_FLAGS = -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
 
 all: init $(NAME)
 
@@ -51,7 +55,7 @@ $(NAME): $(OBJS)
 
 %.o: %.c
 	@echo "$(RD)🧊 CUB3D -\t$(WH)$(BL)Compiling $(OR)($<)$(WH)\c\r"
-	@$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
+	@$(CC) $(CFLAGS) -Imlx_linux -c -o $@ $< $(INCLUDES)
 	@echo "                                   \r\c"
 
 init:
