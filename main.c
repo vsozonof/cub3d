@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:10:02 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/03/28 10:40:38 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/02 10:54:14 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 int	main(int argc, char **argv)
 {
 	t_data	data;
+	t_utils	utils;
 
-	initialize_struct(&data);
-	if (parsing_manager(&data, argc, argv))
+	initialize_struct(&data, &utils);
+	if (parsing_manager(&data, argc, argv, &utils))
 		return (1);
 	exec_manager(argc, argv, &data);
 	return (0);
