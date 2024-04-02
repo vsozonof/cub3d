@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:40:16 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/03/29 14:46:26 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:08:57 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,9 @@ int	found_player_type(t_data *data)
 		i++;
 	}
 	return (0);
+}
+
+void	initialize_game(t_info *ptr)
+{
+	ptr->fov = 90; // 90 degres de FOV
 }

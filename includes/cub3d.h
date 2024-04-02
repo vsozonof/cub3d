@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:11:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/03/29 14:45:21 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:08:47 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct s_info
 	int		p_y;
 	double	p_x_case;
 	double	p_y_case;
+	int		fov;
 }	t_info;
 
 int		main(int argc, char **argv);
@@ -147,5 +148,6 @@ int			found_player_pos(char **argv);
 int			refresh_player_pos(char **argv, t_info *ptr);
 int			found_player_pos_x(char **argv);
 int			found_player_pos_y(char **argv);
+void		initialize_game(t_info *ptr);
 
 #endif
