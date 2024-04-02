@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:10:02 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/03/17 16:01:12 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/03/30 11:19:11 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 int	main(int argc, char **argv)
 {
 	t_data	data;
+	t_utils	utils;
 
-	initialize_struct(&data);
-	if (parsing_manager(&data, argc, argv))
+	initialize_struct(&data, &utils);
+	if (parsing_manager(&data, argc, argv, &utils))
 		return (1);
 	return (0);
 }

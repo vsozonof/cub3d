@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 14:09:59 by vsozonof          #+#    #+#              #
-#    Updated: 2024/03/17 16:23:20 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/03/30 14:17:36 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,11 @@ SRCS = main.c \
 	   parsing/main_parsing.c \
 	   parsing/init_struct.c \
 	   parsing/argument_checker.c \
-	   parsing/params_checker.c \
+	   parsing/params_checker-1.c \
+	   parsing/params_checker-2.c \
 	   parsing/texture_utils-1.c \
+	   parsing/map_checker.c \
+	   parsing/wall_checker.c \
 	   parsing/printers/print-tools-1.c \
 
 
@@ -43,7 +46,7 @@ all: init $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "\n$(RD)🧊 CUB3D -\t$(WH)$(BL)Linking $(OR)($<)$(WH)\r"
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -lreadline $(SRCS_LIB)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(SRCS_LIB) $(MLX_FLAGS)
 	@echo "                                   \r\c"
 
 %.o: %.c
@@ -53,14 +56,17 @@ $(NAME): $(OBJS)
 
 init:
 	make all -C ./libft
+	make all -C ./mlx
 
 clean:
 		make clean -C ./libft
+		make clean -C ./mlx
 		@$(RM) $(OBJS)
 		@echo "$(RD)🧊 CUB3D -\t$(WH)$(GR)All .o files were deleted !$(WH)"
 
 fclean: 
 		make fclean -C ./libft
+		make clean	-C ./mlx
 		@$(RM) $(NAME) $(OBJS)
 		@echo "$(RD)🧊 CUB3D -\t$(WH)$(GR)All .o files and binaries were deleted !$(WH)"
 
