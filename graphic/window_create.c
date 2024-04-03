@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 10:22:35 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 09:31:33 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:16:53 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	get_key_hook(int keycode, t_info *ptr)
 	if (keycode == 119 || keycode == 97 || keycode == 115
 		|| keycode == 100)
 	{
-		printf("wsh wsh\n");
 		// if (try_moove(ptr) == 0)
 		player_movement_minimap(ptr, ptr->p_mov);
 	}

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 09:16:21 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:18:39 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,31 @@ void	player_movement_minimap(t_info *ptr, int input)
 		x = x + 1;
 	ptr->p_y = y;
 	ptr->p_x = x;
+}
+
+void	wall_creation_minimap(t_info *ptr)
+{
+	int		i;
+	int		j;
+	int		x;
+	int		y;
+
+	i =((y = 0));
+	while (ptr->map[i])
+	{
+		j = 0;
+		x = WINDOW_WIDTH - 100;
+		while (ptr->map[i][j])
+		{
+			if (ptr->map[i][j] == '1')
+			{
+				render_rect(&ptr->img, (t_rect){x, y,
+				10, 10, RED_PIXEL});
+			}
+			x = x + 10;
+			j++;
+		}
+		y = y + 10;
+		i++;
+	}
 }

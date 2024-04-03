@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 09:22:43 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:15:32 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # define CHECK_PARAMS	"Checking parameters"
 # define INIT_MLX		"Initializing MiniLibX"
 
-#define WINDOW_WIDTH 600
-#define WINDOW_HEIGHT 300
+#define WINDOW_WIDTH 600 //longueur
+#define WINDOW_HEIGHT 300 //largueur
 #define MLX_ERROR 1
 #define RED_PIXEL 0xFF0000
 #define GREEN_PIXEL 0xFF00
@@ -114,6 +114,7 @@ typedef struct s_info
 	int		p_mov;
 	int		p_x;
 	int		p_y;
+	int		w_size;
 	int		fov;
 	char	**map;
 }	t_info;
@@ -191,6 +192,8 @@ void		player_movement_minimap(t_info *ptr, int input);
 int			get_key_hook(int keycode, t_info *ptr);
 int			try_moove(t_info *ptr);
 int			init_struct(t_info *ptr);
+void		wall_creation_minimap(t_info *ptr);
+void		show_db_tab(char **map);
 
 
 

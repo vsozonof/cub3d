@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 09:24:28 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:10:28 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,10 @@ int	make_minimap(t_info *ptr)//les position du joueur doit deprendre de sa pos d
 
 	// map_w = WINDOW_WIDTH / 100 * 10;
 	render_background(&ptr->img, WHITE_PIXEL);
-	render_rect(&ptr->img, (t_rect){WINDOW_WIDTH - 100, 0,
+	render_rect(&ptr->img, (t_rect){WINDOW_WIDTH - 100, 0, // le deuxieme est la hauteur
 				100, 100, GREEN_PIXEL});
 	// render_rect(&ptr->img, (t_rect){0, 0, 100, 100, RED_PIXEL});
+	wall_creation_minimap(ptr);
 	render_rect(&ptr->img, (t_rect){ptr->p_x, ptr->p_y,
 				5, 5, YELLOW_PIXEL});
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);

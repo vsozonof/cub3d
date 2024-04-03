@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:11:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 09:13:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:01:20 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,27 @@ void	struct_map(char **map, t_info *ptr)
 		i++;
 	}
 	ptr->map[i] = '\0';
+}
+
+void	show_db_tab(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	ft_printf("la map\n");
+	if (!map)
+		return ;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			ft_printf("%c", map[i][j]);
+			j++;
+		}
+		ft_printf("\n");
+		i++;
+	}
+	return ;
 }
