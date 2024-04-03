@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 10:22:35 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 08:10:11 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 08:13:07 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 // pour ca j'ai beosin de cree des pointeur de la mlx
 int	window_create(t_data *data, t_utils *utils)
 {
-	(void)data;
-	(void)utils;
 	// ptr->win = mlx_new_window(ptr->mlx, WINDOW_WIDTH,
 	// 				WINDOW_HEIGHT, "Cub3d");
 	// if (ptr->win == NULL)
@@ -23,7 +21,7 @@ int	window_create(t_data *data, t_utils *utils)
 	// ptr->fov = 90;
 	// essaie(data, ptr, utils);
 	// draw_player_minimap(data, ptr, utils);
-	minimap();
+	window_creation(data, utils);
 	// game_start(ptr);
 	// apres mettre image
 	return (0);

@@ -6,34 +6,11 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 08:09:37 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 08:34:05 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// int	minimap_manager(t_info *ptr)
-// {
-// 	if (ptr->win == NULL)
-//     {
-//         free(ptr->win);
-//         return (MLX_ERROR);
-//     }
-// 	ptr->img.mlx_img = mlx_new_image(ptr->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-// 	mlx_loop_hook(ptr->mlx, &render, ptr);
-//     mlx_hook(ptr->win, KeyPress, KeyPressMask, &handle_keypress, &ptr);
-
-//     mlx_loop(ptr->mlx);
-
-//     /* we will exit the loop if there's no window left, and execute this code */
-//     mlx_destroy_display(ptr->mlx);
-//     free(ptr->mlx);
-// 	// mlx_loop_hook(ptr->mlx, &render, ptr);
-// 	// mlx_hook(ptr->win, 17, 0, mouse_hook, ptr);
-// 	// mlx_key_hook(ptr->win, get_key_hook, ptr);
-// 	// mlx_loop(ptr->mlx);
-// 	return (0);
-// }
 
 void	img_pix_put(t_img *img, int x, int y, int color)
 {
@@ -104,16 +81,19 @@ int	render(t_info *ptr)
 	if (ptr->win == NULL)
 		return (1);
 	render_background(&ptr->img, WHITE_PIXEL);
-	render_rect(&ptr->img, (t_rect){WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100, 100, 100, GREEN_PIXEL});
-	render_rect(&ptr->img, (t_rect){0, 0, 100, 100, RED_PIXEL});
+	render_rect(&ptr->img, (t_rect){WINDOW_WIDTH - 100, 0,
+				100, 100, GREEN_PIXEL});
+	// render_rect(&ptr->img, (t_rect){0, 0, 100, 100, RED_PIXEL});
 
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
 
 	return (0);
 }
 
-int	minimap(void)
+int	window_creation(t_data *data, t_utils *utils)
 {
+	(void)data;
+	(void)utils;
 	t_info	ptr;
 
 	ptr.mlx = mlx_init();
@@ -125,16 +105,14 @@ int	minimap(void)
 		free(ptr.win);
 		return (MLX_ERROR);
 	}
-
-	/* Setup hooks */ 
 	ptr.img.mlx_img = mlx_new_image(ptr.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	
 	ptr.img.addr = mlx_get_data_addr(ptr.img.mlx_img, &ptr.img.bpp,
 			&ptr.img.line_len, &ptr.img.endian);
 
 	mlx_loop_hook(ptr.mlx, &render, &ptr);
-	mlx_hook(ptr.win, KeyPress, KeyPressMask, &handle_keypress, &ptr);
-
+	mlx_hook(ptr.win, 17, 0, mouse_hook, &ptr);
+	mlx_key_hook(ptr.win, get_key_hook, &ptr);
 	mlx_loop(ptr.mlx);
 
 	/* we will exit the loop if there's no window left, and execute this code */

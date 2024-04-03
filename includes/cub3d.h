@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 08:09:44 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 08:30:20 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct s_img
 {
 	void	*mlx_img;
 	char	*addr;
-	int		bpp; /* bits per pixel */
+	int		bpp;
 	int		line_len;
 	int		endian;
 }	t_img;
@@ -185,7 +185,8 @@ void		img_pix_put(t_img *img, int x, int y, int color);
 void		render_background(t_img *img, int color);
 int			render_rect(t_img *img, t_rect rect);
 int			handle_keypress(int keysym, t_info *ptr);
-int			minimap(void);
+int			window_creation(t_data *data, t_utils *utils);
+
 
 
 #endif
