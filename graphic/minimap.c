@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 08:34:05 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 09:24:28 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,28 @@ int	render(t_info *ptr)
 {
 	if (ptr->win == NULL)
 		return (1);
+	make_minimap(ptr);
+	return (0);
+}
+
+int	make_minimap(t_info *ptr)//les position du joueur doit deprendre de sa pos de depart
+{
+	// int		map_w;
+	// int		map_h;
+
+	// map_w = WINDOW_WIDTH / 100 * 10;
 	render_background(&ptr->img, WHITE_PIXEL);
 	render_rect(&ptr->img, (t_rect){WINDOW_WIDTH - 100, 0,
 				100, 100, GREEN_PIXEL});
 	// render_rect(&ptr->img, (t_rect){0, 0, 100, 100, RED_PIXEL});
-
+	render_rect(&ptr->img, (t_rect){ptr->p_x, ptr->p_y,
+				5, 5, YELLOW_PIXEL});
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
-
 	return (0);
 }
+
+// render_rect(&ptr->img, (t_rect){WINDOW_WIDTH - 50, 50,
+				// 5, 5, YELLOW_PIXEL});
 
 int	window_creation(t_data *data, t_utils *utils)
 {
@@ -96,28 +109,34 @@ int	window_creation(t_data *data, t_utils *utils)
 	(void)utils;
 	t_info	ptr;
 
-	ptr.mlx = mlx_init();
-	if (ptr.mlx == NULL)
-		return (MLX_ERROR);
-	ptr.win = mlx_new_window(ptr.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "my window");
-	if (ptr.win == NULL)
-	{
-		free(ptr.win);
-		return (MLX_ERROR);
-	}
+	init_struct(&ptr);
+	struct_map(utils->map, &ptr);
 	ptr.img.mlx_img = mlx_new_image(ptr.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	
 	ptr.img.addr = mlx_get_data_addr(ptr.img.mlx_img, &ptr.img.bpp,
 			&ptr.img.line_len, &ptr.img.endian);
-
 	mlx_loop_hook(ptr.mlx, &render, &ptr);
 	mlx_hook(ptr.win, 17, 0, mouse_hook, &ptr);
 	mlx_key_hook(ptr.win, get_key_hook, &ptr);
 	mlx_loop(ptr.mlx);
-
-	/* we will exit the loop if there's no window left, and execute this code */
 	mlx_destroy_image(ptr.mlx, ptr.img.mlx_img);
 	mlx_destroy_display(ptr.mlx);
 	free(ptr.mlx);
+	return (0);
+}
+
+int		init_struct(t_info *ptr)
+{
+	ptr->mlx = mlx_init();
+	if (ptr->mlx == NULL)
+		return (MLX_ERROR);
+	ptr->win = mlx_new_window(ptr->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "my window");
+	if (ptr->win == NULL)
+	{
+		free(ptr->win);
+		return (MLX_ERROR);
+	}
+	ptr->p_x = WINDOW_WIDTH - 50; // trouver pos joueur
+	ptr->p_y = 50; // trouver pos joueur
+	ptr->p_mov = 0;
 	return (0);
 }

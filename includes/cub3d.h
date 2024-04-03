@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 08:30:20 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 09:22:43 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,8 @@ typedef struct s_info
 	int		p_mov;
 	int		p_x;
 	int		p_y;
-	double	p_x_case;
-	double	p_y_case;
 	int		fov;
+	char	**map;
 }	t_info;
 
 int		main(int argc, char **argv);
@@ -176,6 +175,7 @@ int			refresh_player_pos(char **argv, t_info *ptr);
 int			found_player_pos_x(char **argv);
 int			found_player_pos_y(char **argv);
 void		initialize_game(t_info *ptr);
+void		struct_map(char **map, t_info *ptr);
 
 //mini_map
 int			minimap_manager(t_info *ptr);
@@ -186,6 +186,11 @@ void		render_background(t_img *img, int color);
 int			render_rect(t_img *img, t_rect rect);
 int			handle_keypress(int keysym, t_info *ptr);
 int			window_creation(t_data *data, t_utils *utils);
+int			make_minimap(t_info *ptr);
+void		player_movement_minimap(t_info *ptr, int input);
+int			get_key_hook(int keycode, t_info *ptr);
+int			try_moove(t_info *ptr);
+int			init_struct(t_info *ptr);
 
 
 

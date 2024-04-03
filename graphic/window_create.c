@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 10:22:35 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 08:13:07 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 09:24:57 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,33 @@ int	get_key_hook(int keycode, t_info *ptr)
 	// 	|| keycode == 100)
 	// {
 	// 	if (try_moove(ptr) == 0)
-	// 		player_movement(ptr, ptr->p_mov);
+	// 		player_movement_minimap(ptr, ptr->p_mov);
 	// }
+	return (0);
+}
+
+int	try_moove(t_info *ptr)
+{
+	if (ptr->p_mov == 1)
+	{
+		if (ptr->map[ptr->p_y - 1][ptr->p_x] == '1')
+			return (-1);
+	}
+	else if (ptr->p_mov == 2)
+	{
+		if (ptr->map[ptr->p_y][ptr->p_x - 1] == '1')
+			return (-1);
+	}
+	else if (ptr->p_mov == 3)
+	{
+		if (ptr->map[ptr->p_y + 1][ptr->p_x] == '1')
+			return (-1);
+	}
+	else if (ptr->p_mov == 4)
+	{
+		if (ptr->map[ptr->p_y][ptr->p_x + 1] == '1')
+			return (-1);
+	}
 	return (0);
 }
 
