@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:40:16 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/03/29 15:08:57 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:13:26 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	found_player_pos_x(char **argv)
 				return (j);
 			}
 			j++;
-			printf("%c\n", argv[i][j]);
 		}
 		i++;
 	}
@@ -61,27 +60,28 @@ int	found_player_pos_y(char **argv)
 	return (-1);
 }
 
-int	found_player_type(t_data *data)
+int	found_player_type(t_utils *utils)
 {
 	int i;
+	int	j;
 
 	i = 0;
-	while (data->map[i])
+	while (utils->map[i])
 	{
-		if (data->map[i] == 'N')
-			return (1);
-		else if (data->map[i] == 'S')
-			return (2);
-		else if (data->map[i] == 'E')
-			return (3);
-		else if (data->map[i] == 'W')
-			return (4);
+		j = 0;
+		while (utils->map[i][j])
+		{
+			if (utils->map[i][j] == 'N')
+				return (1);
+			else if (utils->map[i][j] == 'S')
+				return (2);
+			else if (utils->map[i][j] == 'E')
+				return (3);
+			else if (utils->map[i][j] == 'W')
+				return (4);
+			j++;
+		}
 		i++;
 	}
 	return (0);
-}
-
-void	initialize_game(t_info *ptr)
-{
-	ptr->fov = 90; // 90 degres de FOV
 }

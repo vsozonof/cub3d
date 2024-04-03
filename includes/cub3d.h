@@ -3,20 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 15:11:41 by vsozonof          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/03/29 15:08:47 by tpotilli         ###   ########.fr       */
-=======
-/*   Updated: 2024/04/02 10:55:35 by vsozonof         ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
+/*   Updated: 2024/04/03 08:09:44 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-
 
 # define CHECK_N_ARG	"Checking argument number"
 # define CHECK_F_NAME	"Checking file name"
@@ -32,6 +27,8 @@
 #define RED_PIXEL 0xFF0000
 #define GREEN_PIXEL 0xFF00
 #define WHITE_PIXEL 0xFFFFFF
+#define YELLOW_PIXEL 0xFFFF00
+#define BLACK_PIXEL 0x000000
 
 # include "../libft/includes/libft.h"
 # include "mlx.h"
@@ -113,8 +110,8 @@ typedef struct s_info
     void	*mlx;
 	void	*win;
 	t_img	img;
-	int		p_mov;
 	int		cur_img;
+	int		p_mov;
 	int		p_x;
 	int		p_y;
 	double	p_x_case;
@@ -161,26 +158,34 @@ void	pr_msg(char *msg, int mode);
 void	pr_error_spe(char *msg, int *i);
 
 //graphic
-void		img_pix_put(t_img *img, int x, int y, int color);
-int 		render_rect(t_info *info, t_rect rect);
-void		render_background(t_img *img, int color);
-int			handle_keypress(int keysym, t_info *info);
+
 int			render(t_info *info);
-int			exec_manager(int argc, char **argv, t_data *data);
+int			exec_manager(int argc, char **argv, t_data *data, t_utils *utils);
 int			exec_tmp(void);
-int			window_create(t_info *ptr);
+int			window_create(t_data *data, t_utils *utils);
 void		game_start(t_info *ptr);
 int			mouse_hook(t_info *ptr);
 int			get_key_hook(int keycode, t_info *ptr);
 void		close_windows_esc(t_info *ptr);
-int			essaie(t_data *data, t_info *ptr, char **argv);
+int			essaie(t_data *data, t_info *ptr, t_utils *utils);
 
 // graphic utils
-int			found_player_type(t_data *data);
+int			found_player_type(t_utils *utils);
 int			found_player_pos(char **argv);
 int			refresh_player_pos(char **argv, t_info *ptr);
 int			found_player_pos_x(char **argv);
 int			found_player_pos_y(char **argv);
 void		initialize_game(t_info *ptr);
+
+//mini_map
+int			minimap_manager(t_info *ptr);
+int			draw_player_minimap(t_info *ptr);
+int			draw_wall_minimap(t_info *ptr);
+void		img_pix_put(t_img *img, int x, int y, int color);
+void		render_background(t_img *img, int color);
+int			render_rect(t_img *img, t_rect rect);
+int			handle_keypress(int keysym, t_info *ptr);
+int			minimap(void);
+
 
 #endif

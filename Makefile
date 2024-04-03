@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
+#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 14:09:59 by vsozonof          #+#    #+#              #
-#    Updated: 2024/04/02 10:55:56 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/04/02 12:02:20 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS = main.c \
 	   graphic/exemple_graphic.c \
 	   graphic/window_create.c \
 	   graphic/players_utils.c \
+	   graphic/minimap.c \
 
 
 OBJS = $(SRCS:.c=.o)

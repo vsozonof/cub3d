@@ -6,45 +6,46 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 10:16:22 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/02 10:40:54 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 08:05:03 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	exec_manager(int argc, char **argv, t_data *data)
+int	exec_manager(int argc, char **argv, t_data *data, t_utils *utils)
 {
 	(void)argc;
 	(void)argv;
 	// t_game	game;
-	t_info	ptr;
+	// t_info	ptr;
 	(void)data;
 
-	ptr.mlx = mlx_init();
-	if (!ptr.mlx)
-		return (-1);
+	// ptr.mlx = mlx_init();
+	// if (!ptr.mlx)
+		// return (-1);
 	// puis ici init image
-	// window_create(&ptr);
-	initialize_game(&ptr);
-	essaie(data, &ptr, argv);
+	window_create(data, utils);
 	// init_struct(&game, argv);
 	// exec_tmp();
+	// free(ptr.mlx);
+	// mlx_destroy_display(&ptr.mlx);
 	return (0);
 }
 
-// int		essaie(t_data *data, t_info *ptr, char **argv)
-// {
-// 	int	token;
+int		essaie(t_data *data, t_info *ptr, t_utils *utils)
+{
+	int	token;
+	(void)data;
 
-// 	token = 0;
-// 	token = found_player_type(data);
-// 	if (token == 0)
-// 		printf("error when searching player pos\n");
-// 	if (refresh_player_pos(argv, ptr) == -1)
-// 		return (-1);
-// 	printf("voici les pos joueur %d %d\n", ptr->p_x, ptr->p_y);
-// 	return (0);
-// }
+	token = 0;
+	token = found_player_type(utils);
+	if (token == 0)
+		printf("error when searching player pos\n");
+	if (refresh_player_pos(utils->map, ptr) == -1)
+		return (-1);
+	printf("voici les pos joueur %d %d\n", ptr->p_x, ptr->p_y);
+	return (0);
+}
 
 // donc ce que je dois faire: prendre la position du joueur suivant la lettre 
 // (R par exemple) puis a partir de sa position regarder les wall suivants
@@ -56,6 +57,7 @@ int	refresh_player_pos(char **argv, t_info *ptr)
 	if (ptr->p_x == -1)
 		return (printf("error when searching player 1\n"), -1);
 	ptr->p_y = found_player_pos_y(argv);
+	if (ptr->p_y == -1)
 		return (printf("error when searching player 2\n"), -1);
 	return (0);
 }
