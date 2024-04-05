@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 11:32:45 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:43:52 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,7 @@ int	make_minimap(t_info *ptr)//les position du joueur doit deprendre de sa pos d
 				100, 100, GREEN_PIXEL});
 	// render_rect(&ptr->img, (t_rect){0, 0, 100, 100, RED_PIXEL});
 	wall_creation_minimap(ptr);
-	render_rect(&ptr->img, (t_rect){ptr->p_x, ptr->p_y,
-				5, 5, YELLOW_PIXEL});
+	player_creation_minimap(ptr);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
 	return (0);
 }
@@ -136,8 +135,12 @@ int		init_struct(t_info *ptr)
 		free(ptr->win);
 		return (MLX_ERROR);
 	}
-	ptr->p_x = WINDOW_WIDTH - 50; // trouver pos joueur
-	ptr->p_y = 50; // trouver pos joueur
+	found_pos_player_minimap(ptr);
+	ptr->p_x = WINDOW_WIDTH - 50;
+	ptr->p_y = 50;
+	ptr->pdx = cos(ptr->pa) * 5;
+	ptr->pdy = sin(ptr->pa) * 5;
 	ptr->p_mov = 0;
+	// ptr->pa = 90;
 	return (0);
 }

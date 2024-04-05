@@ -6,11 +6,43 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 11:32:43 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:43:44 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	player_pov_rotation(t_info *ptr, int input)
+{
+	printf("voici mon code %d\n", input);
+	if (input == 5) // gauche
+	{
+		ptr->pa -= 0.1;
+		if (ptr->pa < 0)
+			ptr->pa += 2 * PI;
+		ptr->pdx = cos(ptr->pa) * 5;
+		ptr->pdy = sin(ptr->pa) * 5;
+	}
+	else if (input == 7) // droite
+	{
+		ptr->pa += 0.1;
+		if (ptr->pa > 2 * PI)
+			ptr->pa -= 2 * PI;
+		ptr->pdx = cos(ptr->pa) * 5;
+		ptr->pdy = sin(ptr->pa) * 5;
+	}
+	printf("pdx = %f et pdy = %f\n", ptr->pdx, ptr->pdy);
+	// else if (input == 6) // haut
+	// {
+	// 	ptr->p_x += ptr->pdx;
+	// 	ptr->p_y += ptr->pdy;
+	// }
+	// else if (input == 8) // bas
+	// {
+	// 	ptr->p_x -= ptr->pdx;
+	// 	ptr->p_y -= ptr->pdy;
+	// }
+}
 
 void	player_movement_minimap(t_info *ptr, int input)
 {
@@ -38,7 +70,7 @@ void	wall_creation_minimap(t_info *ptr)
 	int		x;
 	int		y;
 
-	i =((y = 0));
+	i = ((y = 0));
 	while (ptr->map[i])
 	{
 		j = 0;
@@ -54,6 +86,29 @@ void	wall_creation_minimap(t_info *ptr)
 			j++;
 		}
 		y = y + 10;
+		i++;
+	}
+}
+
+void	found_pos_player_minimap(t_info *ptr)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (ptr->map[i])
+	{
+		j = 0;
+		while (ptr->map[i][j])
+		{
+			if (ptr->map[i][j] == 'N' || ptr->map[i][j] == 'S'
+				|| ptr->map[i][j] == 'W' || ptr->map[i][j] == 'E')
+			{
+				ptr->p_x = WINDOW_WIDTH - 50;
+				ptr->p_y = 50;
+			}
+			j++;
+		}
 		i++;
 	}
 }

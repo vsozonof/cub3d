@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 10:22:35 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 11:16:53 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:41:28 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	get_key_hook(int keycode, t_info *ptr)
 		ptr->p_mov = 3;
 	else if (keycode == 100)
 		ptr->p_mov = 4;
+	else
+		ptr->p_mov = check_keycode(keycode);
 	if (keycode == 65307)
 	{
 		close_windows_esc(ptr);
@@ -67,7 +69,31 @@ int	get_key_hook(int keycode, t_info *ptr)
 		// if (try_moove(ptr) == 0)
 		player_movement_minimap(ptr, ptr->p_mov);
 	}
+	if (ptr->p_mov == 5 || ptr->p_mov == 6 ||
+		ptr->p_mov == 7 || ptr->p_mov == 8)
+	{
+		player_pov_rotation(ptr, ptr->p_mov);
+	}
+	// else
+	// {
+	// 	ptr->pdx = 0;
+	// 	ptr->pdy = 0;
+	// 	ptr->pa = 0;
+	// }
 	return (0);
+}
+
+int	check_keycode(int keycode)
+{
+	if (keycode == 65363) // droite
+		return (7);
+	else if (keycode == 65362) // haut
+		return (6);
+	else if (keycode == 65361) // gauche
+		return (5);
+	else if (keycode == 65364) // bas
+		return (8);
+	return (-1);
 }
 
 int	try_moove(t_info *ptr)
