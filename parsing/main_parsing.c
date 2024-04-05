@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 15:54:57 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/04/02 10:50:18 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/04/03 19:11:26 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,5 @@ int	parsing_manager(t_data *data, int argc, char **argv, t_utils *utils)
 	if (is_map_valid(data))
 		return (1);
 	put_map_in_double_char_theo_suce_moi_stp(data, utils);
-	int i = 0;
-	while (utils->map[i])
-	{
-		printf("-> %s\n", utils->map[i]);
-		i++;
-	}
 	return (0);
 }

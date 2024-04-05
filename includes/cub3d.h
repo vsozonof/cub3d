@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 11:15:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:59:38 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define GET_PARAMS		"Gathering parameters"
 # define CHECK_PARAMS	"Checking parameters"
 # define INIT_MLX		"Initializing MiniLibX"
+# define CHECK_TEXTUR	"Checking wall textures"
 
 #define WINDOW_WIDTH 600 //longueur
 #define WINDOW_HEIGHT 300 //largueur
