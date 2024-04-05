@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 11:15:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:05:59 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 #define WHITE_PIXEL 0xFFFFFF
 #define YELLOW_PIXEL 0xFFFF00
 #define BLACK_PIXEL 0x000000
+#define PI 3.14159265359
 
 # include "../libft/includes/libft.h"
 # include "mlx.h"
@@ -37,6 +38,7 @@
 # include <string.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include "math.h"
 
 typedef struct s_data
 {
@@ -114,6 +116,9 @@ typedef struct s_info
 	int		p_mov;
 	int		p_x;
 	int		p_y;
+	float	pdx;
+	float	pdy;
+	float	pa; // player angle
 	int		w_size;
 	int		fov;
 	char	**map;
@@ -194,6 +199,12 @@ int			try_moove(t_info *ptr);
 int			init_struct(t_info *ptr);
 void		wall_creation_minimap(t_info *ptr);
 void		show_db_tab(char **map);
+void		found_pos_player_minimap(t_info *ptr);
+int			check_keycode(int keycode);
+void		player_pov_rotation(t_info *ptr, int input);
+void		player_creation_minimap(t_info *ptr);
+void		make_ray(t_info *ptr, int fi_x, int fi_y);
+void		found_case_ray(int bgx, int bgy, int fix, int fiy);
 
 
 

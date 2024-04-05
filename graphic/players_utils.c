@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:40:16 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/02 12:13:26 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:42:42 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,3 +85,66 @@ int	found_player_type(t_utils *utils)
 	}
 	return (0);
 }
+
+void	player_creation_minimap(t_info *ptr)
+{
+	// printf("voici pdx et pdy %f %f\n", ptr->pdx, ptr->pdy);
+	render_rect(&ptr->img, (t_rect){ptr->p_x, ptr->p_y,
+		8, 8, YELLOW_PIXEL});
+	make_ray(ptr, ptr->pdx, ptr->pdy);
+}
+//nouvelle idee technique prendre 1/10 de mon point final et additionner a chaque
+// tour de boucle mon point actuel
+void	make_ray(t_info *ptr, int fix, int fiy)
+{
+	int		bgx;
+	int		bgy;
+	float	xdif;
+	float	ydif;
+	float	tmp;
+
+	bgx = ptr->p_x;
+	bgy = ptr->p_y;
+	tmp = fix - ptr->p_x;
+	xdif = tmp / 10;
+	tmp = fiy - ptr->p_y;
+	ydif = tmp / 10;
+	// printf("voici mes valeurs au debut\n");
+	// printf("")
+	while (bgx != fix && bgy != fiy)
+	{
+		render_rect(&ptr->img, (t_rect){bgx, bgy,
+		1, 1, YELLOW_PIXEL});
+		bgx += xdif;
+		bgy += ydif;
+		if (bgx > WINDOW_WIDTH || bgy < 0)
+			break;
+	}
+} // tracer une ligne de 2 pixels du point x et y au point x' et y' 
+// arriver fix et fiy mes points qui voyagent sont bgx et bgy
+
+// void	make_ray(t_info *ptr, int fix, int fiy)
+// {
+// 	int	bgx;
+// 	int	bgy;
+
+// 	bgx = ptr->p_x;
+// 	bgy = ptr->p_y;
+// 	while (bgx != fix && bgy != fiy)
+// 	{
+// 		render_rect(&ptr->img, (t_rect){bgx, bgy,
+// 		1, 1, YELLOW_PIXEL});
+// 		if (fix > bgx)
+// 			bgx++;
+// 		else
+// 			bgx--;
+// 		if (fiy > bgy)
+// 			bgy++;
+// 		else
+// 			bgy--;
+// 		// printf("voici bgy %d et bgx %d\n", bgy, bgx);
+// 		// printf("voici fiy %d et fix %d\n", fiy, fix);
+// 		if (bgx > WINDOW_WIDTH || bgy < 0)
+// 			break;
+// 	}
+// } // tracer une ligne de 2 pixels du point x et y au point x' et y'
