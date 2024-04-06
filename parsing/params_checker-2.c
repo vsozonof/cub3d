@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params_checker-2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 18:09:18 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/04/04 14:36:55 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/04/06 07:08:29 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ int	are_textures_valid(t_data *data, t_utils *utils)
 
 int	are_colors_valid(t_data *data, t_utils *utils)
 {
-	
+	(void)data;
+	(void)utils;
+	return (0);
 }
 
 int	are_params_valid(t_data *data, t_utils *utils)

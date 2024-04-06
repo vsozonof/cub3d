@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/05 15:59:31 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/04/06 07:35:30 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ typedef struct s_info
 	t_img	img;
 	int		cur_img;
 	int		p_mov;
-	int		p_x;
-	int		p_y;
+	float	p_x;
+	float	p_y;
 	float	pdx;
 	float	pdy;
 	float	pa; // player angle
@@ -197,7 +197,7 @@ int			make_minimap(t_info *ptr);
 void		player_movement_minimap(t_info *ptr, int input);
 int			get_key_hook(int keycode, t_info *ptr);
 int			try_moove(t_info *ptr);
-int			init_struct(t_info *ptr);
+int			init_struct(t_info *ptr, t_utils *util);
 void		wall_creation_minimap(t_info *ptr);
 void		show_db_tab(char **map);
 void		found_pos_player_minimap(t_info *ptr);

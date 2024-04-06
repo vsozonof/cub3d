@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:11:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 11:01:20 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/06 07:25:31 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	struct_map(char **map, t_info *ptr)
 		ptr->map[i][j] = '\0';
 		i++;
 	}
-	ptr->map[i] = '\0';
+	ptr->map[i] = NULL;
 }
 
 void	show_db_tab(char **map)
