@@ -1,66 +1,64 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_helper.c                                   :+:      :+:    :+:   */
+/*   map_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/06 08:03:13 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/06 14:12:55 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	player_pov_rotation(t_info *ptr, int input)
+void	player_pov_rotation(t_math *ma, int input)
 {
 	printf("voici mon code %d\n", input);
-	if (input == 5) // gauche
+	if (input == 7) // droite
 	{
-		ptr->pa -= 0.1;
-		if (ptr->pa < 0)
-			ptr->pa += 2 * PI;
-		ptr->pdx = cos(ptr->pa) * 5;
-		ptr->pdy = sin(ptr->pa) * 5;
+		ma->old_dirx = ma->dirx;
+		ma->dirx = ma->dirx * cos(-5) - ma->diry * sin(-5);
+		ma->diry = ma->old_diry * sin(-5) + ma->diry * cos(-5);
+		ma->old_planex = ma->planex;
+		ma->planex = ma->planex * cos(-5) - ma->planey * sin(-5);
+		ma->planey = ma->old_planex * sin(-5) + ma->planey * cos(-5);
 	}
-	else if (input == 7) // droite
+	else if (input == 5) // gauche
 	{
-		ptr->pa += 0.1;
-		if (ptr->pa > 2 * PI)
-			ptr->pa -= 2 * PI;
-		ptr->pdx = cos(ptr->pa) * 5;
-		ptr->pdy = sin(ptr->pa) * 5;
+		ma->old_dirx = ma->dirx;
+		ma->dirx = ma->dirx * cos(5) - ma->diry * sin(5);
+		ma->diry = ma->old_diry * sin(5) + ma->diry * cos(5);
+		ma->old_planex = ma->planex;
+		ma->planex = ma->planex * cos(5) - ma->planey * sin(5);
+		ma->planey = ma->old_planex * sin(5) + ma->planey * cos(5);
 	}
-	printf("pdx = %f et pdy = %f\n", ptr->pdx, ptr->pdy);
-	// else if (input == 6) // haut
-	// {
-	// 	ptr->p_x += ptr->pdx;
-	// 	ptr->p_y += ptr->pdy;
-	// }
-	// else if (input == 8) // bas
-	// {
-	// 	ptr->p_x -= ptr->pdx;
-	// 	ptr->p_y -= ptr->pdy;
-	// }
+	// printf("pdx = %f et pdy = %f\n", ptr->ma->posx, ptr->ma->posy);
 }
 
-void	player_movement_minimap(t_info *ptr, int input)
+void	player_movement(t_math *ma, int input)
 {
 	int	x;
 	int	y;
 
-	y = ptr->p_y;
-	x = ptr->p_x;
-	if (input == 1)
-		y = y -1;
-	else if (input == 2)
-		x = x - 1;
-	else if (input == 3)
+	y = ma->posy;
+	x = ma->posx;
+	if (input == 1) // devant
+	{
+		ma->posx += ma->dirx * 2;
+		ma->posy += ma->diry * 2;
+	}
+	else if (input == 2) // derriere
+	{
+		ma->posx -= ma->dirx * 2;
+		ma->posy -= ma->diry * 2;
+	}
+	else if (input == 3) // droite a voir plus tard
 		y = y + 1;
-	else if (input == 4)
+	else if (input == 4) // gauche
 		x = x + 1;
-	ptr->p_y = y;
-	ptr->p_x = x;
+	// ptr->ma->posy = y;
+	// ptr->ma->posx = x;
 }
 
 void	wall_creation_minimap(t_info *ptr)
@@ -73,19 +71,18 @@ void	wall_creation_minimap(t_info *ptr)
 	i = ((y = 0));
 	while (ptr->map[i])
 	{
-		j = 0;
-		x = WINDOW_WIDTH - 100;
+		j = ((x = 0));
 		while (ptr->map[i][j])
 		{
 			if (ptr->map[i][j] == '1')
 			{
 				render_rect(&ptr->img, (t_rect){x, y,
-				10, 10, RED_PIXEL});
+				38, 38, WHITE_PIXEL});
 			}
-			x = x + 10;
+			x = x + 38;
 			j++;
 		}
-		y = y + 10;
+		y = y + 38;
 		i++;
 	}
 }
@@ -104,8 +101,8 @@ void	found_pos_player_minimap(t_info *ptr)
 			if (ptr->map[i][j] == 'N' || ptr->map[i][j] == 'S'
 				|| ptr->map[i][j] == 'W' || ptr->map[i][j] == 'E')
 			{
-				ptr->p_x = WINDOW_WIDTH - 50;
-				ptr->p_y = 50;
+				ptr->ma->posx = WINDOW_WIDTH - 50;
+				ptr->ma->posy = 50;
 			}
 			j++;
 		}
@@ -122,27 +119,27 @@ void	player_pov_rotation(t_info *ptr, int input)
 		ptr->pa -= 0.1;
 		if (ptr->pa < 0)
 			ptr->pa += 2 * PI;
-		ptr->pdx = cos(ptr->pa) * 5;
-		ptr->pdy = sin(ptr->pa) * 5;
+		ptr->ma->posx = cos(ptr->pa) * 5;
+		ptr->ma->posy = sin(ptr->pa) * 5;
 	}
 	else if (input == 7) // droite
 	{
 		ptr->pa += 0.1;
 		if (ptr->pa > 2 * PI)
 			ptr->pa -= 2 * PI;
-		ptr->pdx = cos(ptr->pa) * 5;
-		ptr->pdy = sin(ptr->pa) * 5;
+		ptr->ma->posx = cos(ptr->pa) * 5;
+		ptr->ma->posy = sin(ptr->pa) * 5;
 	}
-	printf("pdx = %f et pdy = %f\n", ptr->pdx, ptr->pdy);
+	printf("pdx = %f et pdy = %f\n", ptr->ma->posx, ptr->ma->posy);
 	// else if (input == 6) // haut
 	// {
-	// 	ptr->p_x += ptr->pdx;
-	// 	ptr->p_y += ptr->pdy;
+	// 	ptr->ma->posx += ptr->ma->posx;
+	// 	ptr->ma->posy += ptr->ma->posy;
 	// }
 	// else if (input == 8) // bas
 	// {
-	// 	ptr->p_x -= ptr->pdx;
-	// 	ptr->p_y -= ptr->pdy;
+	// 	ptr->ma->posx -= ptr->ma->posx;
+	// 	ptr->ma->posy -= ptr->ma->posy;
 	// }
 }
 
@@ -151,8 +148,8 @@ void	player_movement_minimap(t_info *ptr, int input)
 	int	x;
 	int	y;
 
-	y = ptr->p_y;
-	x = ptr->p_x;
+	y = ptr->ma->posy;
+	x = ptr->ma->posx;
 	if (input == 1)
 		y = y -1;
 	else if (input == 2)
@@ -161,8 +158,8 @@ void	player_movement_minimap(t_info *ptr, int input)
 		y = y + 1;
 	else if (input == 4)
 		x = x + 1;
-	ptr->p_y = y;
-	ptr->p_x = x;
+	ptr->ma->posy = y;
+	ptr->ma->posx = x;
 }
 
 void	wall_creation_minimap(t_info *ptr)
@@ -206,8 +203,8 @@ void	found_pos_player_minimap(t_info *ptr)
 			if (ptr->map[i][j] == 'N' || ptr->map[i][j] == 'S'
 				|| ptr->map[i][j] == 'W' || ptr->map[i][j] == 'E')
 			{
-				ptr->p_x = WINDOW_WIDTH - 50;
-				ptr->p_y = 50;
+				ptr->ma->posx = WINDOW_WIDTH - 50;
+				ptr->ma->posy = 50;
 			}
 			j++;
 		}

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:40:16 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/06 08:02:46 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/06 10:35:28 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,20 +88,22 @@ int	found_player_type(t_utils *utils)
 
 void	player_creation_minimap(t_info *ptr)
 {
-	// printf("voici pdx et pdy %f %f\n", ptr->pdx, ptr->pdy);
-	render_rect(&ptr->img, (t_rect){ptr->p_x, ptr->p_y,
+	// printf("voici pdx et pdy %f %f\n", ptr->ma->posx, ptr->ma->posy);
+	render_rect(&ptr->img, (t_rect){ptr->ma->posx, ptr->ma->posy,
 		8, 8, YELLOW_PIXEL});
-	make_ray(ptr, ptr->pdx, ptr->pdy);
+	make_ray(ptr, ptr->ma->posx, ptr->ma->posy);
 }
+
 //nouvelle idee technique prendre 1/10 de mon point final et additionner a chaque
 // tour de boucle mon point actuel
+
 void	make_ray(t_info *ptr, int fix, int fiy)
 {
 	float	bgx;
 	float	bgy;
 
-	bgx = ptr->pdx;
-	bgy = ptr->pdy;
+	bgx = ptr->ma->posx;
+	bgy = ptr->ma->posy;
 	// printf("voici mes valeurs au debut\n");
 	// printf("")
 	// printf("donc dans ma fonction de rayon j'ai :\n");
@@ -115,7 +117,8 @@ void	make_ray(t_info *ptr, int fix, int fiy)
 		if (bgx > WINDOW_WIDTH || bgy < 0)
 			break;
 	}
-} // tracer une ligne de 2 pixels du point x et y au point x' et y'
+}
+// tracer une ligne de 2 pixels du point x et y au point x' et y'
 
 // arriver fix et fiy mes points qui voyagent sont bgx et bgy
 
@@ -124,8 +127,8 @@ void	make_ray(t_info *ptr, int fix, int fiy)
 // 	int	bgx;
 // 	int	bgy;
 
-// 	bgx = ptr->p_x;
-// 	bgy = ptr->p_y;
+// 	bgx = ptr->ma->posx;
+// 	bgy = ptr->ma->posy;
 // 	while (bgx != fix && bgy != fiy)
 // 	{
 // 		render_rect(&ptr->img, (t_rect){bgx, bgy,
@@ -220,10 +223,10 @@ int	found_player_type(t_utils *utils)
 
 void	player_creation_minimap(t_info *ptr)
 {
-	// printf("voici pdx et pdy %f %f\n", ptr->pdx, ptr->pdy);
-	render_rect(&ptr->img, (t_rect){ptr->p_x, ptr->p_y,
+	// printf("voici pdx et pdy %f %f\n", ptr->ma->posx, ptr->ma->posy);
+	render_rect(&ptr->img, (t_rect){ptr->ma->posx, ptr->ma->posy,
 		8, 8, YELLOW_PIXEL});
-	make_ray(ptr, ptr->pdx, ptr->pdy);
+	make_ray(ptr, ptr->ma->posx, ptr->ma->posy);
 }
 //nouvelle idee technique prendre 1/10 de mon point final et additionner a chaque
 // tour de boucle mon point actuel
@@ -232,8 +235,8 @@ void	make_ray(t_info *ptr, int fix, int fiy)
 	float	bgx;
 	float	bgy;
 
-	bgx = ptr->pdx;
-	bgy = ptr->pdy;
+	bgx = ptr->ma->posx;
+	bgy = ptr->ma->posy;
 	// printf("voici mes valeurs au debut\n");
 	// printf("")
 	// printf("donc dans ma fonction de rayon j'ai :\n");
@@ -255,8 +258,8 @@ void	make_ray(t_info *ptr, int fix, int fiy)
 // 	int	bgx;
 // 	int	bgy;
 
-// 	bgx = ptr->p_x;
-// 	bgy = ptr->p_y;
+// 	bgx = ptr->ma->posx;
+// 	bgy = ptr->ma->posy;
 // 	while (bgx != fix && bgy != fiy)
 // 	{
 // 		render_rect(&ptr->img, (t_rect){bgx, bgy,

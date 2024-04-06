@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/06 07:35:30 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:00:27 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@
 # include <string.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
-# include "math.h"
+# include <stdlib.h>
+# include <math.h>
 
 typedef struct s_data
 {
@@ -72,8 +73,8 @@ typedef struct s_utils
 // 	int		y;
 // 	int		nb_exit;
 // 	int		nb_player;
-// 	int		p_x;
-// 	int		p_y;
+// 	int		px;
+// 	int		py;
 // 	int		exit_x;
 // 	int		exit_y;
 // 	int		exit;
@@ -108,22 +109,51 @@ typedef struct s_rect
 	int color;
 }	t_rect;
 
+typedef struct s_math
+{
+	double	camerax;
+	double	raydirx;
+	double	raydiry;
+	double	posx; // position player
+	double	posy;
+	double	dirx; // where the player look
+	double	diry;
+	double	planex;
+	double	planey;
+	double	sidedistx;
+	double	sidedisty;
+	double	deltadistx;
+	double	deltadisty;
+	double	perpwalldist;
+	double	old_dirx;
+	double	old_diry;
+	double	old_planex;
+	int		mapx;
+	int		mapy;
+	int		stepx;
+	int		stepy;
+	int		hit;
+	int		side;
+	int		line_Height;
+	int		draw_start;
+	int		draw_end;
+}	t_math;
+
 typedef struct s_info
 {
     void	*mlx;
 	void	*win;
 	t_img	img;
+	t_math	*ma;
 	int		cur_img;
 	int		p_mov;
-	float	p_x;
-	float	p_y;
-	float	pdx;
-	float	pdy;
-	float	pa; // player angle
+	double	pa; // player angle
 	int		w_size;
 	int		fov;
 	char	**map;
+	int		mapS;
 }	t_info;
+
 
 int		main(int argc, char **argv);
 void	initialize_struct(t_data *data, t_utils *utils);
@@ -194,7 +224,7 @@ int			render_rect(t_img *img, t_rect rect);
 int			handle_keypress(int keysym, t_info *ptr);
 int			window_creation(t_data *data, t_utils *utils);
 int			make_minimap(t_info *ptr);
-void		player_movement_minimap(t_info *ptr, int input);
+void		player_movement(t_math *ma, int input);
 int			get_key_hook(int keycode, t_info *ptr);
 int			try_moove(t_info *ptr);
 int			init_struct(t_info *ptr, t_utils *util);
@@ -202,11 +232,14 @@ void		wall_creation_minimap(t_info *ptr);
 void		show_db_tab(char **map);
 void		found_pos_player_minimap(t_info *ptr);
 int			check_keycode(int keycode);
-void		player_pov_rotation(t_info *ptr, int input);
+void		player_pov_rotation(t_math *ma, int input);
 void		player_creation_minimap(t_info *ptr);
 void		make_ray(t_info *ptr, int fi_x, int fi_y);
 void		found_case_ray(int bgx, int bgy, int fix, int fiy);
-
+void		raycasting(t_info *ptr);
+int			make_map(t_info *ptr);
+void		digital_differential_analyser(t_math *ma, t_info *ptr);
+t_math		*ma_init();
 
 
 #endif

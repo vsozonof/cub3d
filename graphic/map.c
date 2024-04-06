@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/06 08:01:55 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:03:13 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,19 +80,20 @@ int	render(t_info *ptr)
 {
 	if (ptr->win == NULL)
 		return (1);
-	make_minimap(ptr);
+	raycasting(ptr);
+	make_map(ptr);
 	return (0);
 }
 
-int	make_minimap(t_info *ptr)//les position du joueur doit deprendre de sa pos de depart
+int	make_map(t_info *ptr)//les position du joueur doit deprendre de sa pos de depart
 {
 	// int		map_w;
 	// int		map_h;
 
 	// map_w = WINDOW_WIDTH / 100 * 10;
-	render_background(&ptr->img, WHITE_PIXEL);
-	render_rect(&ptr->img, (t_rect){WINDOW_WIDTH - 100, 0, // le deuxieme est la hauteur
-				100, 100, GREEN_PIXEL});
+	render_background(&ptr->img, BLACK_PIXEL);
+	// render_rect(&ptr->img, (t_rect){WINDOW_WIDTH - 100, 0, // le deuxieme est la hauteur
+				// 100, 100, GREEN_PIXEL});
 	// render_rect(&ptr->img, (t_rect){0, 0, 100, 100, RED_PIXEL});
 	wall_creation_minimap(ptr);
 	player_creation_minimap(ptr);
@@ -109,7 +110,8 @@ int	window_creation(t_data *data, t_utils *utils)
 	(void)utils;
 	t_info	ptr;
 
-	init_struct(&ptr, utils);
+	if (init_struct(&ptr, utils) == 1)
+		return (1);
 	struct_map(utils->map, &ptr);
 	ptr.img.mlx_img = mlx_new_image(ptr.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	ptr.img.addr = mlx_get_data_addr(ptr.img.mlx_img, &ptr.img.bpp,
@@ -126,6 +128,7 @@ int	window_creation(t_data *data, t_utils *utils)
 
 int		init_struct(t_info *ptr, t_utils *util)
 {
+	ptr->ma = ma_init();
 	ptr->mlx = util->mlx;
 	if (ptr->mlx == NULL)
 		return (MLX_ERROR);
@@ -135,14 +138,24 @@ int		init_struct(t_info *ptr, t_utils *util)
 		free(ptr->win);
 		return (MLX_ERROR);
 	}
-	found_pos_player_minimap(ptr);
-	ptr->p_x = WINDOW_WIDTH - 50;
-	ptr->p_y = 50;
-	ptr->pdx = cos(ptr->pa) * 5;
-	ptr->pdy = sin(ptr->pa) * 5;
+	// found_pos_player_minimap();
 	ptr->p_mov = 0;
 	ptr->pa = 90;
 	return (0);
+}
+
+t_math	*ma_init()
+{
+	t_math *ma;
+
+	ma = NULL;
+	ma->posx = 22; // trouver pos joueur
+	ma->posy = 12;
+	ma->dirx = -1;
+	ma->diry = 0; // initialisation des vecteurs
+	ma->planex = 0;
+	ma->planey = 0.66;
+	return (ma);
 }
 
 /* code du 6 avril, juste la minimap
@@ -266,10 +279,10 @@ int		init_struct(t_info *ptr, t_utils *util)
 		return (MLX_ERROR);
 	}
 	found_pos_player_minimap(ptr);
-	ptr->p_x = WINDOW_WIDTH - 50;
-	ptr->p_y = 50;
-	ptr->pdx = cos(ptr->pa) * 5;
-	ptr->pdy = sin(ptr->pa) * 5;
+	ptr->ma->posx = WINDOW_WIDTH - 50;
+	ptr->ma->posy = 50;
+	ptr->ma->posx = cos(ptr->pa) * 5;
+	ptr->ma->posy = sin(ptr->pa) * 5;
 	ptr->p_mov = 0;
 	ptr->pa = 90;
 	return (0);
