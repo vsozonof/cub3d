@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/06 15:00:27 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/07 10:32:24 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ int			make_minimap(t_info *ptr);
 void		player_movement(t_math *ma, int input);
 int			get_key_hook(int keycode, t_info *ptr);
 int			try_moove(t_info *ptr);
-int			init_struct(t_info *ptr, t_utils *util);
+int			init_struct(t_info *ptr, t_utils *util, t_math *ma);
 void		wall_creation_minimap(t_info *ptr);
 void		show_db_tab(char **map);
 void		found_pos_player_minimap(t_info *ptr);
@@ -239,7 +239,7 @@ void		found_case_ray(int bgx, int bgy, int fix, int fiy);
 void		raycasting(t_info *ptr);
 int			make_map(t_info *ptr);
 void		digital_differential_analyser(t_math *ma, t_info *ptr);
-t_math		*ma_init();
+t_math		*ma_init(t_math *ma);
 
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:01:07 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/04/02 10:51:51 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/04/07 10:25:29 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	get_n_lines(char *map)
 
 int	is_map_valid(t_data *data)
 {
-	pr_msg("Checking the map", 0);
+	pr_msg("Checking the map\n", 0); // j'ai mis un \n a ton print
 	if (are_walls_placed_correctly(data))
 		return (pr_error("The walls are placed incorrectly."));
 	return (0);
