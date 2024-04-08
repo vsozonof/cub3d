@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/07 10:40:41 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/08 13:53:16 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,22 +87,19 @@ int	render(t_info *ptr)
 
 int	make_map(t_info *ptr)//les position du joueur doit deprendre de sa pos de depart
 {
+	(void)ptr;
 	// int		map_w;
 	// int		map_h;
 
 	// map_w = WINDOW_WIDTH / 100 * 10;
 	render_background(&ptr->img, BLACK_PIXEL);
-	// render_rect(&ptr->img, (t_rect){WINDOW_WIDTH - 100, 0, // le deuxieme est la hauteur
-				// 100, 100, GREEN_PIXEL});
-	// render_rect(&ptr->img, (t_rect){0, 0, 100, 100, RED_PIXEL});
-	// wall_creation_minimap(ptr);
-	// player_creation_minimap(ptr);
+	render_rect(&ptr->img, (t_rect){0, 0, // le deuxieme est la hauteur
+				1920, 1080, BLACK_PIXEL});
+	wall_creation_minimap(ptr);
+	player_creation_minimap(ptr);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
 	return (0);
 }
-
-// render_rect(&ptr->img, (t_rect){WINDOW_WIDTH - 50, 50,
-				// 5, 5, YELLOW_PIXEL});
 
 int	window_creation(t_data *data, t_utils *utils)
 {
@@ -147,8 +144,8 @@ int		init_struct(t_info *ptr, t_utils *util, t_math *ma)
 
 t_math	*ma_init(t_math *ma)
 {
-	ma->posx = 22; // trouver pos joueur
-	ma->posy = 12;
+	ma->posx = 3; // trouver pos joueur
+	ma->posy = 3;
 	ma->dirx = -1;
 	ma->diry = 0; // initialisation des vecteurs
 	ma->planex = 0;

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:40:16 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/06 10:35:28 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/08 13:48:13 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	player_creation_minimap(t_info *ptr)
 {
 	// printf("voici pdx et pdy %f %f\n", ptr->ma->posx, ptr->ma->posy);
 	render_rect(&ptr->img, (t_rect){ptr->ma->posx, ptr->ma->posy,
-		8, 8, YELLOW_PIXEL});
+		50, 50, GREEN_PIXEL});
 	make_ray(ptr, ptr->ma->posx, ptr->ma->posy);
 }
 
@@ -111,13 +111,14 @@ void	make_ray(t_info *ptr, int fix, int fiy)
 	while (bgx != fix && bgy != fiy)
 	{
 		render_rect(&ptr->img, (t_rect){bgx, bgy,
-		1, 1, YELLOW_PIXEL});
+		2, 2, RED_PIXEL});
 		bgx++;
 		bgy++;
 		if (bgx > WINDOW_WIDTH || bgy < 0)
 			break;
 	}
 }
+
 // tracer une ligne de 2 pixels du point x et y au point x' et y'
 
 // arriver fix et fiy mes points qui voyagent sont bgx et bgy
