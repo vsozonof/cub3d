@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/08 13:44:02 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/09 08:40:37 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct s_math
 	double	old_dirx;
 	double	old_diry;
 	double	old_planex;
+	int		out;
 	int		mapx;
 	int		mapy;
 	int		stepx;

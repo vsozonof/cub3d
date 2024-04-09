@@ -6,12 +6,13 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 10:22:35 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/06 14:15:25 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/09 07:16:02 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-// pour ca j'ai beosin de cree des pointeur de la mlx
+
+// pour ca j'ai besoin de cree des pointeur de la mlx
 int	window_create(t_data *data, t_utils *utils)
 {
 	window_creation(data, utils);

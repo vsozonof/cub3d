@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/08 13:47:54 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:36:50 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,57 +43,85 @@ void	player_movement(t_math *ma, int input)
 
 	y = ma->posy;
 	x = ma->posx;
-	printf("voici input %d\n", input);
+	printf("voici input %d et voici dirx %f t diry %f\n", input, ma->dirx, ma->diry);
 	if (input == 1) // devant
-		ma->posy += ma->diry - 5;
+		ma->posy += ma->diry - 0.5;
 	else if (input == 2) // gauche
-		ma->posx -= ma->dirx + 5;
+		ma->posx -= ma->dirx - 0.5;
 	else if (input == 3) // bas
-		ma->posy += ma->diry + 5;
+		ma->posy += ma->diry - 0.5;
 	else if (input == 4) // droite
-		ma->posx += ma->dirx + 5;
+		ma->posx -= ma->dirx - 0.5;
 	// ptr->ma->posy = y;
 	// ptr->ma->posx = x;
 }
 
-void	wall_creation_minimap(t_info *ptr)
-{
-	int		i;
-	int		j;
-	int		x;
-	int		y;
+// void	wall_creation_minimap(t_info *ptr)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		x;
+// 	int		y;
 
-	i = ((y = 0));
-	while (ptr->map[i])
-	{
-		j = 0;
-		x = 0;
-		while (ptr->map[i][j])
-		{
-			if (ptr->map[i][j] == '1')
-			{
-				render_rect(&ptr->img, (t_rect){x, y,
-				100, 120, WHITE_PIXEL});
-			}
-			x = x + 100;
-			j++;
-		}
-		y = y + 120;
-		i++;
-	}
-}
+// 	i = ((y = 0));
+// 	while (ptr->map[i])
+// 	{
+// 		j = 0;
+// 		x = 0;
+// 		while (ptr->map[i][j])
+// 		{
+// 			if (ptr->map[i][j] == '1')
+// 			{
+// 				render_rect(&ptr->img, (t_rect){x, y,
+// 				100, 120, WHITE_PIXEL});
+// 			}
+// 			x = x + 100;
+// 			j++;
+// 		}
+// 		y = y + 120;
+// 		i++;
+// 	}
+// }
 
-/*
+// void	wall_creation_minimap(t_info *ptr)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		x;
+// 	int		y;
+
+// 	i = ((y = 0));
+// 	while (ptr->map[i])
+// 	{
+// 		j = 0;
+// 		x = 0;
+// 		while (ptr->map[i][j])
+// 		{
+// 			if (ptr->map[i][j] == '1')
+// 			{
+// 				printf("start %d end %d\n", ptr->ma->draw_start, ptr->ma->draw_end);
+// 				printf("voici windows height %d\n", ptr->ma->line_Height);
+// 				render_rect(&ptr->img, (t_rect){j, i,
+// 				ptr->ma->draw_start, ptr->ma->draw_end, RED_PIXEL});
+// 			}
+// 			x = x + 100;
+// 			j++;
+// 		}
+// 		y = y + 120;
+// 		i++;
+// 	}
+// 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
+// }
+
 void	wall_creation_minimap(t_info *ptr)
 {
 	printf("start %d end %d\n", ptr->ma->draw_start, ptr->ma->draw_end);
-	render_background(&ptr->img, BLACK_PIXEL);
-	printf("voici windows %d\n", ptr->ma->line_Height);
+	// render_background(&ptr->img, BLACK_PIXEL);
+	printf("voici windows height %d\n", ptr->ma->line_Height);
 	render_rect(&ptr->img, (t_rect){ptr->ma->draw_start, ptr->ma->draw_end,
-				ptr->ma->line_Height, ptr->ma->line_Height, WHITE_PIXEL});
+				50, 50, RED_PIXEL});
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
 }
-*/
 
 void	found_pos_player_minimap(t_info *ptr)
 {

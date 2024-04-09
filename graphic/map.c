@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/08 13:53:16 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/09 10:23:32 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	render(t_info *ptr)
 	if (ptr->win == NULL)
 		return (1);
 	raycasting(ptr);
+	if (ptr->ma->out == 1)
+		return (-1);
 	make_map(ptr);
 	return (0);
 }
@@ -94,9 +96,9 @@ int	make_map(t_info *ptr)//les position du joueur doit deprendre de sa pos de de
 	// map_w = WINDOW_WIDTH / 100 * 10;
 	render_background(&ptr->img, BLACK_PIXEL);
 	render_rect(&ptr->img, (t_rect){0, 0, // le deuxieme est la hauteur
-				1920, 1080, BLACK_PIXEL});
+				WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});
 	wall_creation_minimap(ptr);
-	player_creation_minimap(ptr);
+	// player_creation_minimap(ptr);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
 	return (0);
 }
@@ -150,6 +152,7 @@ t_math	*ma_init(t_math *ma)
 	ma->diry = 0; // initialisation des vecteurs
 	ma->planex = 0;
 	ma->planey = 0.66;
+	ma->out = 0;
 	return (ma);
 }
 

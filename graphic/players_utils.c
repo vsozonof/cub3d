@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:40:16 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/08 13:48:13 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/09 08:40:33 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	make_ray(t_info *ptr, int fix, int fiy)
 	while (bgx != fix && bgy != fiy)
 	{
 		render_rect(&ptr->img, (t_rect){bgx, bgy,
-		2, 2, RED_PIXEL});
+		5, 5, RED_PIXEL});
 		bgx++;
 		bgy++;
 		if (bgx > WINDOW_WIDTH || bgy < 0)

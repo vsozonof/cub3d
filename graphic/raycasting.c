@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/08 09:22:26 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:30:00 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,15 @@
 void	raycasting(t_info *ptr)
 {
 	int		x;
-	double	w;
 	t_math	*ma;
 	(void)ptr;
 
 	x = 0;
-	w = 1;
 	ma = ptr->ma;
-	while (x < w)
+	while (x < WINDOW_WIDTH)
 	{
 		// calculate ray position and direction
-		ma->camerax = 2 * x / w -1; // x coordinate in camera space
+		ma->camerax = 2 * x / WINDOW_WIDTH -1; // x coordinate in camera space
 		ma->raydirx = ma->dirx + ma->planex * ma->camerax;
 		ma->raydiry = ma->diry + ma->planey * ma->camerax;
 		// printf("voici raydirx %f et raydiry %f\n", ma->raydirx, ma->raydiry);
@@ -71,19 +69,21 @@ void	raycasting(t_info *ptr)
 		// printf("AVANT L'APPEL PRINTF\n");
 		// printf("voici sidex %f et sidey %f\n", ma->sidedistx, ma->sidedisty);
 		digital_differential_analyser(ma, ptr);
+		if (ma->out == 1)
+			return ;
 		if (ma->side == 0)
 			ma->perpwalldist = (ma->sidedistx - ma->deltadistx);
 		else
 			ma->perpwalldist = (ma->sidedisty - ma->deltadisty);
-		ma->line_Height = (int)(WINDOW_HEIGHT / ma->perpwalldist);
-		
-		ma->draw_start = -ma->line_Height / 2 + WINDOW_HEIGHT / 2;
+		ma->line_Height = (WINDOW_HEIGHT / ma->perpwalldist);
+		printf("voici perpwalldist %f\n", ma->perpwalldist);
+		ma->draw_start -= ma->line_Height / 2 + WINDOW_HEIGHT / 2;
 		if (ma->draw_start < 0)
-			ma->draw_end = 0;
+			ma->draw_start = 0;
 		ma->draw_end = ma->line_Height / 2 + WINDOW_HEIGHT / 2;
 		if (ma->draw_end >= WINDOW_HEIGHT)
 			ma->draw_end = WINDOW_HEIGHT - 1;
-		wall_creation_minimap(ptr); // je me sers pas des draw start/end car pas
+		// wall_creation_minimap(ptr); // je me sers pas des draw start/end car pas
 		x++;// encore a l'etape des murs
 	}
 }
@@ -105,8 +105,13 @@ void	digital_differential_analyser(t_math *ma, t_info *ptr)
 			ma->mapy += ma->stepy;
 			ma->side = 1;
 		}
-		// printf("may %d side %f\n", ma->mapy, ma->sidedisty);
 		printf("voici mes co x %d et y %d\n", ma->mapx, ma->mapy);
+		if (ma->mapx < 0 || ma->mapy < 0)
+		{
+			ma->out = 1;
+			return ;
+		}
+		// printf("may %d side %f\n", ma->mapy, ma->sidedisty);
 		if (ptr->map[ma->mapx][ma->mapy] > 0)
 			ma->hit = 1;
 	}
