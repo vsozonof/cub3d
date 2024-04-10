@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 18:09:18 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/04/04 14:36:55 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/04/06 16:48:04 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,41 @@ int	are_textures_valid(t_data *data, t_utils *utils)
 
 int	are_colors_valid(t_data *data, t_utils *utils)
 {
-	
+	int	i;
+
+	((i = 0));
+	utils->floor_color = ft_split(data->floor_color, ',');
+	utils->ceiling_color = ft_split(data->ceiling_color, ',');
+	while (utils->floor_color[i] && utils->ceiling_color[i])
+	{
+		if (ft_is_str_digit(utils->floor_color[i])
+			&& ft_is_str_digit(utils->ceiling_color[i]))
+			return (1);
+		if (ft_atoi(utils->floor_color[i]) < 0
+			|| ft_atoi(utils->floor_color[i]) > 255)
+			return (1);
+		if (ft_atoi(utils->ceiling_color[i]) < 0
+			|| ft_atoi(utils->ceiling_color[i]) > 255)
+			return (1);
+		i++;
+	}
+	if (i != 3)
+		return (1);
+	return (0);
 }
 
 int	are_params_valid(t_data *data, t_utils *utils)
 {
-	(void)data;
 	if (init_mlx_ptr(utils))
 		return (1);
 	if (are_textures_valid(data, utils))
 		return (1);
-	
+	pr_msg(CHECK_COLORS, 0);
+	if (are_colors_valid(data, utils))
+	{
+		pr_msg(CHECK_COLORS, 1);
+		return (pr_error("Invalid color code"));
+	}
+	pr_msg(CHECK_COLORS, 2);
 	return (0);
 }

@@ -1,26 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_str_digit.c                                  :+:      :+:    :+:   */
+/*   wall_checker-utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 07:35:38 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/04/06 15:12:38 by vsozonof         ###   ########.fr       */
+/*   Created: 2024/04/10 14:46:39 by vsozonof          #+#    #+#             */
+/*   Updated: 2024/04/10 14:46:59 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_is_str_digit(char *str)
+#include "cub3d.h"
+
+int	double_tab_len(char **p)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	if (!p)
+		return (-1);
+	while (p[i])
+		i++;
+	return (i);
+}
+
+void	replace_wspace_by_walls(char **map)
+{
+	int	i;
+	int	j;
+
+	i = ((j = 0));
+	while (map[i])
 	{
-		if (str[i] >= '0' && str[i] <= '9')
-			i++;
-		else
-			return (1);
+		while (map[i][j])
+		{
+			if (map[i][j] == ' ' || map[i][j] == '\t')
+				map[i][j] = '1';
+			j++;
+		}
+		i++;
+		j = 0;
 	}
-	return (0);
 }

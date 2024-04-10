@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/05 15:59:31 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:48:02 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define CHECK_PARAMS	"Checking parameters"
 # define INIT_MLX		"Initializing MiniLibX"
 # define CHECK_TEXTUR	"Checking wall textures"
+# define CHECK_COLORS	"Checking color codes"
 
 #define WINDOW_WIDTH 600 //longueur
 #define WINDOW_HEIGHT 300 //largueur
@@ -149,14 +150,19 @@ int		are_params_valid(t_data *data, t_utils *utils);
 
 // Map parsing
 
-int		is_map_valid(t_data *data);
-int		get_n_lines(char *map);
+int		is_map_valid(t_data *data, t_utils *utils);
+int		check_map(char **map, int len);
 
 // WALL CHECKING
-int		are_walls_placed_correctly(t_data *data);
-int		check_first_line(char *map);
-int		check_last_line(char *map, int n_lines);
-void	replace_wspace_by_walls(char *map);
+int		are_walls_placed_correctly(t_utils *utils);
+int		check_first_line(char *f_line, int *len);
+int		check_last_line(char *line);
+void	replace_wspace_by_walls(char **map);
+
+// PARSING UTILS
+
+int		get_n_lines(char *map);
+int		double_tab_len(char **p);
 
 // ! Printing
 void	pr_parsing_start(void);
