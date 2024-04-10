@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/09 08:40:37 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:16:04 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,8 @@ typedef struct s_math
 	double	old_dirx;
 	double	old_diry;
 	double	old_planex;
+	int		map_width;
+	int		map_height;
 	int		out;
 	int		mapx;
 	int		mapy;
@@ -240,7 +242,7 @@ void		found_case_ray(int bgx, int bgy, int fix, int fiy);
 void		raycasting(t_info *ptr);
 int			make_map(t_info *ptr);
 void		digital_differential_analyser(t_math *ma, t_info *ptr);
-t_math		*ma_init(t_math *ma);
+t_math		*ma_init(t_math *ma, t_info *ptr);
 
 
 #endif

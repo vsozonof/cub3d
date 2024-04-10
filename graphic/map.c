@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/09 10:23:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:14:25 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,9 @@ int	window_creation(t_data *data, t_utils *utils)
 	t_info	ptr;
 	t_math	ma;
 
+	struct_map(utils->map, &ptr);
 	if (init_struct(&ptr, utils, &ma) == 1)
 		return (1);
-	struct_map(utils->map, &ptr);
 	ptr.img.mlx_img = mlx_new_image(ptr.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	ptr.img.addr = mlx_get_data_addr(ptr.img.mlx_img, &ptr.img.bpp,
 			&ptr.img.line_len, &ptr.img.endian);
@@ -128,7 +128,6 @@ int	window_creation(t_data *data, t_utils *utils)
 
 int		init_struct(t_info *ptr, t_utils *util, t_math *ma)
 {
-	ptr->ma = ma_init(ma);
 	ptr->mlx = util->mlx;
 	if (ptr->mlx == NULL)
 		return (MLX_ERROR);
@@ -141,18 +140,36 @@ int		init_struct(t_info *ptr, t_utils *util, t_math *ma)
 	// found_pos_player_minimap();
 	ptr->p_mov = 0;
 	ptr->pa = 90;
+	ptr->ma = ma_init(ma, ptr);
 	return (0);
 }
 
-t_math	*ma_init(t_math *ma)
+t_math	*ma_init(t_math *ma, t_info *ptr)
 {
-	ma->posx = 3; // trouver pos joueur
-	ma->posy = 3;
+	int		i;
+	int		tmp;
+
+	i = 0;
+	ma->posx = 2; // trouver pos joueur
+	ma->posy = 2;
 	ma->dirx = -1;
 	ma->diry = 0; // initialisation des vecteurs
 	ma->planex = 0;
 	ma->planey = 0.66;
 	ma->out = 0;
+	while (ptr->map[i])
+		i++;
+	ma->map_width = i;
+	i = 0;
+	ma->map_height = ft_strlen(ptr->map[i]);
+	i++;
+	while (ptr->map[i])
+	{
+		tmp = ft_strlen(ptr->map[i]);
+		if (tmp > ma->map_height)
+			ma->map_height = tmp;
+		i++;
+	}
 	return (ma);
 }
 
