@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:40:16 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/10 13:37:10 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/11 10:44:16 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int	found_player_type(t_utils *utils)
 void	player_creation_minimap(t_info *ptr)
 {
 	// printf("voici pdx et pdy %f %f\n", ptr->ma->posx, ptr->ma->posy);
-	render_rect(&ptr->img, (t_rect){ptr->ma->posx, ptr->ma->posy,
-		ptr->ma->posx, ptr->ma->posy, GREEN_PIXEL});
+	render_rect(&ptr->img, (t_rect){300, 320,
+		50, 50, GREEN_PIXEL});
 	make_ray(ptr, ptr->ma->posx, ptr->ma->posy);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/11 08:19:01 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:59:17 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,26 @@ void	player_movement(t_math *ma, int input, t_info *ptr)
 	// ptr->ma->posx = x;
 }
 
+void	player_movement_minimap(t_math *ma, int input, t_info *ptr)
+{
+	int	x;
+	int	y;
+	(void)ptr;
+
+	y = ma->posy;
+	x = ma->posx;
+	if (input == 1)
+		y = y - 0.5;
+	else if (input == 2)
+		x = x - 0.5;
+	else if (input == 3)
+		y = y + 0.5;
+	else if (input == 4)
+		x = x + 0.5;
+	ma->posy = y;
+	ma->posx = x;
+}
+
 // void	wall_creation_minimap(t_info *ptr)
 // {
 // 	int		i;
@@ -89,7 +109,7 @@ void	player_movement(t_math *ma, int input, t_info *ptr)
 // 			{
 // 				printf("start %d end %d\n", ptr->ma->draw_start, ptr->ma->draw_end);
 // 				printf("voici windows height %d\n", ptr->ma->line_Height);
-// 				render_rect(&ptr->img, (t_rect){x, y,
+// 				render_rect(&ptr->img, (t_rect){ptr->ma->draw_start, ptr->ma->draw_end,
 // 				ptr->ma->draw_start, ptr->ma->draw_end, RED_PIXEL});
 // 			}
 // 			x = x + 100;

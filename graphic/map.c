@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/10 17:14:25 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:59:24 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,16 +140,12 @@ int		init_struct(t_info *ptr, t_utils *util, t_math *ma)
 	// found_pos_player_minimap();
 	ptr->p_mov = 0;
 	ptr->pa = 90;
-	ptr->ma = ma_init(ma, ptr);
+	ptr->ma = ma_init(ma);
 	return (0);
 }
 
-t_math	*ma_init(t_math *ma, t_info *ptr)
+t_math	*ma_init(t_math *ma)
 {
-	int		i;
-	int		tmp;
-
-	i = 0;
 	ma->posx = 2; // trouver pos joueur
 	ma->posy = 2;
 	ma->dirx = -1;
@@ -157,19 +153,6 @@ t_math	*ma_init(t_math *ma, t_info *ptr)
 	ma->planex = 0;
 	ma->planey = 0.66;
 	ma->out = 0;
-	while (ptr->map[i])
-		i++;
-	ma->map_width = i;
-	i = 0;
-	ma->map_height = ft_strlen(ptr->map[i]);
-	i++;
-	while (ptr->map[i])
-	{
-		tmp = ft_strlen(ptr->map[i]);
-		if (tmp > ma->map_height)
-			ma->map_height = tmp;
-		i++;
-	}
 	return (ma);
 }
 
