@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/10 17:25:54 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/11 08:42:34 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,8 @@ void	raycasting(t_info *ptr)
 		ma->mapx = (int)ma->posx; // dans quel case nous somme
 		ma->mapy = (int)ma->posy;
 		//longueur du rayon depuis notre position
-		if (ma->raydirx == 0)
-			ma->deltadistx = 1e30;
-		else
-			ma->deltadistx = fabs(1 / ma->raydirx);
-		if (ma->raydiry == 0)
-			ma->deltadisty = 1e30;
-		else
-			ma->deltadisty = fabs(1 / ma->raydiry);
+		ma->deltadistx = sqrt(1 + (ma->raydiry * ma->raydiry) / (ma->raydirx * ma->raydirx));
+      	ma->deltadisty = sqrt(1 + (ma->raydirx * ma->raydirx) / (ma->raydiry * ma->raydiry));
 		printf("ma->raudirx %f\n", ma->raydirx);
 		printf("ma->raudiry %f\n", ma->raydiry);
 		// printf("deltadisty %f\n", ma->deltadisty);
@@ -99,21 +93,26 @@ void	raycasting(t_info *ptr)
 			printf("voici delta %f\n", ma->deltadisty);
 			ma->perpwalldist = (ma->sidedisty - ma->deltadisty);
 		}
-		ma->line_Height = (ma->map_height / ma->perpwalldist); // le probleme viens du fait que ma division est fausse
-		printf("voici perpwalldist %f\n", ma->perpwalldist); //c ar perpwalldist est de 0 et c'est lui qui divise
-		printf("voici map_height %d\n", ma->map_height);
-		printf("essaie line Height / 2 %d\n", ma->line_Height / 2);
-		printf("essaie line Height tout court %d\n", ma->line_Height);
-		printf("!!voici le resultat de l'equation entre perpwalldist et map height %d\n", ma->line_Height / 2 + ma->map_height / 2);
-		ma->draw_start -= ma->line_Height / 2 + ma->map_height / 2;
-		printf("line height / 2 = %d\n", ma->line_Height / 2);
-		printf("map_height = %d\n", 2 + ma->map_height / 2);
-		printf("voici mon draw_start %d\n", ma->draw_start);
+		if (ma->perpwalldist == 0)
+		{
+			ma->line_Height = ma->map_height;
+		}
+		else
+			ma->line_Height = (ma->map_height / ma->perpwalldist); // le probleme viens du fait que ma division est fausse
+		// printf("voici perpwalldist %f\n", ma->perpwalldist); //c ar perpwalldist est de 0 et c'est lui qui divise
+		// printf("voici map_height %d\n", ma->map_height);
+		// printf("essaie line Height / 2 %d\n", ma->line_Height / 2);
+		// printf("essaie line Height tout court %d\n", ma->line_Height);
+		// printf("!!voici le resultat de l'equation entre perpwalldist et map height %d\n", ma->line_Height / 2 + ma->map_height / 2);
+		ma->draw_start = -ma->line_Height / 2 + ma->map_height / 2;
+		// printf("line height / 2 = %d\n", ma->line_Height / 2);
+		// printf("map_height = %d\n", 2 + ma->map_height / 2);
 		if (ma->draw_start < 0)
 			ma->draw_start = 0;
 		ma->draw_end = ma->line_Height / 2 + ma->map_height / 2;
 		if (ma->draw_end >= ma->map_height)
 			ma->draw_end = ma->map_height - 1;
+		printf("voici mon draw_start %d\n", ma->draw_start);
 		// wall_creation_minimap(ptr); // je me sers pas des draw start/end car pas
 		x++;// encore a l'etape des murs
 	}

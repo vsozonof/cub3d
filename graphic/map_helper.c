@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/10 14:48:28 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/11 08:19:01 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,124 @@
 
 void	player_pov_rotation(t_math *ma, int input)
 {
+	double oldDirX;
+	double oldPlaneX;
+
+	oldDirX = ma->dirx;
 	printf("voici mon code %d\n", input);
 	if (input == 7) // droite
 	{
-		ma->old_dirx = ma->dirx;
-		ma->dirx = ma->dirx * cos(-5) - ma->diry * sin(-5);
-		ma->diry = ma->old_diry * sin(-5) + ma->diry * cos(-5);
-		ma->old_planex = ma->planex;
-		ma->planex = ma->planex * cos(-5) - ma->planey * sin(-5);
-		ma->planey = ma->old_planex * sin(-5) + ma->planey * cos(-5);
+		ma->dirx = ma->dirx * cos(1) - ma->diry * sin(-1);
+		ma->diry = oldDirX * sin(-1) + ma->diry * cos(-1);
+		oldPlaneX = ma->planex;
+		ma->planex = ma->planex * cos(-1) - ma->planey * sin(-1);
+		ma->planey = oldPlaneX * sin(-1) + ma->planey * cos(-1);
 	}
 	else if (input == 5) // gauche
 	{
-		ma->old_dirx = ma->dirx;
-		ma->dirx = ma->dirx * cos(5) - ma->diry * sin(5);
-		ma->diry = ma->old_diry * sin(5) + ma->diry * cos(5);
-		ma->old_planex = ma->planex;
-		ma->planex = ma->planex * cos(5) - ma->planey * sin(5);
-		ma->planey = ma->old_planex * sin(5) + ma->planey * cos(5);
+		ma->dirx = ma->dirx * cos(1) - ma->diry * sin(1);
+		ma->diry = oldDirX * sin(1) + ma->diry * cos(1);
+		oldPlaneX = ma->planex;
+		ma->planex = ma->planex * cos(1) - ma->planey * sin(1);
+		ma->planey = oldPlaneX * sin(1) + ma->planey * cos(1);
 	}
 	// printf("pdx = %f et pdy = %f\n", ptr->ma->posx, ptr->ma->posy);
 }
 
-void	player_movement(t_math *ma, int input)
+void	player_movement(t_math *ma, int input, t_info *ptr)
 {
 	int	x;
 	int	y;
+	int	tmp;
 
 	y = ma->posy;
 	x = ma->posx;
 	printf("voici input %d et voici dirx %f t diry %f\n", input, ma->dirx, ma->diry);
 	if (input == 1) // devant
-		ma->posy += ma->diry - 0.5;
-	else if (input == 2) // gauche
-		ma->posx -= ma->dirx - 0.5;
+	{
+		tmp = (int)ma->posx;
+		if(ptr->map[tmp + (int)ma->dirx * 1][(int)ma->posy] == 0) 
+			ma->posx += ma->dirx * 1;
+		if(ptr->map[(int)ma->posx][(int)ma->posy + (int)ma->diry * 1] == 0) 
+			ma->posy += ma->diry * 1;
+	}
+	// else if (input == 2) // gauche
+		// ma->posx -= ma->dirx - 0.5;
 	else if (input == 3) // bas
-		ma->posy += ma->diry - 0.5;
-	else if (input == 4) // droite
-		ma->posx -= ma->dirx - 0.5;
+	{
+		tmp = (int)ma->posx;
+		if(ptr->map[tmp - (int)ma->dirx * 1][(int)ma->posy] == 0) 
+			ma->posx -= ma->dirx * 1;
+		if(ptr->map[(int)ma->posx][(int)ma->posy - (int)ma->diry * 1] == 0) 
+			ma->posy -= ma->diry * 1;
+	}
+	// else if (input == 4) // droite
+		// ma->posx -= ma->dirx - 0.5;
 	// ptr->ma->posy = y;
 	// ptr->ma->posx = x;
+}
+
+// void	wall_creation_minimap(t_info *ptr)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		x;
+// 	int		y;
+
+// 	i = ((y = 0));
+// 	while (ptr->map[i])
+// 	{
+// 		j = 0;
+// 		x = 0;
+// 		while (ptr->map[i][j])
+// 		{
+// 			if (ptr->map[i][j] == '1')
+// 			{
+// 				printf("start %d end %d\n", ptr->ma->draw_start, ptr->ma->draw_end);
+// 				printf("voici windows height %d\n", ptr->ma->line_Height);
+// 				render_rect(&ptr->img, (t_rect){x, y,
+// 				ptr->ma->draw_start, ptr->ma->draw_end, RED_PIXEL});
+// 			}
+// 			x = x + 100;
+// 			j++;
+// 		}
+// 		y = y + 120;
+// 		i++;
+// 	}
+// 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
+// }
+
+void	wall_creation_minimap(t_info *ptr)
+{
+	printf("start %d end %d\n", ptr->ma->draw_start, ptr->ma->draw_end);
+	// render_background(&ptr->img, BLACK_PIXEL);
+	printf("voici windows height %d\n", ptr->ma->line_Height);
+	render_rect(&ptr->img, (t_rect){ptr->ma->draw_start, ptr->ma->draw_end,
+				100, 100, RED_PIXEL});
+	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
+}
+
+void	found_pos_player_minimap(t_info *ptr)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (ptr->map[i])
+	{
+		j = 0;
+		while (ptr->map[i][j])
+		{
+			if (ptr->map[i][j] == 'N' || ptr->map[i][j] == 'S'
+				|| ptr->map[i][j] == 'W' || ptr->map[i][j] == 'E')
+			{
+				ptr->ma->posx = WINDOW_WIDTH - 50;
+				ptr->ma->posy = 50;
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
 // void	wall_creation_minimap(t_info *ptr)
@@ -112,67 +190,6 @@ void	player_movement(t_math *ma, int input)
 // 	}
 // 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
 // }
-
-void	wall_creation_minimap(t_info *ptr)
-{
-	int		i;
-	int		j;
-	int		x;
-	int		y;
-
-	i = ((y = 0));
-	while (ptr->map[i])
-	{
-		j = 0;
-		x = 0;
-		while (ptr->map[i][j])
-		{
-			if (ptr->map[i][j] == '1')
-			{
-				render_rect(&ptr->img, (t_rect){x, j,
-				ptr->ma->draw_start, ptr->ma->draw_end, RED_PIXEL});
-			}
-			x = x + 100;
-			j++;
-		}
-		y = y + 120;
-		i++;
-	}
-	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
-}
-
-// void	wall_creation_minimap(t_info *ptr)
-// {
-// 	printf("start %d end %d\n", ptr->ma->draw_start, ptr->ma->draw_end);
-// 	// render_background(&ptr->img, BLACK_PIXEL);
-// 	printf("voici windows height %d\n", ptr->ma->line_Height);
-// 	render_rect(&ptr->img, (t_rect){ptr->ma->draw_start, ptr->ma->draw_end,
-// 				50, 50, RED_PIXEL});
-// 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
-// }
-
-void	found_pos_player_minimap(t_info *ptr)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (ptr->map[i])
-	{
-		j = 0;
-		while (ptr->map[i][j])
-		{
-			if (ptr->map[i][j] == 'N' || ptr->map[i][j] == 'S'
-				|| ptr->map[i][j] == 'W' || ptr->map[i][j] == 'E')
-			{
-				ptr->ma->posx = WINDOW_WIDTH - 50;
-				ptr->ma->posy = 50;
-			}
-			j++;
-		}
-		i++;
-	}
-}
 
 /* code du 6 avril juste minimap
 void	player_pov_rotation(t_info *ptr, int input)

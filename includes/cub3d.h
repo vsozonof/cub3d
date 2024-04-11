@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/10 13:16:04 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/11 08:06:43 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ int			render_rect(t_img *img, t_rect rect);
 int			handle_keypress(int keysym, t_info *ptr);
 int			window_creation(t_data *data, t_utils *utils);
 int			make_minimap(t_info *ptr);
-void		player_movement(t_math *ma, int input);
+void		player_movement(t_math *ma, int input, t_info *ptr);
 int			get_key_hook(int keycode, t_info *ptr);
 int			try_moove(t_info *ptr);
 int			init_struct(t_info *ptr, t_utils *util, t_math *ma);
