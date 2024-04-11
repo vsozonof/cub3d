@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/11 11:59:24 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:56:49 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,22 @@ int	render(t_info *ptr)
 	if (ptr->win == NULL)
 		return (1);
 	raycasting(ptr);
-	if (ptr->ma->out == 1)
-		return (-1);
 	make_map(ptr);
 	return (0);
 }
 
+int	make_map(t_info *ptr)//les position du joueur doit deprendre de sa pos de depart
+{
+	render_background(&ptr->img, BLACK_PIXEL);
+	render_rect(&ptr->img, (t_rect){0, 0, // le deuxieme est la hauteur
+				WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});
+	wall_creation_minimap(ptr);
+	// player_creation_minimap(ptr);
+	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
+	return (0);
+}
+
+/*
 int	make_map(t_info *ptr)//les position du joueur doit deprendre de sa pos de depart
 {
 	(void)ptr;
@@ -97,11 +107,12 @@ int	make_map(t_info *ptr)//les position du joueur doit deprendre de sa pos de de
 	render_background(&ptr->img, BLACK_PIXEL);
 	render_rect(&ptr->img, (t_rect){0, 0, // le deuxieme est la hauteur
 				WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});
-	wall_creation_minimap(ptr);
+	// wall_creation_minimap(ptr);
 	// player_creation_minimap(ptr);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
 	return (0);
 }
+*/
 
 int	window_creation(t_data *data, t_utils *utils)
 {
@@ -113,6 +124,8 @@ int	window_creation(t_data *data, t_utils *utils)
 	struct_map(utils->map, &ptr);
 	if (init_struct(&ptr, utils, &ma) == 1)
 		return (1);
+	ptr.crgb = data->ceiling_color;
+	ptr.frgb = data->floor_color;
 	ptr.img.mlx_img = mlx_new_image(ptr.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	ptr.img.addr = mlx_get_data_addr(ptr.img.mlx_img, &ptr.img.bpp,
 			&ptr.img.line_len, &ptr.img.endian);
@@ -146,8 +159,8 @@ int		init_struct(t_info *ptr, t_utils *util, t_math *ma)
 
 t_math	*ma_init(t_math *ma)
 {
-	ma->posx = 2; // trouver pos joueur
-	ma->posy = 2;
+	ma->posx = 22; // trouver pos joueur
+	ma->posy = 12;
 	ma->dirx = -1;
 	ma->diry = 0; // initialisation des vecteurs
 	ma->planex = 0;

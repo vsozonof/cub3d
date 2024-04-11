@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/11 11:59:17 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:02:04 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,40 @@ void	player_movement_minimap(t_math *ma, int input, t_info *ptr)
 // 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
 // }
 
+// void	wall_creation_minimap(t_info *ptr)
+// {
+// 	printf("start %d end %d\n", ptr->ma->draw_start, ptr->ma->draw_end);
+// 	// render_background(&ptr->img, BLACK_PIXEL);
+// 	printf("voici windows height %d\n", ptr->ma->line_Height);
+// 	render_rect(&ptr->img, (t_rect){ptr->ma->draw_start, ptr->ma->draw_end,
+// 				100, 100, RED_PIXEL});
+// 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
+// }
+
 void	wall_creation_minimap(t_info *ptr)
 {
-	printf("start %d end %d\n", ptr->ma->draw_start, ptr->ma->draw_end);
-	// render_background(&ptr->img, BLACK_PIXEL);
-	printf("voici windows height %d\n", ptr->ma->line_Height);
-	render_rect(&ptr->img, (t_rect){ptr->ma->draw_start, ptr->ma->draw_end,
-				100, 100, RED_PIXEL});
-	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
+	t_math	*ma;
+	t_line	*line;
+	double	wall_x;
+	int		scale;
+
+	ma = ptr->ma;
+	if (ma->side == WEST || ma->side == EAST)
+		wall_x = ma->posy + ma->perpwalldist * ma->raydiry;
+	else
+		wall_x = ma->posx + ma->perpwalldist * ma->raydirx;
+	wall_x -= floor(wall_x);
+	line->x = ma->mapx;
+	if (ptr->map[ma->mapy][ma->mapx] == '1')
+		paint_texture_line(ptr, ma, line);
+	line->yb = 0;
+	line->yf = ma->draw_start;
+	paint_line(ma, line, ptr->crgb);
+	line->yb = WINDOW_HEIGHT;
+	line->yf = ma->draw_end;
+	paint_line(ptr, ma, ptr->frgb);
+	// scale = line->y - (WINDOW_HEIGHT) / 2 + ma->line_Height;
+	// scale = line->y * texture->line_length;
 }
 
 void	found_pos_player_minimap(t_info *ptr)

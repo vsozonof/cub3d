@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/11 12:06:45 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:59:47 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct s_math
 	double	old_dirx;
 	double	old_diry;
 	double	old_planex;
+	double	wall_x;
 	int		out;
 	int		mapx;
 	int		mapy;
@@ -140,18 +141,31 @@ typedef struct s_math
 	int		draw_end;
 }	t_math;
 
+typedef struct s_line
+{
+	int		x;
+	int		y;
+	int		yb;
+	int		yf;
+	int		tex_x;
+	int		tex_y;
+}	t_line;
+
 typedef struct s_info
 {
     void	*mlx;
 	void	*win;
 	t_img	img;
 	t_math	*ma;
+	t_line	*line;
 	int		cur_img;
 	int		p_mov;
 	double	pa; // player angle
 	int		w_size;
 	int		fov;
 	char	**map;
+	char	*frgb;
+	char	*crgb;
 	int		mapS;
 }	t_info;
 
