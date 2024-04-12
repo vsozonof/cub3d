@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/11 14:58:01 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/12 11:20:55 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	raycasting(t_info *ptr)
 {
 	int		x;
 	t_math	*ma;
-	
+
 	x = 0;
 	ma = ptr->ma;
 	while (x < WINDOW_WIDTH)
 	{
-		ma->camerax = 2 * x / WINDOW_WIDTH - 1; // peut etre devoir mettre le double
+		ma->camerax = 2 * x / WINDOW_WIDTH - 1;
 		ma->raydirx = ma->dirx + ma->planex * ma->camerax;
 		ma->raydiry = ma->diry + ma->planey * ma->camerax;
 		ma->deltadistx = fabs(1 / ma->raydirx);
@@ -79,7 +79,21 @@ void	raycasting(t_info *ptr)
 			ma->perpwalldist = (ma->sidedistx - ma->deltadistx);
 		else
 			ma->perpwalldist = (ma->sidedisty - ma->deltadisty);
+		ma->line_Height = (WINDOW_HEIGHT / ma->perpwalldist);
+		ma->draw_start = -ma->line_Height / 2 + WINDOW_HEIGHT / 2;
+		if (ma->draw_start < 0)
+			ma->draw_start = 0;
+		ma->draw_end = ma->line_Height / 2 + WINDOW_HEIGHT / 2;
+		// printf("valeur draw_end %d\n", ma->draw_end);
+		// printf("WIND_HEIGHT %d\n", WINDOW_HEIGHT);
+		// if (ma->draw_end < 0)
+			// ma->draw_end *= -1;
+		if (ma->draw_end >= WINDOW_HEIGHT)
+		{
+			// printf("je passe ici\n");
+			ma->draw_end = WINDOW_HEIGHT - 1;
+			// printf("donc dnas le if %d\n", ma->draw_end);
+		}
 		x++;
 	}
-
 }

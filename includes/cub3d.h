@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/11 14:59:47 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/12 07:56:09 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,5 +256,6 @@ int			make_map(t_info *ptr);
 void		digital_differential_analyser(t_math *ma, t_info *ptr);
 t_math		*ma_init(t_math *ma);
 void		player_movement_minimap(t_math *ma, int input, t_info *ptr);
+void		wall_creation_map(t_info *ptr);
 
 #endif

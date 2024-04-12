@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/11 14:56:49 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/12 07:55:58 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	make_map(t_info *ptr)//les position du joueur doit deprendre de sa pos de de
 	render_background(&ptr->img, BLACK_PIXEL);
 	render_rect(&ptr->img, (t_rect){0, 0, // le deuxieme est la hauteur
 				WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});
-	wall_creation_minimap(ptr);
+	wall_creation_map(ptr);
 	// player_creation_minimap(ptr);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
 	return (0);

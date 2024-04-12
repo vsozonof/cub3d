@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/11 15:02:04 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/12 10:56:05 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,16 @@ void	player_movement_minimap(t_math *ma, int input, t_info *ptr)
 	ma->posx = x;
 }
 
+void	wall_creation_map(t_info *ptr)
+{
+	t_math *ma;
+
+	ma = ptr->ma;
+	printf("voici draw_start %d end %d\n", ma->draw_start, ma->draw_end);
+	render_rect(&ptr->img, (t_rect){ma->draw_start, ma->draw_end,
+				100, 100, RED_PIXEL});
+}
+
 // void	wall_creation_minimap(t_info *ptr)
 // {
 // 	int		i;
@@ -130,32 +140,6 @@ void	player_movement_minimap(t_math *ma, int input, t_info *ptr)
 // 				100, 100, RED_PIXEL});
 // 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
 // }
-
-void	wall_creation_minimap(t_info *ptr)
-{
-	t_math	*ma;
-	t_line	*line;
-	double	wall_x;
-	int		scale;
-
-	ma = ptr->ma;
-	if (ma->side == WEST || ma->side == EAST)
-		wall_x = ma->posy + ma->perpwalldist * ma->raydiry;
-	else
-		wall_x = ma->posx + ma->perpwalldist * ma->raydirx;
-	wall_x -= floor(wall_x);
-	line->x = ma->mapx;
-	if (ptr->map[ma->mapy][ma->mapx] == '1')
-		paint_texture_line(ptr, ma, line);
-	line->yb = 0;
-	line->yf = ma->draw_start;
-	paint_line(ma, line, ptr->crgb);
-	line->yb = WINDOW_HEIGHT;
-	line->yf = ma->draw_end;
-	paint_line(ptr, ma, ptr->frgb);
-	// scale = line->y - (WINDOW_HEIGHT) / 2 + ma->line_Height;
-	// scale = line->y * texture->line_length;
-}
 
 void	found_pos_player_minimap(t_info *ptr)
 {
@@ -338,4 +322,48 @@ void	found_pos_player_minimap(t_info *ptr)
 		i++;
 	}
 }
+
+void	wall_creation_map(t_info *ptr)
+// {
+// 	t_math	*ma;
+// 	t_line	*line;
+// 	double	wall_x;
+// 	int		scale;
+
+// 	ma = ptr->ma;
+// 	if (ma->side == WEST || ma->side == EAST)
+// 		wall_x = ma->posy + ma->perpwalldist * ma->raydiry;
+// 	else
+// 		wall_x = ma->posx + ma->perpwalldist * ma->raydirx;
+// 	wall_x -= floor(wall_x);
+// 	line->x = ma->mapx;
+// 	if (ptr->map[ma->mapy][ma->mapx] == '1')
+// 		paint_texture_line(ptr, ma, line);
+// 	line->yb = 0;
+// 	line->yf = ma->draw_start;
+// 	paint_line(ma, line, ptr->crgb);
+// 	line->yb = WINDOW_HEIGHT;
+// 	line->yf = ma->draw_end;
+// 	paint_line(ptr, ma, ptr->frgb);
+// 	texture_on_img(ptr, ma, line, texture);
+// 	// scale = line->y - (WINDOW_HEIGHT) / 2 + ma->line_Height;
+// 	// scale = line->y * texture->line_length;
+// }
+
+// static void	texture_on_img(t_info *ptr, t_math *ma, t_line *line, t_image *texture)
+// {
+// 	int		scale;
+// // peut etre changer le 50 pour la cam height
+// 	scale = line->y * line_lenght - (WINDOW_HEIGHT * 50) * line_lenght / 2
+// 		+ ma->line_Height * line_lenght / 2;
+// 	line->tex_y = ((scale * texture->height) / ma->line_Height) / texture->line_lenght;
+// 	ptr->mlx_img->data[line->y * line_lenght + line->x * bbp / 8] = texture->data[line->tex_y
+// 		* texture->line_lenght + line->tex_x * (texture->bbp / 8)];
+// 	ptr->mlx_img->data[line->y * ptr->mlx_img->line_lenght + line->x
+// 		(ptr->mlx_img->bbp / 8) + 1] = texture->data[line->tex_y * texture->line_lenght
+// 		+ line->tex_x * (texture->bbp / 8) + 1];
+// 	ptr->mlx_img->data[line->y * ]
+	
+// }
+
 */
