@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/15 11:40:59 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:29:54 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,26 @@ int	render(t_info *ptr)
 {
 	if (ptr->win == NULL)
 		return (1);
-	raycasting(ptr);
-	// make_map(ptr);
+	make_map(ptr, 0);
+	while (ptr->ma->planey < 0.90)
+	{
+		raycasting(ptr);
+		printf("sasasa\n");
+		wall_creation_map(ptr, 0);
+		ptr->ma->planey += 0.01;
+		printf("ALLOOOOO voici planey %f\n", ptr->ma->planey);
+	}
+	ptr->ma->planey = 0.01;
 	return (0);
 }
 
 int	make_map(t_info *ptr, int i)//les position du joueur doit deprendre de sa pos de depart
 {
+	(void)i;
 	render_background(&ptr->img, BLACK_PIXEL);
-	render_rect(&ptr->img, (t_rect){0, 0, // le deuxieme est la hauteur
+	render_rect(&ptr->img, (t_rect){0, 0,
 				WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});
-	wall_creation_map(ptr, i);
+	// wall_creation_map(ptr, i);
 	// player_creation_minimap(ptr);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
 	return (0);
@@ -164,7 +173,7 @@ t_math	*ma_init(t_math *ma)
 	ma->dirx = -1;
 	ma->diry = 0; // initialisation des vecteurs
 	ma->planex = 0;
-	// ma->planey = 0.66;
+	ma->planey = 0.01;
 	ma->out = 0;
 	return (ma);
 }

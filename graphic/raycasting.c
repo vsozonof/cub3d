@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/15 11:41:35 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:46:03 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,90 +19,85 @@ void	raycasting(t_info *ptr)
 
 	x = 0;
 	ma = ptr->ma;
-	ma->planey = 0.1;
-	while (ma->planey < 0.90)
+	// ma->planey += 0.01;
+	while (x < WINDOW_WIDTH)
 	{
-		while (x < WINDOW_WIDTH)
-		{
-			ma->camerax = 2 * x / WINDOW_WIDTH - 1;
-			ma->raydirx = ma->dirx + ma->planex * ma->camerax;
-			ma->raydiry = ma->diry + ma->planey * ma->camerax;
+		ma->camerax = 2 * x / WINDOW_WIDTH - 1;
+		ma->raydirx = ma->dirx + ma->planex * ma->camerax;
+		ma->raydiry = ma->diry + ma->planey * ma->camerax;
+		ma->deltadistx = fabs(1 / ma->raydirx);
+		ma->deltadisty = fabs(1 / ma->raydiry);
+		ma->mapx = ma->posx;
+		ma->mapy = ma->posy;
+		if (ma->raydirx == 0)
+			ma->deltadistx = 1e30;
+		else
 			ma->deltadistx = fabs(1 / ma->raydirx);
+		if (ma->raydiry == 0)
+			ma->deltadisty = 1e30;
+		else
 			ma->deltadisty = fabs(1 / ma->raydiry);
-			ma->mapx = ma->posx;
-			ma->mapy = ma->posy;
-			if (ma->raydirx == 0)
-				ma->deltadistx = 1e30;
-			else
-				ma->deltadistx = fabs(1 / ma->raydirx);
-			if (ma->raydiry == 0)
-				ma->deltadisty = 1e30;
-			else
-				ma->deltadisty = fabs(1 / ma->raydiry);
 
-			ma->hit = 0;
-			if (ma->raydirx < 0)
-			{
-				ma->stepx = -1;
-				ma->sidedistx = (ma->posx - ma->mapx) * ma->deltadistx;
-			}
-			else
-			{
-				ma->stepx = -1;
-				ma->sidedistx = (ma->mapx + 1.0 - ma->posx) * ma->deltadistx;
-			}
-			if (ma->raydiry < 0)
-			{
-				ma->stepy = -1;
-				ma->sidedisty = (ma->posy - ma->mapy) * ma->deltadisty;
-			}
-			else
-			{
-				ma->stepy = 1;
-				ma->sidedisty = (ma->mapy + 1.0 - ma->posy) * ma->deltadisty;
-			}
-			while (ma->hit == 0)
-			{
-				if (ma->sidedistx < ma->sidedisty)
-				{
-					ma->sidedistx += ma->deltadistx;
-					ma->mapx += ma->stepx;
-					ma->side = 0;
-				}
-				else
-				{
-					ma->sidedisty += ma->deltadisty;
-					ma->mapy += ma->stepy;
-					ma->side = 1;
-				}
-				if (ptr->map[ma->mapx][ma->mapy] > 0)
-					ma->hit = 1;
-			}
-			if (ma->side == 0)
-				ma->perpwalldist = (ma->sidedistx - ma->deltadistx);
-			else
-				ma->perpwalldist = (ma->sidedisty - ma->deltadisty);
-			ma->line_Height = (WINDOW_HEIGHT / ma->perpwalldist);
-			printf("%f\n", ma->perpwalldist);
-			printf("line %d\n", ma->line_Height);
-			ma->draw_start = -ma->line_Height / 2 + WINDOW_HEIGHT / 2;
-			if (ma->draw_start < 0)
-				ma->draw_start = 0;
-			ma->draw_end = ma->line_Height / 2 + WINDOW_HEIGHT / 2;
-			// printf("WIND_HEIGHT %d\n", WINDOW_HEIGHT);
-			// if (ma->draw_end < 0)
-				// ma->draw_end *= -1;
-			if (ma->draw_end >= WINDOW_HEIGHT || ma->draw_end < 0)
-				ma->draw_end = WINDOW_HEIGHT - 1;
-			ma->draw_end /= 2;
-			printf("valeur draw_start %d\n", ma->draw_start);
-			printf("valeur draw_end %d\n", ma->draw_end);
-			x++;
+		ma->hit = 0;
+		if (ma->raydirx < 0)
+		{
+			ma->stepx = -1;
+			ma->sidedistx = (ma->posx - ma->mapx) * ma->deltadistx;
 		}
-		printf("maintenant je print\n");
-		make_map(ptr, (ma->planey * 100));
-		ma->planey += 0.1;
-		x = 0;
+		else
+		{
+			ma->stepx = -1;
+			ma->sidedistx = (ma->mapx + 1.0 - ma->posx) * ma->deltadistx;
+		}
+		if (ma->raydiry < 0)
+		{
+			ma->stepy = -1;
+			ma->sidedisty = (ma->posy - ma->mapy) * ma->deltadisty;
+		}
+		else
+		{
+			ma->stepy = 1;
+			ma->sidedisty = (ma->mapy + 1.0 - ma->posy) * ma->deltadisty;
+		}
+		while (ma->hit == 0)
+		{
+			if (ma->sidedistx < ma->sidedisty)
+			{
+				ma->sidedistx += ma->deltadistx;
+				ma->mapx += ma->stepx;
+				ma->side = 0;
+			}
+			else
+			{
+				ma->sidedisty += ma->deltadisty;
+				ma->mapy += ma->stepy;
+				ma->side = 1;
+			}
+			// if (map->mapx > limite_map || mapy > limit_map) // faire cette condition
+			if (ptr->map[ma->mapx][ma->mapy] > 0)
+				ma->hit = 1;
+		}
+		if (ma->side == 0)
+			ma->perpwalldist = (ma->sidedistx - ma->deltadistx);
+		else
+			ma->perpwalldist = (ma->sidedisty - ma->deltadisty);
+		ma->line_Height = (WINDOW_HEIGHT / ma->perpwalldist);
+		// printf("%f\n", ma->perpwalldist);
+		// printf("line %d\n", ma->line_Height);
+		ma->draw_start = -ma->line_Height / 2 + WINDOW_HEIGHT / 2;
+		// printf("start = %d\n", ma->draw_start);
+		if (ma->draw_start < 0)
+			ma->draw_start = 1;
+		ma->draw_end = ma->line_Height / 2 + WINDOW_HEIGHT / 2;
+		// printf("WIND_HEIGHT %d\n", WINDOW_HEIGHT);
+		// if (ma->draw_end < 0)
+			// ma->draw_end *= -1;
+		if (ma->draw_end >= WINDOW_HEIGHT || ma->draw_end < 0)
+			ma->draw_end = WINDOW_HEIGHT - 1;
+		ma->draw_end /= 2;
+		// printf("valeur draw_start %d\n", ma->draw_start);
+		// printf("valeur draw_end %d\n", ma->draw_end);
+		x++;
 	}
 }
 
