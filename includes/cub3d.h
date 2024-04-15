@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/12 07:56:09 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:41:44 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct s_math
 	double	old_diry;
 	double	old_planex;
 	double	wall_x;
+	int		fov;
 	int		out;
 	int		mapx;
 	int		mapy;
@@ -252,10 +253,10 @@ void		player_creation_minimap(t_info *ptr);
 void		make_ray(t_info *ptr, int fi_x, int fi_y);
 void		found_case_ray(int bgx, int bgy, int fix, int fiy);
 void		raycasting(t_info *ptr);
-int			make_map(t_info *ptr);
+int			make_map(t_info *ptr, int i);
 void		digital_differential_analyser(t_math *ma, t_info *ptr);
 t_math		*ma_init(t_math *ma);
 void		player_movement_minimap(t_math *ma, int input, t_info *ptr);
-void		wall_creation_map(t_info *ptr);
+void		wall_creation_map(t_info *ptr, int i);
 
 #endif
