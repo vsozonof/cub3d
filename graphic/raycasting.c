@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/15 14:46:03 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:03:00 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,18 @@ void	raycasting(t_info *ptr)
 
 	x = 0;
 	ma = ptr->ma;
-	// ma->planey += 0.01;
 	while (x < WINDOW_WIDTH)
 	{
-		ma->camerax = 2 * x / WINDOW_WIDTH - 1;
+		ma->camerax = 2 * x / (double)WINDOW_WIDTH - 1;
+		// printf("!!!!!!!!!!!!!!voici x %d\n", x);
+		// printf("voici camera %f et maintenant voici ses composante\n %d %d\n", ma->camerax, 2 * x, WINDOW_WIDTH - 1);
 		ma->raydirx = ma->dirx + ma->planex * ma->camerax;
 		ma->raydiry = ma->diry + ma->planey * ma->camerax;
-		ma->deltadistx = fabs(1 / ma->raydirx);
-		ma->deltadisty = fabs(1 / ma->raydiry);
-		ma->mapx = ma->posx;
-		ma->mapy = ma->posy;
+		// printf("===voici resultat %f\n", ma->diry + ma->planey * ma->camerax);
+		// printf("===voici les composante du calcul diry %f, planey %f camerax %f\n", ma->diry, ma->planey, ma->camerax);
+		// printf("voici raydiry %f===\n", ma->raydiry);
+		ma->mapx = (int)ma->posx;
+		ma->mapy = (int)ma->posy;
 		if (ma->raydirx == 0)
 			ma->deltadistx = 1e30;
 		else
@@ -37,8 +39,8 @@ void	raycasting(t_info *ptr)
 			ma->deltadisty = 1e30;
 		else
 			ma->deltadisty = fabs(1 / ma->raydiry);
-
 		ma->hit = 0;
+		// printf("voici deltadisty %f \n", ma->deltadisty);
 		if (ma->raydirx < 0)
 		{
 			ma->stepx = -1;
@@ -46,7 +48,7 @@ void	raycasting(t_info *ptr)
 		}
 		else
 		{
-			ma->stepx = -1;
+			ma->stepx = 1;
 			ma->sidedistx = (ma->mapx + 1.0 - ma->posx) * ma->deltadistx;
 		}
 		if (ma->raydiry < 0)
@@ -78,15 +80,22 @@ void	raycasting(t_info *ptr)
 				ma->hit = 1;
 		}
 		if (ma->side == 0)
+		{
 			ma->perpwalldist = (ma->sidedistx - ma->deltadistx);
+			printf("voici side = 0 sidesity %f et delta %f\n", ma->sidedistx, ma->deltadistx);
+		}
 		else
+		{
+			printf("==voici side = 1 sidesity %f et delta %f\n", ma->sidedistx, ma->deltadistx);
 			ma->perpwalldist = (ma->sidedisty - ma->deltadisty);
-		ma->line_Height = (WINDOW_HEIGHT / ma->perpwalldist);
+			printf("donc la mon perpwalldist est egal a ca %f pourtant le calcul donne ca %f\n==", ma->perpwalldist, ma->sidedisty - ma->deltadisty);
+		}
+		ma->line_Height = (int)(WINDOW_HEIGHT / ma->perpwalldist);
 		// printf("%f\n", ma->perpwalldist);
 		// printf("line %d\n", ma->line_Height);
 		ma->draw_start = -ma->line_Height / 2 + WINDOW_HEIGHT / 2;
 		// printf("start = %d\n", ma->draw_start);
-		if (ma->draw_start < 0)
+		if (ma->draw_start < 0) // probleme avec draw_start aussi
 			ma->draw_start = 1;
 		ma->draw_end = ma->line_Height / 2 + WINDOW_HEIGHT / 2;
 		// printf("WIND_HEIGHT %d\n", WINDOW_HEIGHT);

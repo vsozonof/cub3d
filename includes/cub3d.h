@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/15 11:41:44 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/16 09:46:38 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,8 +168,9 @@ typedef struct s_info
 	char	*frgb;
 	char	*crgb;
 	int		mapS;
+	int		x_map_max;
+	int		y_map_max;
 }	t_info;
-
 
 int		main(int argc, char **argv);
 void	initialize_struct(t_data *data, t_utils *utils);

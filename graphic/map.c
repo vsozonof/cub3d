@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/15 14:29:54 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/16 13:41:06 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ int		init_struct(t_info *ptr, t_utils *util, t_math *ma)
 	ptr->p_mov = 0;
 	ptr->pa = 90;
 	ptr->ma = ma_init(ma);
+	// ptr->x
 	return (0);
 }
 

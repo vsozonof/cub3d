@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/15 14:45:21 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/16 10:46:06 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,32 @@ void	player_movement_minimap(t_math *ma, int input, t_info *ptr)
 	y = ma->posy;
 	x = ma->posx;
 	if (input == 1)
+	{
+		if (y - 0.5 <= 0)
+			return ;
 		y = y - 0.5;
+	}
 	else if (input == 2)
+	{
+		if (x - 0.5 <= 0)
+			return ;
 		x = x - 0.5;
+	}
 	else if (input == 3)
+	{
+		if (y + 0.5 >= ft_strlen(ptr->map[y]))
+			return ;
 		y = y + 0.5;
+	}
 	else if (input == 4)
+	{
+		if (x + 0.5 >= ft_strlen(ptr->map[x]))
+			return ;
 		x = x + 0.5;
+	}
 	ma->posy = y;
 	ma->posx = x;
+	printf("nouvelle position %f %f\n", ma->posy, ma->posx);
 }
 
 void	wall_creation_map(t_info *ptr, int i)
@@ -98,9 +115,9 @@ void	wall_creation_map(t_info *ptr, int i)
 
 	ma = ptr->ma;
 	// ma->draw_end /= 2;
-	printf("voici draw_start %d end %d\n", ma->draw_start, ma->draw_end);
-	render_rect(&ptr->img, (t_rect){ma->draw_start, ma->draw_end,
-				ma->draw_start, ma->draw_end, RED_PIXEL});
+	// printf("voici draw_start %d end %d\n", ma->draw_start, ma->draw_end);
+	render_rect(&ptr->img, (t_rect){ma->draw_start, ma->draw_start,
+				ma->draw_end, ma->draw_end, RED_PIXEL});
 }
 
 // void	wall_creation_minimap(t_info *ptr)
