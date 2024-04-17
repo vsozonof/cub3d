@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/17 10:56:49 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:38:52 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # define INIT_MLX		"Initializing MiniLibX"
 # define CHECK_TEXTUR	"Checking wall textures"
 
-# define WINDOW_WIDTH 2560 //longueur
-# define WINDOW_HEIGHT 1440 //largueur
+# define WINDOW_WIDTH 1920 //longueur
+# define WINDOW_HEIGHT 1080 //largueur
 # define MLX_ERROR 1
 # define RED_PIXEL 0xFF0000
 # define GREEN_PIXEL 0xFF00

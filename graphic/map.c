@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/17 11:25:15 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:52:31 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ int	render(t_info *ptr)
 	render_background(&ptr->img, BLACK_PIXEL);
 	render_rect(&ptr->img, (t_rect){0, 0,
 				WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});
-	make_map(ptr, 0);
 	raycasting(ptr);
 	printf("sasasa\n");
-	wall_creation_map(ptr, 0);
+	make_map(ptr, 0);
+	// wall_creation_map(ptr, 0);
 	printf("ALLOOOOO voici planey %f\n", ptr->ma->planey);
 	return (0);
 }
@@ -94,12 +94,12 @@ int	render(t_info *ptr)
 int	make_map(t_info *ptr, int i)//les position du joueur doit deprendre de sa pos de depart
 {
 	(void)i;
-	render_background(&ptr->img, BLACK_PIXEL);
-	render_rect(&ptr->img, (t_rect){0, 0,
-				WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});
+	// render_background(&ptr->img, BLACK_PIXEL);
+	// render_rect(&ptr->img, (t_rect){0, 0,
+				// WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});
 	wall_creation_map(ptr, i);
+	// make_cf(ptr);
 	// player_creation_minimap(ptr);
-	make_cf(ptr);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
 	return (0);
 }
