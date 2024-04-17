@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/16 10:46:06 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/17 10:56:09 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ void	wall_creation_map(t_info *ptr, int i)
 	ma = ptr->ma;
 	// ma->draw_end /= 2;
 	// printf("voici draw_start %d end %d\n", ma->draw_start, ma->draw_end);
-	render_rect(&ptr->img, (t_rect){ma->draw_start, ma->draw_start,
-				ma->draw_end, ma->draw_end, RED_PIXEL});
+	// render_rect(&ptr->img, (t_rect){ma->draw_start, ma->draw_start,
+				// ma->draw_end, ma->draw_end, RED_PIXEL});
 }
 
 // void	wall_creation_minimap(t_info *ptr)

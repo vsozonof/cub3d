@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/16 14:03:00 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/17 10:44:02 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	raycasting(t_info *ptr)
 		ma->raydiry = ma->diry + ma->planey * ma->camerax;
 		// printf("===voici resultat %f\n", ma->diry + ma->planey * ma->camerax);
 		// printf("===voici les composante du calcul diry %f, planey %f camerax %f\n", ma->diry, ma->planey, ma->camerax);
-		// printf("voici raydiry %f===\n", ma->raydiry);
+		// printf("voici raydiry %f et  raydirx %f\n", ma->raydiry, ma->raydirx);
 		ma->mapx = (int)ma->posx;
 		ma->mapy = (int)ma->posy;
 		if (ma->raydirx == 0)
@@ -40,27 +40,32 @@ void	raycasting(t_info *ptr)
 		else
 			ma->deltadisty = fabs(1 / ma->raydiry);
 		ma->hit = 0;
-		// printf("voici deltadisty %f \n", ma->deltadisty);
+		// printf("voici deltadisty %f et deltax %f\n", ma->deltadisty, ma->deltadistx);
 		if (ma->raydirx < 0)
 		{
 			ma->stepx = -1;
 			ma->sidedistx = (ma->posx - ma->mapx) * ma->deltadistx;
+			// printf("je passe par le 1 donc voici mes nombre %f %d %f\n", ma->posx, ma->mapx, ma->deltadistx);
 		}
 		else
 		{
 			ma->stepx = 1;
 			ma->sidedistx = (ma->mapx + 1.0 - ma->posx) * ma->deltadistx;
+			// printf("je passe par le 2\n");
 		}
 		if (ma->raydiry < 0)
 		{
 			ma->stepy = -1;
 			ma->sidedisty = (ma->posy - ma->mapy) * ma->deltadisty;
+			// printf("je passe par le 3\n");
 		}
 		else
 		{
 			ma->stepy = 1;
 			ma->sidedisty = (ma->mapy + 1.0 - ma->posy) * ma->deltadisty;
+			// printf("je passe par le 4\n");
 		}
+		// printf("voici sidetx %f et sidety %f\n", ma->sidedistx, ma->sidedisty);
 		while (ma->hit == 0)
 		{
 			if (ma->sidedistx < ma->sidedisty)
@@ -82,13 +87,13 @@ void	raycasting(t_info *ptr)
 		if (ma->side == 0)
 		{
 			ma->perpwalldist = (ma->sidedistx - ma->deltadistx);
-			printf("voici side = 0 sidesity %f et delta %f\n", ma->sidedistx, ma->deltadistx);
+			// printf("voici side = 0 sidesity %f et delta %f\n", ma->sidedistx, ma->deltadistx);
 		}
 		else
 		{
-			printf("==voici side = 1 sidesity %f et delta %f\n", ma->sidedistx, ma->deltadistx);
+			// printf("==voici side = 1 sidesity %f et delta %f\n", ma->sidedistx, ma->deltadistx);
 			ma->perpwalldist = (ma->sidedisty - ma->deltadisty);
-			printf("donc la mon perpwalldist est egal a ca %f pourtant le calcul donne ca %f\n==", ma->perpwalldist, ma->sidedisty - ma->deltadisty);
+			// printf("donc la mon perpwalldist est egal a ca %f pourtant le calcul donne ca %f\n==", ma->perpwalldist, ma->sidedisty - ma->deltadisty);
 		}
 		ma->line_Height = (int)(WINDOW_HEIGHT / ma->perpwalldist);
 		// printf("%f\n", ma->perpwalldist);
@@ -103,7 +108,7 @@ void	raycasting(t_info *ptr)
 			// ma->draw_end *= -1;
 		if (ma->draw_end >= WINDOW_HEIGHT || ma->draw_end < 0)
 			ma->draw_end = WINDOW_HEIGHT - 1;
-		ma->draw_end /= 2;
+		// ma->draw_end /= 2;
 		// printf("valeur draw_start %d\n", ma->draw_start);
 		// printf("valeur draw_end %d\n", ma->draw_end);
 		x++;
