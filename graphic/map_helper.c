@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/17 14:55:48 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:02:02 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,18 +111,40 @@ void	player_movement_minimap(t_math *ma, int input, t_info *ptr)
 void	wall_creation_map(t_info *ptr, int i)
 {
 	t_math *ma;
-	(void)i;
+	int j;
 
 	ma = ptr->ma;
-	render_rect(&ptr->img, (t_rect){0, 0,
-		ma->draw_end, ma->draw_end, BLUE_PIXEL});
-	printf("coucou\n");
-	render_rect(&ptr->img, (t_rect){ma->draw_start, ma->draw_start,
-		ma->draw_start, ma->draw_end, RED_PIXEL});
-	printf("COUCOU\n");
-	render_rect(&ptr->img, (t_rect){ma->draw_end, ma->draw_end,
-		WINDOW_HEIGHT - ma->draw_end, WINDOW_HEIGHT - ma->draw_end,GREEN_PIXEL});
-	printf("voici draw_start %d end %d\n", ma->draw_start, ma->draw_end);
+	i = 0; // largeur
+	j = 0; // hauteur
+	ma->draw_end = ma->draw_end / 2;
+	ma->draw_start = 150; //CHANGER LES START ET END CAR C'EST PAS BON
+	while (i < WINDOW_HEIGHT)
+	{
+		j = 0;
+		if (j < ptr->ma->draw_start)
+			while (j++ < ptr->ma->draw_start)
+				render_rect(&ptr->img, (t_rect){j, i, 1, 1, BLUE_PIXEL});
+		else if (j < ma->draw_end)
+		{
+			while (j++ < ma->draw_end)
+				img_pix_put(&ptr->img, j, i, RED_PIXEL);
+				
+		}
+		else
+			while (j++ < WINDOW_HEIGHT)
+				img_pix_put(&ptr->img, j, i, GREEN_PIXEL);
+		i++;
+	}
+	// printf("voici i %d\n", i);
+	// render_rect(&ptr->img, (t_rect){0, 0,
+	// 	ma->draw_end, ma->draw_end, BLUE_PIXEL});
+	// printf("coucou\n");
+	// render_rect(&ptr->img, (t_rect){ma->draw_start, ma->draw_start,
+	// 	ma->draw_start, ma->draw_end, RED_PIXEL});
+	// printf("COUCOU\n");
+	// render_rect(&ptr->img, (t_rect){ma->draw_end, ma->draw_end,
+	// 	WINDOW_HEIGHT - ma->draw_end, WINDOW_HEIGHT - ma->draw_end,GREEN_PIXEL});
+	// printf("voici draw_start %d end %d\n", ma->draw_start, ma->draw_end);
 }
 
 // void	wall_creation_minimap(t_info *ptr)

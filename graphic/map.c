@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/17 13:52:31 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:34:05 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,10 @@ int	render(t_info *ptr)
 	render_background(&ptr->img, BLACK_PIXEL);
 	render_rect(&ptr->img, (t_rect){0, 0,
 				WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});
+	// while () // voir comment je peux le boucler en changeant la valeur
 	raycasting(ptr);
-	printf("sasasa\n");
 	make_map(ptr, 0);
 	// wall_creation_map(ptr, 0);
-	printf("ALLOOOOO voici planey %f\n", ptr->ma->planey);
 	return (0);
 }
 
