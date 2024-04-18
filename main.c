@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:10:02 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/04/06 07:18:05 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:09:26 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int	main(int argc, char **argv)
 	initialize_struct(&data, &utils);
 	if (parsing_manager(&data, argc, argv, &utils))
 		return (1);
-	exec_manager(argc, argv, &data, &utils);
+	window_creation(&data, &utils);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/17 13:38:52 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:09:36 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,9 +214,7 @@ void	pr_error_spe(char *msg, int *i);
 //graphic
 
 int			render(t_info *info);
-int			exec_manager(int argc, char **argv, t_data *data, t_utils *utils);
 int			exec_tmp(void);
-int			window_create(t_data *data, t_utils *utils);
 void		game_start(t_info *ptr);
 int			mouse_hook(t_info *ptr);
 int			get_key_hook(int keycode, t_info *ptr);

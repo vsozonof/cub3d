@@ -6,7 +6,7 @@
 #    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 14:09:59 by vsozonof          #+#    #+#              #
-#    Updated: 2024/04/17 10:43:44 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/04/18 15:12:49 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,9 +34,6 @@ SRCS = main.c \
 	   parsing/map_checker.c \
 	   parsing/wall_checker.c \
 	   parsing/printers/print-tools-1.c \
-	   graphic/graphic1.c \
-	   graphic/exemple_graphic.c \
-	   graphic/window_create.c \
 	   graphic/players_utils.c \
 	   graphic/map.c \
 	   graphic/utils_function.c \
@@ -44,6 +41,9 @@ SRCS = main.c \
 	   graphic/mlx_utils.c \
 	   graphic/raycasting.c \
 	   graphic/drawing.c \
+	   graphic/keys_hook.c \
+	   graphic/init_struct.c\
+	   graphic/img_creation.c \
 
 
 OBJS = $(SRCS:.c=.o)

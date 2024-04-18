@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:40:16 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/11 10:44:16 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:06:38 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,17 @@ void	make_ray(t_info *ptr, int fix, int fiy)
 		if (bgx > WINDOW_WIDTH || bgy < 0)
 			break;
 	}
+}
+
+int	refresh_player_pos(char **argv, t_info *ptr)
+{
+	ptr->ma->posx = found_player_pos_x(argv);
+	if (ptr->ma->posx == -1)
+		return (printf("error when searching player 1\n"), -1);
+	ptr->ma->posy = found_player_pos_y(argv);
+	if (ptr->ma->posy == -1)
+		return (printf("error when searching player 2\n"), -1);
+	return (0);
 }
 
 // tracer une ligne de 2 pixels du point x et y au point x' et y'

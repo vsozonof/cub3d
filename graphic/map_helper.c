@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/18 14:12:24 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:03:56 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,46 +138,6 @@ void	wall_creation_map(t_info *ptr, int i)
 	// printf("voici draw_start %d end %d\n", ma->draw_start, ma->draw_end);
 }
 
-// void	wall_creation_minimap(t_info *ptr)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		x;
-// 	int		y;
-
-// 	i = ((y = 0));
-// 	while (ptr->map[i])
-// 	{
-// 		j = 0;
-// 		x = 0;
-// 		while (ptr->map[i][j])
-// 		{
-// 			if (ptr->map[i][j] == '1')
-// 			{
-// 				printf("start %d end %d\n", ptr->ma->draw_start, ptr->ma->draw_end);
-// 				printf("voici windows height %d\n", ptr->ma->line_Height);
-// 				render_rect(&ptr->img, (t_rect){ptr->ma->draw_start, ptr->ma->draw_end,
-// 				ptr->ma->draw_start, ptr->ma->draw_end, RED_PIXEL});
-// 			}
-// 			x = x + 100;
-// 			j++;
-// 		}
-// 		y = y + 120;
-// 		i++;
-// 	}
-// 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
-// }
-
-// void	wall_creation_minimap(t_info *ptr)
-// {
-// 	printf("start %d end %d\n", ptr->ma->draw_start, ptr->ma->draw_end);
-// 	// render_background(&ptr->img, BLACK_PIXEL);
-// 	printf("voici windows height %d\n", ptr->ma->line_Height);
-// 	render_rect(&ptr->img, (t_rect){ptr->ma->draw_start, ptr->ma->draw_end,
-// 				100, 100, RED_PIXEL});
-// 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
-// }
-
 void	found_pos_player_minimap(t_info *ptr)
 {
 	int		i;
@@ -201,62 +161,35 @@ void	found_pos_player_minimap(t_info *ptr)
 	}
 }
 
-// void	wall_creation_minimap(t_info *ptr)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		x;
-// 	int		y;
+void	wall_creation_minimap(t_info *ptr)
+{
+	int		i;
+	int		j;
+	int		x;
+	int		y;
 
-// 	i = ((y = 0));
-// 	while (ptr->map[i])
-// 	{
-// 		j = 0;
-// 		x = 0;
-// 		while (ptr->map[i][j])
-// 		{
-// 			if (ptr->map[i][j] == '1')
-// 			{
-// 				render_rect(&ptr->img, (t_rect){x, y,
-// 				100, 120, WHITE_PIXEL});
-// 			}
-// 			x = x + 100;
-// 			j++;
-// 		}
-// 		y = y + 120;
-// 		i++;
-// 	}
-// }
-
-// void	wall_creation_minimap(t_info *ptr)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		x;
-// 	int		y;
-
-// 	i = ((y = 0));
-// 	while (ptr->map[i])
-// 	{
-// 		j = 0;
-// 		x = 0;
-// 		while (ptr->map[i][j])
-// 		{
-// 			if (ptr->map[i][j] == '1')
-// 			{
-// 				printf("start %d end %d\n", ptr->ma->draw_start, ptr->ma->draw_end);
-// 				printf("voici windows height %d\n", ptr->ma->line_Height);
-// 				render_rect(&ptr->img, (t_rect){j, i,
-// 				ptr->ma->draw_start, ptr->ma->draw_end, RED_PIXEL});
-// 			}
-// 			x = x + 100;
-// 			j++;
-// 		}
-// 		y = y + 120;
-// 		i++;
-// 	}
-// 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
-// }
+	i = ((y = 0));
+	while (ptr->map[i])
+	{
+		j = 0;
+		x = 0;
+		while (ptr->map[i][j])
+		{
+			if (ptr->map[i][j] == '1')
+			{
+				printf("start %d end %d\n", ptr->ma->draw_start, ptr->ma->draw_end);
+				printf("voici windows height %d\n", ptr->ma->line_Height);
+				render_rect(&ptr->img, (t_rect){ptr->ma->draw_start, ptr->ma->draw_end,
+				ptr->ma->draw_start, ptr->ma->draw_end, RED_PIXEL});
+			}
+			x = x + 100;
+			j++;
+		}
+		y = y + 120;
+		i++;
+	}
+	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
+}
 
 /* code du 6 avril juste minimap
 void	player_pov_rotation(t_info *ptr, int input)
@@ -402,5 +335,72 @@ void	wall_creation_map(t_info *ptr)
 // 	ptr->mlx_img->data[line->y * ]
 	
 // }
+
+void	wall_creation_minimap(t_info *ptr)
+{
+	printf("start %d end %d\n", ptr->ma->draw_start, ptr->ma->draw_end);
+	// render_background(&ptr->img, BLACK_PIXEL);
+	printf("voici windows height %d\n", ptr->ma->line_Height);
+	render_rect(&ptr->img, (t_rect){ptr->ma->draw_start, ptr->ma->draw_end,
+				100, 100, RED_PIXEL});
+	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
+}
+
+void	wall_creation_minimap(t_info *ptr)
+{
+	int		i;
+	int		j;
+	int		x;
+	int		y;
+
+	i = ((y = 0));
+	while (ptr->map[i])
+	{
+		j = 0;
+		x = 0;
+		while (ptr->map[i][j])
+		{
+			if (ptr->map[i][j] == '1')
+			{
+				render_rect(&ptr->img, (t_rect){x, y,
+				100, 120, WHITE_PIXEL});
+			}
+			x = x + 100;
+			j++;
+		}
+		y = y + 120;
+		i++;
+	}
+}
+
+void	wall_creation_minimap(t_info *ptr)
+{
+	int		i;
+	int		j;
+	int		x;
+	int		y;
+
+	i = ((y = 0));
+	while (ptr->map[i])
+	{
+		j = 0;
+		x = 0;
+		while (ptr->map[i][j])
+		{
+			if (ptr->map[i][j] == '1')
+			{
+				printf("start %d end %d\n", ptr->ma->draw_start, ptr->ma->draw_end);
+				printf("voici windows height %d\n", ptr->ma->line_Height);
+				render_rect(&ptr->img, (t_rect){j, i,
+				ptr->ma->draw_start, ptr->ma->draw_end, RED_PIXEL});
+			}
+			x = x + 100;
+			j++;
+		}
+		y = y + 120;
+		i++;
+	}
+	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
+}
 
 */
