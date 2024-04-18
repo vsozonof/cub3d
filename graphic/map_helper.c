@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/18 12:02:02 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:27:44 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,20 +122,26 @@ void	wall_creation_map(t_info *ptr, int i)
 	{
 		j = 0;
 		if (j < ptr->ma->draw_start)
-			while (j++ < ptr->ma->draw_start)
-				render_rect(&ptr->img, (t_rect){j, i, 1, 1, BLUE_PIXEL});
-		else if (j < ma->draw_end)
 		{
-			while (j++ < ma->draw_end)
-				img_pix_put(&ptr->img, j, i, RED_PIXEL);
-				
+			while (j++ < ptr->ma->draw_start)
+				render_rect(&ptr->img, (t_rect){i, j, 1, 1, BLUE_PIXEL});
+			render_rect(&ptr->img, (t_rect){i, j, 1, 1, BLUE_PIXEL});
 		}
-		else
+		if (j < ma->draw_end)
+		{
+			printf("salut\n");
+			while (j++ < ma->draw_end)
+				img_pix_put(&ptr->img, i, j, RED_PIXEL);
+		}
+		if (j > ma->draw_end)
+		{
+			printf("les gars\n");
 			while (j++ < WINDOW_HEIGHT)
-				img_pix_put(&ptr->img, j, i, GREEN_PIXEL);
+				img_pix_put(&ptr->img, i, j, GREEN_PIXEL);
+		}
 		i++;
 	}
-	// printf("voici i %d\n", i);
+	printf("voici i %d\n", i);
 	// render_rect(&ptr->img, (t_rect){0, 0,
 	// 	ma->draw_end, ma->draw_end, BLUE_PIXEL});
 	// printf("coucou\n");
@@ -144,7 +150,7 @@ void	wall_creation_map(t_info *ptr, int i)
 	// printf("COUCOU\n");
 	// render_rect(&ptr->img, (t_rect){ma->draw_end, ma->draw_end,
 	// 	WINDOW_HEIGHT - ma->draw_end, WINDOW_HEIGHT - ma->draw_end,GREEN_PIXEL});
-	// printf("voici draw_start %d end %d\n", ma->draw_start, ma->draw_end);
+	printf("voici draw_start %d end %d\n", ma->draw_start, ma->draw_end);
 }
 
 // void	wall_creation_minimap(t_info *ptr)
