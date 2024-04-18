@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/18 11:30:24 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:35:48 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,14 @@ void	raycasting(t_info *ptr)
 			// printf("donc la mon perpwalldist est egal a ca %f pourtant le calcul donne ca %f\n==", ma->perpwalldist, ma->sidedisty - ma->deltadisty);
 		}
 		ma->line_Height = (int)(WINDOW_HEIGHT / ma->perpwalldist);
-		// printf("%f\n", ma->perpwalldist);
-		// printf("line %d\n", ma->line_Height);
+		// printf("== perp %f ", ma->perpwalldist);
+		// printf("line %d ==\n", ma->line_Height);
 		ma->draw_start = -ma->line_Height / 2 + WINDOW_HEIGHT / 2;
 		// printf("start = %d\n", ma->draw_start);
 		if (ma->draw_start < 0) // probleme avec draw_start aussi
-			ma->draw_start = 1;
+			ma->draw_start = 0;
 		ma->draw_end = ma->line_Height / 2 + WINDOW_HEIGHT / 2;
-		// printf("WIND_HEIGHT %d\n", WINDOW_HEIGHT);
+		// printf("draw end %d\n", ma->draw_end);
 		// if (ma->draw_end < 0)
 			// ma->draw_end *= -1;
 		if (ma->draw_end >= WINDOW_HEIGHT || ma->draw_end < 0)
