@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/18 14:35:48 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/19 10:14:00 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	raycasting(t_info *ptr)
 {
 	int		x;
+	int		j;
 	t_math	*ma;
 
 	x = 0;
@@ -99,7 +100,7 @@ void	raycasting(t_info *ptr)
 		// printf("== perp %f ", ma->perpwalldist);
 		// printf("line %d ==\n", ma->line_Height);
 		ma->draw_start = -ma->line_Height / 2 + WINDOW_HEIGHT / 2;
-		// printf("start = %d\n", ma->draw_start);
+		// printf("start = %d - %d\n", ma->draw_start, ma->line_Height);
 		if (ma->draw_start < 0) // probleme avec draw_start aussi
 			ma->draw_start = 0;
 		ma->draw_end = ma->line_Height / 2 + WINDOW_HEIGHT / 2;
@@ -111,6 +112,24 @@ void	raycasting(t_info *ptr)
 		// ma->draw_end /= 2;
 		// printf("valeur draw_start %d\n", ma->draw_start);
 		// printf("valeur draw_end %d\n", ma->draw_end);
+		// usleep(10000);
+		j = 0;
+		// ma->draw_end = ma->draw_end / 2;
+		// ma->draw_start = 150; //CHANGER LES START ET END CAR C'EST PAS BON
+		if (j < ptr->ma->draw_start)
+		{
+			while (j++ < ptr->ma->draw_start)
+				render_rect(&ptr->img, (t_rect){x, j, 1, 1, BLUE_PIXEL});
+		}
+		// printf("je passe le plafond\n");
+		if (j < ma->draw_end)
+			while (j++ < ma->draw_end)
+				img_pix_put(&ptr->img, x, j, RED_PIXEL);
+		// printf("je passe le mur\n");
+		if (j > ma->draw_end)
+			while (j++ < WINDOW_HEIGHT)
+				img_pix_put(&ptr->img, x, j, GREEN_PIXEL);
+		// printf("je passe le sol\n");
 		x++;
 	}
 }

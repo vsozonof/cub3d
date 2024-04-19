@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/18 15:09:36 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/19 10:19:51 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,7 +255,7 @@ void		found_case_ray(int bgx, int bgy, int fix, int fiy);
 void		raycasting(t_info *ptr);
 int			make_map(t_info *ptr, int i);
 void		digital_differential_analyser(t_math *ma, t_info *ptr);
-t_math		*ma_init(t_math *ma);
+t_math		*ma_init(t_math *ma, t_info *ptr);
 void		player_movement_minimap(t_math *ma, int input, t_info *ptr);
 void		wall_creation_map(t_info *ptr, int i);
 void		make_cf(t_info *ptr);

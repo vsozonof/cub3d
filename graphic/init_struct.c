@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/18 14:59:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/19 10:30:45 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,24 @@ int		init_struct(t_info *ptr, t_utils *util, t_math *ma)
 	// found_pos_player_minimap();
 	ptr->p_mov = 0;
 	ptr->pa = 90;
-	ptr->ma = ma_init(ma);
+	ptr->ma = ma_init(ma, ptr);
 	// ptr->x
 	return (0);
 }
 
-t_math	*ma_init(t_math *ma)
+t_math	*ma_init(t_math *ma, t_info *ptr)
 {
-	ma->posx = 22.5; // trouver pos joueur
-	ma->posy = 12.5;
-	ma->dirx = -1;
+	ma->posx = found_player_pos_x(ptr->map) + 0.5; /// trouver pos joueur
+	if (ma->posx < 0)
+		return (NULL); // faudra free
+	ma->posy = found_player_pos_y(ptr->map) + 0.5;
+	if (ma->posy < 0)
+		return (NULL); // faudra free
+	printf("x %f y %f \n", ma->posx, ma->posy);
+	ma->dirx = 0;
 	ma->diry = 0; // initialisation des vecteurs
 	ma->planex = 0;
-	ma->planey = 0.66;
+	ma->planey = -0.66;
 	ma->out = 0;
 	return (ma);
 }
