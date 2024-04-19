@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/19 10:14:00 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:26:18 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,39 +32,33 @@ void	raycasting(t_info *ptr)
 		// printf("voici raydiry %f et  raydirx %f\n", ma->raydiry, ma->raydirx);
 		ma->mapx = (int)ma->posx;
 		ma->mapy = (int)ma->posy;
-		if (ma->raydirx == 0)
-			ma->deltadistx = 1e30;
-		else
-			ma->deltadistx = fabs(1 / ma->raydirx);
-		if (ma->raydiry == 0)
-			ma->deltadisty = 1e30;
-		else
-			ma->deltadisty = fabs(1 / ma->raydiry);
+		ma->deltadistx = fabs(1 / ma->raydirx);
+		ma->deltadisty = fabs(1 / ma->raydiry);
 		ma->hit = 0;
 		// printf("voici deltadisty %f et deltax %f\n", ma->deltadisty, ma->deltadistx);
 		if (ma->raydirx < 0)
 		{
 			ma->stepx = -1;
 			ma->sidedistx = (ma->posx - ma->mapx) * ma->deltadistx;
-			// printf("je passe par le 1 donc voici mes nombre %f %d %f\n", ma->posx, ma->mapx, ma->deltadistx);
+			printf("je passe par le 1|||| donc voici mes nombre %f %d %f\n", ma->posx, ma->mapx, ma->deltadistx);
 		}
 		else
 		{
 			ma->stepx = 1;
 			ma->sidedistx = (ma->mapx + 1.0 - ma->posx) * ma->deltadistx;
-			// printf("je passe par le 2\n");
+			printf("je passe par le 2|||| %f %d %f\n", ma->posx, ma->mapx, ma->deltadistx);
 		}
 		if (ma->raydiry < 0)
 		{
 			ma->stepy = -1;
 			ma->sidedisty = (ma->posy - ma->mapy) * ma->deltadisty;
-			// printf("je passe par le 3\n");
+			printf("je passe par le 3|||| %f %d %f\n", ma->posy, ma->mapy, ma->deltadisty);
 		}
 		else
 		{
 			ma->stepy = 1;
 			ma->sidedisty = (ma->mapy + 1.0 - ma->posy) * ma->deltadisty;
-			// printf("je passe par le 4\n");
+			printf("je passe par le 4|||| %f %d %f\n", ma->posy, ma->mapy, ma->deltadisty);
 		}
 		// printf("voici sidetx %f et sidety %f\n", ma->sidedistx, ma->sidedisty);
 		while (ma->hit == 0)
@@ -81,6 +75,7 @@ void	raycasting(t_info *ptr)
 				ma->mapy += ma->stepy;
 				ma->side = 1;
 			}
+			// printf("voici sidex %f y %f mapx %d y %d\n", ma->sidedistx, ma->sidedisty, ma->mapx, ma->mapy);
 			// if (map->mapx > limite_map || mapy > limit_map) // faire cette condition
 			if (ptr->map[ma->mapx][ma->mapy] > 0)
 				ma->hit = 1;
@@ -130,6 +125,7 @@ void	raycasting(t_info *ptr)
 			while (j++ < WINDOW_HEIGHT)
 				img_pix_put(&ptr->img, x, j, GREEN_PIXEL);
 		// printf("je passe le sol\n");
+		usleep(5000000);
 		x++;
 	}
 }
