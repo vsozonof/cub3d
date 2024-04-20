@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/19 10:03:48 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/04/20 14:20:51 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	player_movement(t_math *ma, int input, t_info *ptr)
 	// ptr->ma->posx = x;
 }
 
-void	player_movement_minimap(t_math *ma, int input, t_info *ptr)
+void	player_movement_map(t_math *ma, int input, t_info *ptr)
 {
 	int	x;
 	int	y;
@@ -108,35 +108,35 @@ void	player_movement_minimap(t_math *ma, int input, t_info *ptr)
 	printf("nouvelle position %f %f\n", ma->posy, ma->posx);
 }
 
-void	wall_creation_map(t_info *ptr, int i)
-{
-	t_math *ma;
-	int j;
+// void	wall_creation_map(t_info *ptr, int i)
+// {
+// 	t_math *ma;
+// 	int j;
 
-	ma = ptr->ma;
-	i = 0;
-	j = 0;
-	// ma->draw_end = ma->draw_end / 2;
-	// ma->draw_start = 150; //CHANGER LES START ET END CAR C'EST PAS BON
-	while (i < WINDOW_HEIGHT)
-	{
-		j = 0;
-		if (j < ptr->ma->draw_start)
-		{
-			while (j++ < ptr->ma->draw_start)
-				render_rect(&ptr->img, (t_rect){i, j, 1, 1, BLUE_PIXEL});
-		}
-		if (j < ma->draw_end)
-			while (j++ < ma->draw_end)
-				img_pix_put(&ptr->img, i, j, RED_PIXEL);
-		if (j > ma->draw_end)
-			while (j++ < WINDOW_HEIGHT)
-				img_pix_put(&ptr->img, i, j, GREEN_PIXEL);
-		i++;
-	}
-	// printf("voici i %d\n", i);
-	// printf("voici draw_start %d end %d\n", ma->draw_start, ma->draw_end);
-}
+// 	ma = ptr->ma;
+// 	i = 0;
+// 	j = 0;
+// 	// ma->draw_end = ma->draw_end / 2;
+// 	// ma->draw_start = 150; //CHANGER LES START ET END CAR C'EST PAS BON
+// 	while (i < WINDOW_HEIGHT)
+// 	{
+// 		j = 0;
+// 		if (j < ptr->ma->draw_start)
+// 		{
+// 			while (j++ < ptr->ma->draw_start)
+// 				render_rect(&ptr->img, (t_rect){i, j, 1, 1, BLUE_PIXEL});
+// 		}
+// 		if (j < ma->draw_end)
+// 			while (j++ < ma->draw_end)
+// 				img_pix_put(&ptr->img, i, j, RED_PIXEL);
+// 		if (j > ma->draw_end)
+// 			while (j++ < WINDOW_HEIGHT)
+// 				img_pix_put(&ptr->img, i, j, GREEN_PIXEL);
+// 		i++;
+// 	}
+// 	// printf("voici i %d\n", i);
+// 	// printf("voici draw_start %d end %d\n", ma->draw_start, ma->draw_end);
+// }
 
 void	found_pos_player_minimap(t_info *ptr)
 {

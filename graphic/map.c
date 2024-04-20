@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/18 15:12:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/20 14:21:12 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	make_map(t_info *ptr, int i)//les position du joueur doit deprendre de sa po
 	// render_background(&ptr->img, BLACK_PIXEL);
 	// render_rect(&ptr->img, (t_rect){0, 0,
 				// WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});
-	wall_creation_map(ptr, i);
+	// wall_creation_map(ptr, i);
 	// player_creation_minimap(ptr);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
 	return (0);
@@ -52,6 +52,12 @@ int	window_creation(t_data *data, t_utils *utils)
 		return (1);
 	ptr.crgb = data->ceiling_color;
 	ptr.frgb = data->floor_color;
+	int i = 0;
+	while (ptr.map[i])
+	{
+		printf("printf de ma map %s\n", ptr.map[i]);
+		i++;
+	}
 	ptr.img.mlx_img = mlx_new_image(ptr.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	ptr.img.addr = mlx_get_data_addr(ptr.img.mlx_img, &ptr.img.bpp,
 			&ptr.img.line_len, &ptr.img.endian);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/19 10:19:51 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/04/20 13:40:50 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,6 +259,7 @@ t_math		*ma_init(t_math *ma, t_info *ptr);
 void		player_movement_minimap(t_math *ma, int input, t_info *ptr);
 void		wall_creation_map(t_info *ptr, int i);
 void		make_cf(t_info *ptr);
+void		player_movement_map(t_math *ma, int input, t_info *ptr);
 
 
 #endif

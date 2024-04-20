@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/19 11:26:18 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/04/20 13:45:33 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,25 @@ void	raycasting(t_info *ptr)
 		{
 			ma->stepx = -1;
 			ma->sidedistx = (ma->posx - ma->mapx) * ma->deltadistx;
-			printf("je passe par le 1|||| donc voici mes nombre %f %d %f\n", ma->posx, ma->mapx, ma->deltadistx);
+			// printf("je passe par le 1|||| donc voici mes nombre %f %d %f\n", ma->posx, ma->mapx, ma->deltadistx);
 		}
 		else
 		{
 			ma->stepx = 1;
 			ma->sidedistx = (ma->mapx + 1.0 - ma->posx) * ma->deltadistx;
-			printf("je passe par le 2|||| %f %d %f\n", ma->posx, ma->mapx, ma->deltadistx);
+			// printf("je passe par le 2|||| %f %d %f\n", ma->posx, ma->mapx, ma->deltadistx);
 		}
 		if (ma->raydiry < 0)
 		{
 			ma->stepy = -1;
 			ma->sidedisty = (ma->posy - ma->mapy) * ma->deltadisty;
-			printf("je passe par le 3|||| %f %d %f\n", ma->posy, ma->mapy, ma->deltadisty);
+			// printf("je passe par le 3|||| %f %d %f\n", ma->posy, ma->mapy, ma->deltadisty);
 		}
 		else
 		{
 			ma->stepy = 1;
 			ma->sidedisty = (ma->mapy + 1.0 - ma->posy) * ma->deltadisty;
-			printf("je passe par le 4|||| %f %d %f\n", ma->posy, ma->mapy, ma->deltadisty);
+			// printf("je passe par le 4|||| %f %d %f\n", ma->posy, ma->mapy, ma->deltadisty);
 		}
 		// printf("voici sidetx %f et sidety %f\n", ma->sidedistx, ma->sidedisty);
 		while (ma->hit == 0)
@@ -125,7 +125,6 @@ void	raycasting(t_info *ptr)
 			while (j++ < WINDOW_HEIGHT)
 				img_pix_put(&ptr->img, x, j, GREEN_PIXEL);
 		// printf("je passe le sol\n");
-		usleep(5000000);
 		x++;
 	}
 }

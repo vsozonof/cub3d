@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window_create.c                                    :+:      :+:    :+:   */
+/*   keys_hook.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 10:22:35 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/11 13:16:08 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/20 13:40:56 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	get_key_hook(int keycode, t_info *ptr)
 		|| keycode == 100)
 	{
 		// if (try_moove(ptr) == 0)
-		player_movement_minimap(ptr->ma, ptr->p_mov, ptr);
+		player_movement_map(ptr->ma, ptr->p_mov, ptr);
 	}
 	if (ptr->p_mov == 5 || ptr->p_mov == 6 ||
 		ptr->p_mov == 7 || ptr->p_mov == 8)
