@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/22 11:15:27 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/22 11:25:59 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	raycasting(t_info *ptr)
 			// if (map->mapx > limite_map || mapy > limit_map) // faire cette condition
 			if (ptr->map[ma->mapx][ma->mapy] > 0)
 			{
-				printf("voici hit %d %f %f\n", ma->hit, ma->sidedistx, ma->deltadistx);
+				// printf("voici hit %d %f %f\n", ma->hit, ma->sidedistx, ma->deltadistx);
 				ma->hit = 1;
 			}
 		}
