@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/22 11:35:48 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/22 11:54:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,29 +80,30 @@ void	player_movement_map(t_math *ma, int input, t_info *ptr)
 	y = ma->posy;
 	x = ma->posx;
 	printf("voici mes valeurs au debut de ma fonction %f %f\n", x, y);
-	if (input == 1)
+	printf("voici input %d\n", input);
+	if (input == 1) // devant
 	{
-		if (y - 0.5 < 0)
+		if (y - 0.2 < 0)
 			return ;
-		y = y - 0.5;
+		y = y - 0.2;
 	}
-	else if (input == 2)
+	else if (input == 2) // gauche
 	{
-		if (x - 0.5 < 0)
+		if (x - 0.2 < 0)
 			return ;
-		x = x - 0.5;
+		x = x - 0.2;
 	}
-	else if (input == 3)
+	else if (input == 3)// bas
 	{
-		if (y + 0.5 > ft_strlen(ptr->map[(int)y]))
+		if (y + 0.2 < 0)
 			return ;
-		y = y + 0.5;
+		y = y + 0.2;
 	}
-	else if (input == 4)
+	else if (input == 4) // droite
 	{
-		if (x + 0.5 > ft_strlen(ptr->map[(int)x]))
+		if (x + 0.2 < 0)
 			return ;
-		x = x + 0.5;
+		x = x + 0.2;
 	}
 	ma->posy = y;
 	ma->posx = x;
