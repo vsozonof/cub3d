@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/19 11:26:20 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/04/22 10:48:40 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_math	*ma_init(t_math *ma, t_info *ptr)
 	ma->posy = found_player_pos_y(ptr->map) + 0.5;
 	if (ma->posy < 0)
 		return (NULL); // faudra free
-	printf("x %f y %f \n", ma->posx, ma->posy);
+	printf("\nmes position de base x %f y %f \n", ma->posx, ma->posy);
 	ma->dirx = 0;
 	ma->diry = 0; // initialisation des vecteurs
 	ma->planex = 0;

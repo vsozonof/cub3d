@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/20 13:45:33 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/22 11:15:27 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,15 @@ void	raycasting(t_info *ptr)
 		// printf("voici raydiry %f et  raydirx %f\n", ma->raydiry, ma->raydirx);
 		ma->mapx = (int)ma->posx;
 		ma->mapy = (int)ma->posy;
-		ma->deltadistx = fabs(1 / ma->raydirx);
-		ma->deltadisty = fabs(1 / ma->raydiry);
+		//   double deltaDistX = (rayDirX == 0) ? 1e30 : std::abs(1 / rayDirX);
+		if (ma->raydirx == 0)
+			ma->deltadistx = 1e30;
+		else
+			ma->deltadistx = fabs(1 / ma->raydirx);
+		if (ma->raydiry == 0)
+			ma->deltadisty = 1e30;
+		else
+			ma->deltadisty = fabs(1 / ma->raydiry);
 		ma->hit = 0;
 		// printf("voici deltadisty %f et deltax %f\n", ma->deltadisty, ma->deltadistx);
 		if (ma->raydirx < 0)
@@ -78,7 +85,10 @@ void	raycasting(t_info *ptr)
 			// printf("voici sidex %f y %f mapx %d y %d\n", ma->sidedistx, ma->sidedisty, ma->mapx, ma->mapy);
 			// if (map->mapx > limite_map || mapy > limit_map) // faire cette condition
 			if (ptr->map[ma->mapx][ma->mapy] > 0)
+			{
+				printf("voici hit %d %f %f\n", ma->hit, ma->sidedistx, ma->deltadistx);
 				ma->hit = 1;
+			}
 		}
 		if (ma->side == 0)
 		{
@@ -108,9 +118,9 @@ void	raycasting(t_info *ptr)
 		// printf("valeur draw_start %d\n", ma->draw_start);
 		// printf("valeur draw_end %d\n", ma->draw_end);
 		// usleep(10000);
-		j = 0;
 		// ma->draw_end = ma->draw_end / 2;
 		// ma->draw_start = 150; //CHANGER LES START ET END CAR C'EST PAS BON
+		j = 0;
 		if (j < ptr->ma->draw_start)
 		{
 			while (j++ < ptr->ma->draw_start)
@@ -126,6 +136,7 @@ void	raycasting(t_info *ptr)
 				img_pix_put(&ptr->img, x, j, GREEN_PIXEL);
 		// printf("je passe le sol\n");
 		x++;
+		// usleep(50000);
 	}
 }
 
