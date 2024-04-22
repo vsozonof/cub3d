@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/22 11:25:59 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/22 15:21:58 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,123 +22,144 @@ void	raycasting(t_info *ptr)
 	ma = ptr->ma;
 	while (x < WINDOW_WIDTH)
 	{
-		ma->camerax = 2 * x / (double)WINDOW_WIDTH - 1;
-		// printf("!!!!!!!!!!!!!!voici x %d\n", x);
-		// printf("voici camera %f et maintenant voici ses composante\n %d %d\n", ma->camerax, 2 * x, WINDOW_WIDTH - 1);
-		ma->raydirx = ma->dirx + ma->planex * ma->camerax;
-		ma->raydiry = ma->diry + ma->planey * ma->camerax;
-		// printf("===voici resultat %f\n", ma->diry + ma->planey * ma->camerax);
-		// printf("===voici les composante du calcul diry %f, planey %f camerax %f\n", ma->diry, ma->planey, ma->camerax);
-		// printf("voici raydiry %f et  raydirx %f\n", ma->raydiry, ma->raydirx);
-		ma->mapx = (int)ma->posx;
-		ma->mapy = (int)ma->posy;
-		//   double deltaDistX = (rayDirX == 0) ? 1e30 : std::abs(1 / rayDirX);
-		if (ma->raydirx == 0)
-			ma->deltadistx = 1e30;
-		else
-			ma->deltadistx = fabs(1 / ma->raydirx);
-		if (ma->raydiry == 0)
-			ma->deltadisty = 1e30;
-		else
-			ma->deltadisty = fabs(1 / ma->raydiry);
-		ma->hit = 0;
-		// printf("voici deltadisty %f et deltax %f\n", ma->deltadisty, ma->deltadistx);
-		if (ma->raydirx < 0)
-		{
-			ma->stepx = -1;
-			ma->sidedistx = (ma->posx - ma->mapx) * ma->deltadistx;
-			// printf("je passe par le 1|||| donc voici mes nombre %f %d %f\n", ma->posx, ma->mapx, ma->deltadistx);
-		}
-		else
-		{
-			ma->stepx = 1;
-			ma->sidedistx = (ma->mapx + 1.0 - ma->posx) * ma->deltadistx;
-			// printf("je passe par le 2|||| %f %d %f\n", ma->posx, ma->mapx, ma->deltadistx);
-		}
-		if (ma->raydiry < 0)
-		{
-			ma->stepy = -1;
-			ma->sidedisty = (ma->posy - ma->mapy) * ma->deltadisty;
-			// printf("je passe par le 3|||| %f %d %f\n", ma->posy, ma->mapy, ma->deltadisty);
-		}
-		else
-		{
-			ma->stepy = 1;
-			ma->sidedisty = (ma->mapy + 1.0 - ma->posy) * ma->deltadisty;
-			// printf("je passe par le 4|||| %f %d %f\n", ma->posy, ma->mapy, ma->deltadisty);
-		}
-		// printf("voici sidetx %f et sidety %f\n", ma->sidedistx, ma->sidedisty);
-		while (ma->hit == 0)
-		{
-			if (ma->sidedistx < ma->sidedisty)
-			{
-				ma->sidedistx += ma->deltadistx;
-				ma->mapx += ma->stepx;
-				ma->side = 0;
-			}
-			else
-			{
-				ma->sidedisty += ma->deltadisty;
-				ma->mapy += ma->stepy;
-				ma->side = 1;
-			}
-			// printf("voici sidex %f y %f mapx %d y %d\n", ma->sidedistx, ma->sidedisty, ma->mapx, ma->mapy);
-			// if (map->mapx > limite_map || mapy > limit_map) // faire cette condition
-			if (ptr->map[ma->mapx][ma->mapy] > 0)
-			{
-				// printf("voici hit %d %f %f\n", ma->hit, ma->sidedistx, ma->deltadistx);
-				ma->hit = 1;
-			}
-		}
-		if (ma->side == 0)
-		{
-			ma->perpwalldist = (ma->sidedistx - ma->deltadistx);
-			// printf("voici side = 0 sidesity %f et delta %f\n", ma->sidedistx, ma->deltadistx);
-		}
-		else
-		{
-			// printf("==voici side = 1 sidesity %f et delta %f\n", ma->sidedistx, ma->deltadistx);
-			ma->perpwalldist = (ma->sidedisty - ma->deltadisty);
-			// printf("donc la mon perpwalldist est egal a ca %f pourtant le calcul donne ca %f\n==", ma->perpwalldist, ma->sidedisty - ma->deltadisty);
-		}
-		ma->line_Height = (int)(WINDOW_HEIGHT / ma->perpwalldist);
-		// printf("== perp %f ", ma->perpwalldist);
-		// printf("line %d ==\n", ma->line_Height);
-		ma->draw_start = -ma->line_Height / 2 + WINDOW_HEIGHT / 2;
-		// printf("start = %d - %d\n", ma->draw_start, ma->line_Height);
-		if (ma->draw_start < 0) // probleme avec draw_start aussi
-			ma->draw_start = 0;
-		ma->draw_end = ma->line_Height / 2 + WINDOW_HEIGHT / 2;
-		// printf("draw end %d\n", ma->draw_end);
-		// if (ma->draw_end < 0)
-			// ma->draw_end *= -1;
-		if (ma->draw_end >= WINDOW_HEIGHT || ma->draw_end < 0)
-			ma->draw_end = WINDOW_HEIGHT - 1;
-		// ma->draw_end /= 2;
-		// printf("valeur draw_start %d\n", ma->draw_start);
-		// printf("valeur draw_end %d\n", ma->draw_end);
-		// usleep(10000);
-		// ma->draw_end = ma->draw_end / 2;
-		// ma->draw_start = 150; //CHANGER LES START ET END CAR C'EST PAS BON
+		delta_distance_calculation(ma, x);
+		ray_calculation(ma);
+		digital_differential_analyser(ma, ptr);
 		j = 0;
-		if (j < ptr->ma->draw_start)
-		{
-			while (j++ < ptr->ma->draw_start)
-				render_rect(&ptr->img, (t_rect){x, j, 1, 1, BLUE_PIXEL});
-		}
-		// printf("je passe le plafond\n");
-		if (j < ma->draw_end)
-			while (j++ < ma->draw_end)
-				img_pix_put(&ptr->img, x, j, RED_PIXEL);
-		// printf("je passe le mur\n");
-		if (j > ma->draw_end)
-			while (j++ < WINDOW_HEIGHT)
-				img_pix_put(&ptr->img, x, j, GREEN_PIXEL);
-		// printf("je passe le sol\n");
+		finish_calcul_and_print(ptr, ma, x, j);
+		// printf("voici ma boucle %d\n", x);
 		x++;
-		// usleep(50000);
 	}
 }
+
+void	delta_distance_calculation(t_math *ma, int x)
+{
+	ma->camerax = 2 * x / (double)WINDOW_WIDTH - 1;
+	ma->raydirx = ma->dirx + ma->planex * ma->camerax;
+	ma->raydiry = ma->diry + ma->planey * ma->camerax;
+	// printf("voici raydirx %f\n", ma->raydirx);
+	// printf("voici les composante de raydirx %f %f %f\n", ma->dirx, ma->planex, ma->camerax);
+	ma->mapx = (int)ma->posx;
+	ma->mapy = (int)ma->posy;
+	if (ma->raydirx == 0)
+		ma->deltadistx = 1e30;
+	else
+		ma->deltadistx = fabs(1 / ma->raydirx);
+	if (ma->raydiry == 0)
+		ma->deltadisty = 1e30;
+	else
+		ma->deltadisty = fabs(1 / ma->raydiry);
+	ma->hit = 0;
+}
+
+void	ray_calculation(t_math *ma)
+{
+	if (ma->raydirx < 0)
+	{
+		ma->stepx = -1;
+		ma->sidedistx = (ma->posx - ma->mapx) * ma->deltadistx;
+		// printf("je passe par le 1|||| donc voici mes nombre %f %d %f\n", ma->posx, ma->mapx, ma->deltadistx);
+	}
+	else
+	{
+		ma->stepx = 1;
+		ma->sidedistx = (ma->mapx + 1.0 - ma->posx) * ma->deltadistx;
+		// printf("je passe par le 2|||| %f %d %f\n", ma->posx, ma->mapx, ma->deltadistx);
+	}
+	if (ma->raydiry < 0)
+	{
+		ma->stepy = -1;
+		ma->sidedisty = (ma->posy - ma->mapy) * ma->deltadisty;
+		// printf("je passe par le 3|||| %f %d %f\n", ma->posy, ma->mapy, ma->deltadisty);
+	}
+	else
+	{
+		ma->stepy = 1;
+		ma->sidedisty = (ma->mapy + 1.0 - ma->posy) * ma->deltadisty;
+		// printf("je passe par le 4|||| %f %d %f\n", ma->posy, ma->mapy, ma->deltadisty);
+	}
+}
+
+void	digital_differential_analyser(t_math *ma, t_info *ptr)
+{
+	while (ma->hit == 0)
+	{
+		if (ma->sidedistx < ma->sidedisty)
+		{
+			ma->sidedistx += ma->deltadistx;
+			ma->mapx += ma->stepx;
+			ma->side = 0;
+		}
+		else
+		{
+			ma->sidedisty += ma->deltadisty;
+			ma->mapy += ma->stepy;
+			ma->side = 1;
+		}
+		if (ptr->map[ma->mapx][ma->mapy] > 0)
+		{
+			printf("sidex = %f et y %f\n", ma->sidedistx, ma->sidedisty);
+			printf("voici mapx %d mapy %d\n", ma->mapx, ma->mapy);
+			printf("voici la valeur de ma map %d\n", ptr->map[ma->mapx][ma->mapy]);
+			ma->hit = 1;
+		}
+	}
+	if (ma->side == 0)
+			ma->perpwalldist = (ma->sidedistx - ma->deltadistx);
+	else
+		ma->perpwalldist = (ma->sidedisty - ma->deltadisty);
+	ma->line_Height = (int)(WINDOW_HEIGHT / ma->perpwalldist);
+	ma->draw_start = -ma->line_Height / 2 + WINDOW_HEIGHT / 2;
+	if (ma->draw_start < 0)
+		ma->draw_start = 0;
+}
+
+void	finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j)
+{
+	ma->draw_end = ma->line_Height / 2 + WINDOW_HEIGHT / 2;
+	if (ma->draw_end >= WINDOW_HEIGHT || ma->draw_end < 0)
+		ma->draw_end = WINDOW_HEIGHT - 1;
+	if (j < ptr->ma->draw_start)
+	{
+		while (j++ < ptr->ma->draw_start)
+		{
+			// printf("1 j %d\n", j);
+			render_rect(&ptr->img, (t_rect){x, j, 1, 1, BLUE_PIXEL});
+		}
+	}
+	if (j < ma->draw_end)
+		while (j++ < ma->draw_end)
+		{
+			// printf("2 j %d\n", j);
+			img_pix_put(&ptr->img, x, j, RED_PIXEL);
+		}
+	if (j > ma->draw_end)
+		while (j++ < WINDOW_HEIGHT)
+		{
+			// printf("3 j %d\n", j);
+			img_pix_put(&ptr->img, x, j, GREEN_PIXEL);
+		}
+}
+
+/*
+void	finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j)
+{
+	ma->draw_end = ma->line_Height / 2 + WINDOW_HEIGHT / 2;
+	if (ma->draw_end >= WINDOW_HEIGHT || ma->draw_end < 0)
+		ma->draw_end = WINDOW_HEIGHT - 1;
+	if (j < ptr->ma->draw_start)
+	{
+		while (j++ < ptr->ma->draw_start)
+			render_rect(&ptr->img, (t_rect){x, j, 1, 1, BLUE_PIXEL});
+	}
+	if (j < ma->draw_end)
+		while (j++ < ma->draw_end)
+			img_pix_put(&ptr->img, x, j, RED_PIXEL);
+	if (j > ma->draw_end)
+		while (j++ < WINDOW_HEIGHT)
+			img_pix_put(&ptr->img, x, j, GREEN_PIXEL);
+}
+*/
 
 /*
 void	raycasting(t_info *ptr)

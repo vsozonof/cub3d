@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/20 13:40:50 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/22 13:35:19 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,10 @@ void		player_movement_minimap(t_math *ma, int input, t_info *ptr);
 void		wall_creation_map(t_info *ptr, int i);
 void		make_cf(t_info *ptr);
 void		player_movement_map(t_math *ma, int input, t_info *ptr);
+void		delta_distance_calculation(t_math *ma, int x);
+void		ray_calculation(t_math *ma);
+void		digital_differential_analyser(t_math *ma, t_info *ptr);
+void		finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j);
 
 
 #endif

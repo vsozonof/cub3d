@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/22 11:54:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/22 13:43:50 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	player_movement_map(t_math *ma, int input, t_info *ptr)
 	}
 	ma->posy = y;
 	ma->posx = x;
-	printf("nouvelle position %f %f\n", ma->posy, ma->posx);
+	printf("nouvelle position %f %f\n", ma->posx, ma->posy);
 }
 
 // void	wall_creation_map(t_info *ptr, int i)

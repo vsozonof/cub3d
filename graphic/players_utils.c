@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   players_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:40:16 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/19 10:30:33 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/04/22 13:49:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	found_player_pos_x(char **argv)
 	i = 1;
 	while (argv[i])
 	{
-		j = 0;
+		j = 1;
 		while (argv[i][j])
 		{
 			if (argv[i][j] == 'N' || argv[i][j] == 'S'
@@ -42,10 +42,10 @@ int	found_player_pos_y(char **argv)
 	int	i;
 	int	j;
 
-	i = 0;
+	i = 1;
 	while (argv[i])
 	{
-		j = 0;
+		j = 1;
 		while (argv[i][j])
 		{
 			if (argv[i][j] == 'N' || argv[i][j] == 'S'
