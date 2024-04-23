@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/20 14:21:12 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/23 10:15:46 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,19 @@ int	window_creation(t_data *data, t_utils *utils)
 	ptr.crgb = data->ceiling_color;
 	ptr.frgb = data->floor_color;
 	int i = 0;
+	int j = 0;
 	while (ptr.map[i])
 	{
-		printf("printf de ma map %s\n", ptr.map[i]);
+		j = 0;
+		while (ptr.map[i][j])
+		{
+			printf("%c", ptr.map[i][j]);
+			j++;
+		}
+		printf("\n");
 		i++;
 	}
+	// usleep(500000000);
 	ptr.img.mlx_img = mlx_new_image(ptr.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	ptr.img.addr = mlx_get_data_addr(ptr.img.mlx_img, &ptr.img.bpp,
 			&ptr.img.line_len, &ptr.img.endian);
