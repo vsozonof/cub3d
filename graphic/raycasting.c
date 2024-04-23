@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/23 11:48:52 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:40:31 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	delta_distance_calculation(t_math *ma, int x)
 		ma->deltadisty = 1e30;
 	else
 		ma->deltadisty = fabs(1 / ma->raydiry);
+	// printf("voici deltax %f et voici deltay %f\n", ma->deltadistx, ma->deltadisty);
 	ma->hit = 0;
 }
 
@@ -96,7 +97,7 @@ void	digital_differential_analyser(t_math *ma, t_info *ptr)
 			ma->mapy += ma->stepy;
 			ma->side = 1;
 		}
-		printf("voici la valeur de ma map %c\n", ptr->map[ma->mapx][ma->mapy]);
+		// printf("voici la valeur de ma map %c\n", ptr->map[ma->mapx][ma->mapy]);
 		if (ptr->map[ma->mapx][ma->mapy] > 0) // regler le pb ici
 		{
 			// printf("sidex = %f et y %f\n", ma->sidedistx, ma->sidedisty);
@@ -109,16 +110,14 @@ void	digital_differential_analyser(t_math *ma, t_info *ptr)
 	if (ma->side == 0)
 			ma->perpwalldist = (ma->sidedistx - ma->deltadistx);
 	else
-	{
-		printf("sidey deltay %f %f\n", ma->sidedisty, ma->deltadisty);
 		ma->perpwalldist = (ma->sidedisty - ma->deltadisty);
-	}
 	ma->line_Height = (int)(WINDOW_HEIGHT / ma->perpwalldist);
-	// printf("line %d\n", ma->line_Height);
-	// printf("perp %f\n", ma->perpwalldist);
+	printf("line %d\n", ma->line_Height);
+	printf("perp %f\n", ma->perpwalldist);
 	ma->draw_start = -ma->line_Height / 2 + WINDOW_HEIGHT / 2;
 	if (ma->draw_start < 0)
 		ma->draw_start = 0;
+	printf("voici mon calcul %d\n", ma->line_Height);
 }
 
 void	finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j)
@@ -127,27 +126,33 @@ void	finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j)
 	if (ma->draw_end >= WINDOW_HEIGHT || ma->draw_end < 0)
 		ma->draw_end = WINDOW_HEIGHT - 1;
 	// printf("voici draw_start et end %d %d\n", ma->draw_start, ma->draw_end);
-	usleep(5000);
+	if (x == 1000)
+		usleep(50000000);
 	if (j < ptr->ma->draw_start)
 	{
+		printf("voici a quel boucle je suis %d voici mon j %d ainsi que mon draw start %d\n", x, j, ma->draw_start);
 		while (j++ < ptr->ma->draw_start)
 		{
-			// printf("1 j %d\n", j);
 			render_rect(&ptr->img, (t_rect){x, j, 1, 1, BLUE_PIXEL});
 		}
 	}
 	if (j < ma->draw_end)
+	{
+		printf("voici mon j %d ainsi que mon draw end %d\n", j, ma->draw_end);
 		while (j++ < ma->draw_end)
 		{
-			// printf("2 j %d\n", j);
 			img_pix_put(&ptr->img, x, j, RED_PIXEL);
 		}
+	}
 	if (j > ma->draw_end)
+	{
+		printf("voici mon j %d ainsi que mon draw end %d\n", j, ma->draw_end);
 		while (j++ < WINDOW_HEIGHT)
 		{
-			// printf("3 j %d\n", j);
 			img_pix_put(&ptr->img, x, j, GREEN_PIXEL);
 		}
+	}
+	printf("======\n");
 }
 
 /*
