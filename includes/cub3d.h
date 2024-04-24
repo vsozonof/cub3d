@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/24 10:02:37 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/24 13:19:42 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,6 @@ typedef struct s_info
 	double	pa; // player angle
 	int		w_size;
 	int		fov;
-	char	**map;
 	char	*frgb;
 	char	*crgb;
 	int		mapS;

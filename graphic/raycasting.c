@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/24 11:57:33 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/24 13:28:57 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,11 @@ void	digital_differential_analyser(t_math *ma, t_info *ptr)
 		{
 			ma->sidedistx += ma->deltadistx;
 			j = ma->mapx += ma->stepx;
+			show_db_tab(ptr->utils->map);
 			printf("verif\n");
-			printf("voici mon x %d\n", j);
+			printf("voici mon j %d\n", j);
 			printf("voici mon y %d\n", ma->mapy);
-			printf("voii ma len %d\n", ptr->map[j]);
+			printf("voici ma len %zu\n", ft_strlen(ptr->utils->map[2]));
 			i = ft_strlen(ptr->utils->map[j]);
 			ma->mapx += ma->stepx;
 			if (i < ma->mapx)
@@ -109,6 +110,7 @@ void	digital_differential_analyser(t_math *ma, t_info *ptr)
 		}
 		else
 		{
+			printf("je passe dans y\n");
 			ma->sidedisty += ma->deltadisty;
 			j = ma->mapy += ma->stepy;
 			i = ft_strlen(ptr->utils->map[j]);
@@ -120,6 +122,7 @@ void	digital_differential_analyser(t_math *ma, t_info *ptr)
 			}
 			ma->side = 1;
 		}
+		printf("juste avant test de la map\n");
 		// printf("voici mes max de ses coordonne %zu %zu\n", ft_strlen(ptr->map[ma->mapx]), ft_strlen(ptr->map[ma->mapy]));
 		// printf("voici ma valeur %d\n", ptr->utils->map[ma->mapx][ma->mapy]);
 		if (ptr->utils->map[ma->mapy][ma->mapx] == '1') // regler le pb ici
