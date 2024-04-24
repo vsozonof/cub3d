@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/22 13:43:50 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/24 10:03:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	player_movement(t_math *ma, int input, t_info *ptr)
 	if (input == 1) // devant
 	{
 		tmp = (int)ma->posx;
-		if(ptr->map[tmp + (int)ma->dirx * 1][(int)ma->posy] == 0) 
+		if(ptr->utils->map[tmp + (int)ma->dirx * 1][(int)ma->posy] == 0) 
 			ma->posx += ma->dirx * 1;
-		if(ptr->map[(int)ma->posx][(int)ma->posy + (int)ma->diry * 1] == 0) 
+		if(ptr->utils->map[(int)ma->posx][(int)ma->posy + (int)ma->diry * 1] == 0) 
 			ma->posy += ma->diry * 1;
 	}
 	// else if (input == 2) // gauche
@@ -60,9 +60,9 @@ void	player_movement(t_math *ma, int input, t_info *ptr)
 	else if (input == 3) // bas
 	{
 		tmp = (int)ma->posx;
-		if(ptr->map[tmp - (int)ma->dirx * 1][(int)ma->posy] == 0) 
+		if(ptr->utils->map[tmp - (int)ma->dirx * 1][(int)ma->posy] == 0) 
 			ma->posx -= ma->dirx * 1;
-		if(ptr->map[(int)ma->posx][(int)ma->posy - (int)ma->diry * 1] == 0) 
+		if(ptr->utils->map[(int)ma->posx][(int)ma->posy - (int)ma->diry * 1] == 0) 
 			ma->posy -= ma->diry * 1;
 	}
 	// else if (input == 4) // droite
@@ -146,13 +146,13 @@ void	found_pos_player_minimap(t_info *ptr)
 	int		j;
 
 	i = 0;
-	while (ptr->map[i])
+	while (ptr->utils->map[i])
 	{
 		j = 0;
-		while (ptr->map[i][j])
+		while (ptr->utils->map[i][j])
 		{
-			if (ptr->map[i][j] == 'N' || ptr->map[i][j] == 'S'
-				|| ptr->map[i][j] == 'W' || ptr->map[i][j] == 'E')
+			if (ptr->utils->map[i][j] == 'N' || ptr->utils->map[i][j] == 'S'
+				|| ptr->utils->map[i][j] == 'W' || ptr->utils->map[i][j] == 'E')
 			{
 				ptr->ma->posx = WINDOW_WIDTH - 50;
 				ptr->ma->posy = 50;
@@ -204,13 +204,13 @@ void	wall_creation_minimap(t_info *ptr)
 	int		y;
 
 	i = ((y = 0));
-	while (ptr->map[i])
+	while (ptr->utils->map[i])
 	{
 		j = 0;
 		x = 0;
-		while (ptr->map[i][j])
+		while (ptr->utils->map[i][j])
 		{
-			if (ptr->map[i][j] == '1')
+			if (ptr->utils->map[i][j] == '1')
 			{
 				printf("start %d end %d\n", ptr->ma->draw_start, ptr->ma->draw_end);
 				printf("voici windows height %d\n", ptr->ma->line_Height);
@@ -253,13 +253,13 @@ void	wall_creation_minimap(t_info *ptr)
 	int		y;
 
 	i = ((y = 0));
-	while (ptr->map[i])
+	while (ptr->utils->map[i])
 	{
 		j = 0;
 		x = WINDOW_WIDTH - 100;
-		while (ptr->map[i][j])
+		while (ptr->utils->map[i][j])
 		{
-			if (ptr->map[i][j] == '1')
+			if (ptr->utils->map[i][j] == '1')
 			{
 				render_rect(&ptr->img, (t_rect){x, y,
 				10, 10, RED_PIXEL});
@@ -278,13 +278,13 @@ void	found_pos_player_minimap(t_info *ptr)
 	int		j;
 
 	i = 0;
-	while (ptr->map[i])
+	while (ptr->utils->map[i])
 	{
 		j = 0;
-		while (ptr->map[i][j])
+		while (ptr->utils->map[i][j])
 		{
-			if (ptr->map[i][j] == 'N' || ptr->map[i][j] == 'S'
-				|| ptr->map[i][j] == 'W' || ptr->map[i][j] == 'E')
+			if (ptr->utils->map[i][j] == 'N' || ptr->utils->map[i][j] == 'S'
+				|| ptr->utils->map[i][j] == 'W' || ptr->utils->map[i][j] == 'E')
 			{
 				ptr->ma->posx = WINDOW_WIDTH - 50;
 				ptr->ma->posy = 50;
@@ -309,7 +309,7 @@ void	wall_creation_map(t_info *ptr)
 // 		wall_x = ma->posx + ma->perpwalldist * ma->raydirx;
 // 	wall_x -= floor(wall_x);
 // 	line->x = ma->mapx;
-// 	if (ptr->map[ma->mapy][ma->mapx] == '1')
+// 	if (ptr->utils->map[ma->mapy][ma->mapx] == '1')
 // 		paint_texture_line(ptr, ma, line);
 // 	line->yb = 0;
 // 	line->yf = ma->draw_start;
@@ -356,13 +356,13 @@ void	wall_creation_minimap(t_info *ptr)
 	int		y;
 
 	i = ((y = 0));
-	while (ptr->map[i])
+	while (ptr->utils->map[i])
 	{
 		j = 0;
 		x = 0;
-		while (ptr->map[i][j])
+		while (ptr->utils->map[i][j])
 		{
-			if (ptr->map[i][j] == '1')
+			if (ptr->utils->map[i][j] == '1')
 			{
 				render_rect(&ptr->img, (t_rect){x, y,
 				100, 120, WHITE_PIXEL});
@@ -383,13 +383,13 @@ void	wall_creation_minimap(t_info *ptr)
 	int		y;
 
 	i = ((y = 0));
-	while (ptr->map[i])
+	while (ptr->utils->map[i])
 	{
 		j = 0;
 		x = 0;
-		while (ptr->map[i][j])
+		while (ptr->utils->map[i][j])
 		{
-			if (ptr->map[i][j] == '1')
+			if (ptr->utils->map[i][j] == '1')
 			{
 				printf("start %d end %d\n", ptr->ma->draw_start, ptr->ma->draw_end);
 				printf("voici windows height %d\n", ptr->ma->line_Height);

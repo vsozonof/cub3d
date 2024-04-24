@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/23 08:47:26 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:34:26 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,76 @@ int		init_struct(t_info *ptr, t_utils *util, t_math *ma)
 
 t_math	*ma_init(t_math *ma, t_info *ptr)
 {
-	ma->posx = found_player_pos_y(ptr->map) + 0.5; /// trouver pos joueur
+	ma->posx = found_player_pos_x(ptr->utils->map) + 0.5; /// trouver pos joueur
 	if (ma->posx < 0)
 		return (NULL); // faudra free
-	ma->posy = found_player_pos_x(ptr->map) + 0.5;
+	ma->posy = found_player_pos_y(ptr->utils->map) + 0.5;
 	if (ma->posy < 0)
 		return (NULL); // faudra free
 	printf("\nmes position de base x %f y %f \n", ma->posx, ma->posy);
-	ma->dirx = 0;
-	ma->diry = 0; // initialisation des vecteurs
-	ma->planex = 0;
-	ma->planey = -0.66;
+	setup_cardinal_point(ma, ptr);
 	ma->out = 0;
 	return (ma);
+}
+
+void	setup_cardinal_point(t_math *ma, t_info *ptr)
+{
+	if (player_tag(ptr) == 1) // Nord
+	{
+		printf("je suis dans le nord\n");
+		ma->dirx = 0;
+		ma->diry = 0; // initialisation des vecteurs
+		ma->planex = 0;
+		ma->planey = -0.66;
+	}
+	else if (player_tag(ptr) == 2) // Sud
+	{
+		printf("je suis dans le sud\n");
+		ma->dirx = 0;
+		ma->diry = 0; // initialisation des vecteurs
+		ma->planex = 0;
+		ma->planey = -0.66;
+	}
+	else if (player_tag(ptr) == 3) // Est
+	{
+		printf("je suis dans le est\n");
+		ma->dirx = 0;
+		ma->diry = 0; // initialisation des vecteurs
+		ma->planex = 0;
+		ma->planey = -0.66;
+	}
+	else if (player_tag(ptr) == 4) // Ouest
+	{
+		printf("je suis dans le ouest\n");
+		ma->dirx = 0;
+		ma->diry = 0; // initialisation des vecteurs
+		ma->planex = 0;
+		ma->planey = -0.66;
+	}
+}
+
+int	player_tag(t_info *ptr)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (ptr->utils->map[i])
+	{
+		j = 0;
+		while (ptr->utils->map[i][j])
+		{
+			if (ptr->utils->map[i][j] == 'N')
+				return (1);
+			else if (ptr->utils->map[i][j] == 'S')
+				return (2);
+			else if (ptr->utils->map[i][j] == 'E')
+				return (3);
+			else if (ptr->utils->map[i][j] == 'O')
+				return (4);
+			j++;
+		}
+		i++;
+	}
+	return (-1);
 }

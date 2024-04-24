@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/22 13:35:19 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/24 10:02:37 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ typedef struct s_info
 	t_img	img;
 	t_math	*ma;
 	t_line	*line;
+	t_utils	*utils;
 	int		cur_img;
 	int		p_mov;
 	double	pa; // player angle
@@ -264,6 +265,8 @@ void		delta_distance_calculation(t_math *ma, int x);
 void		ray_calculation(t_math *ma);
 void		digital_differential_analyser(t_math *ma, t_info *ptr);
 void		finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j);
+void		setup_cardinal_point(t_math *ma, t_info *ptr);
+int			player_tag(t_info *ptr);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 10:22:35 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/22 13:43:47 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/24 10:03:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,22 @@ int	try_moove(t_info *ptr)
 {
 	if (ptr->p_mov == 1)
 	{
-		if (ptr->map[(int)ptr->ma->posy - 1][(int)ptr->ma->posx] == '1')
+		if (ptr->utils->map[(int)ptr->ma->posy - 1][(int)ptr->ma->posx] == '1')
 			return (-1);
 	}
 	else if (ptr->p_mov == 2)
 	{
-		if (ptr->map[(int)ptr->ma->posy][(int)ptr->ma->posx - 1] == '1')
+		if (ptr->utils->map[(int)ptr->ma->posy][(int)ptr->ma->posx - 1] == '1')
 			return (-1);
 	}
 	else if (ptr->p_mov == 3)
 	{
-		if (ptr->map[(int)ptr->ma->posy + 1][(int)ptr->ma->posx] == '1')
+		if (ptr->utils->map[(int)ptr->ma->posy + 1][(int)ptr->ma->posx] == '1')
 			return (-1);
 	}
 	else if (ptr->p_mov == 4)
 	{
-		if (ptr->map[(int)ptr->ma->posy][(int)ptr->ma->posx + 1] == '1')
+		if (ptr->utils->map[(int)ptr->ma->posy][(int)ptr->ma->posx + 1] == '1')
 			return (-1);
 	}
 	return (0);

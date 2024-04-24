@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/23 13:40:31 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:57:33 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	delta_distance_calculation(t_math *ma, int x)
 	ma->mapx = (int)ma->posx;
 	ma->mapy = (int)ma->posy;
 	if (ma->raydirx == 0)
-		ma->deltadistx = 1e30;
+		ma->deltadistx = 2.5;
 	else
 		ma->deltadistx = fabs(1 / ma->raydirx);
 	if (ma->raydiry == 0)
-		ma->deltadisty = 1e30;
+		ma->deltadisty = 2.5;
 	else
 		ma->deltadisty = fabs(1 / ma->raydiry);
 	// printf("voici deltax %f et voici deltay %f\n", ma->deltadistx, ma->deltadisty);
@@ -83,41 +83,65 @@ void	ray_calculation(t_math *ma)
 
 void	digital_differential_analyser(t_math *ma, t_info *ptr)
 {
+	int 	i;
+	int 	j;
+
 	while (ma->hit == 0)
 	{
+		i = 0;
+		j = 0;
 		if (ma->sidedistx < ma->sidedisty)
 		{
 			ma->sidedistx += ma->deltadistx;
+			j = ma->mapx += ma->stepx;
+			printf("verif\n");
+			printf("voici mon x %d\n", j);
+			printf("voici mon y %d\n", ma->mapy);
+			printf("voii ma len %d\n", ptr->map[j]);
+			i = ft_strlen(ptr->utils->map[j]);
 			ma->mapx += ma->stepx;
+			if (i < ma->mapx)
+			{
+				ma->hit = 1;
+				break;
+			}
 			ma->side = 0;
 		}
 		else
 		{
 			ma->sidedisty += ma->deltadisty;
+			j = ma->mapy += ma->stepy;
+			i = ft_strlen(ptr->utils->map[j]);
 			ma->mapy += ma->stepy;
+			if (i < ma->mapy)
+			{
+				ma->hit = 1;
+				break;
+			}
 			ma->side = 1;
 		}
-		// printf("voici la valeur de ma map %c\n", ptr->map[ma->mapx][ma->mapy]);
-		if (ptr->map[ma->mapx][ma->mapy] > 0) // regler le pb ici
+		// printf("voici mes max de ses coordonne %zu %zu\n", ft_strlen(ptr->map[ma->mapx]), ft_strlen(ptr->map[ma->mapy]));
+		// printf("voici ma valeur %d\n", ptr->utils->map[ma->mapx][ma->mapy]);
+		if (ptr->utils->map[ma->mapy][ma->mapx] == '1') // regler le pb ici
 		{
 			// printf("sidex = %f et y %f\n", ma->sidedistx, ma->sidedisty);
 			// printf("voici sidex %f sidey %f\n", ma->sidedistx, ma->sidedisty);
-			// printf("voici la valeur de ma map %c\n", ptr->map[ma->mapx][ma->mapy]);
+			// printf("voici la valeur de ma map %c\n", ptr->utils->map[ma->mapx][ma->mapy]);
 			ma->hit = 1;
 		}
 	}
-	printf("voici ma->side %d\n", ma->side);
+	// printf("voici ma->side %d\n", ma->side);
 	if (ma->side == 0)
 			ma->perpwalldist = (ma->sidedistx - ma->deltadistx);
 	else
 		ma->perpwalldist = (ma->sidedisty - ma->deltadisty);
 	ma->line_Height = (int)(WINDOW_HEIGHT / ma->perpwalldist);
-	printf("line %d\n", ma->line_Height);
-	printf("perp %f\n", ma->perpwalldist);
+	// printf("line %d\n", ma->line_Height);
+	// printf("perp %f\n", ma->perpwalldist);
 	ma->draw_start = -ma->line_Height / 2 + WINDOW_HEIGHT / 2;
 	if (ma->draw_start < 0)
 		ma->draw_start = 0;
-	printf("voici mon calcul %d\n", ma->line_Height);
+	// printf("voici mon calcul %d\n", ma->line_Height);
 }
 
 void	finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j)
@@ -126,33 +150,17 @@ void	finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j)
 	if (ma->draw_end >= WINDOW_HEIGHT || ma->draw_end < 0)
 		ma->draw_end = WINDOW_HEIGHT - 1;
 	// printf("voici draw_start et end %d %d\n", ma->draw_start, ma->draw_end);
-	if (x == 1000)
-		usleep(50000000);
+	// if (x == 1000)
+		// usleep(50000000);
 	if (j < ptr->ma->draw_start)
-	{
-		printf("voici a quel boucle je suis %d voici mon j %d ainsi que mon draw start %d\n", x, j, ma->draw_start);
 		while (j++ < ptr->ma->draw_start)
-		{
 			render_rect(&ptr->img, (t_rect){x, j, 1, 1, BLUE_PIXEL});
-		}
-	}
 	if (j < ma->draw_end)
-	{
-		printf("voici mon j %d ainsi que mon draw end %d\n", j, ma->draw_end);
 		while (j++ < ma->draw_end)
-		{
 			img_pix_put(&ptr->img, x, j, RED_PIXEL);
-		}
-	}
 	if (j > ma->draw_end)
-	{
-		printf("voici mon j %d ainsi que mon draw end %d\n", j, ma->draw_end);
 		while (j++ < WINDOW_HEIGHT)
-		{
 			img_pix_put(&ptr->img, x, j, GREEN_PIXEL);
-		}
-	}
-	printf("======\n");
 }
 
 /*
@@ -273,7 +281,7 @@ void	raycasting(t_info *ptr)
 				ma->mapy += ma->stepy;
 				ma->side = 1;
 			}
-			if (ptr->map[ma->mapx][ma->mapy] > 0)
+			if (ptr->utils->map[ma->mapx][ma->mapy] > 0)
 				ma->hit = 1;
 		}
 		printf("voici le second side %f\n", ma->sidedistx);

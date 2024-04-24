@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/23 10:15:46 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/24 10:06:13 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,28 @@ int	window_creation(t_data *data, t_utils *utils)
 	t_info	ptr;
 	t_math	ma;
 
-	struct_map(utils->map, &ptr);
+	// struct_map(utils->map, &ptr);
+	ptr.utils = utils;
 	if (init_struct(&ptr, utils, &ma) == 1)
 		return (1);
 	ptr.crgb = data->ceiling_color;
 	ptr.frgb = data->floor_color;
-	int i = 0;
-	int j = 0;
-	while (ptr.map[i])
+	// usleep(500000000);
+	int		i;
+	int		j;
+	i = 0;
+	j = 0;
+	while (ptr.utils->map[i])
 	{
 		j = 0;
-		while (ptr.map[i][j])
+		while (ptr.utils->map[i][j])
 		{
-			printf("%c", ptr.map[i][j]);
+			printf("%c", ptr.utils->map[i][j]);
 			j++;
 		}
 		printf("\n");
 		i++;
 	}
-	// usleep(500000000);
 	ptr.img.mlx_img = mlx_new_image(ptr.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	ptr.img.addr = mlx_get_data_addr(ptr.img.mlx_img, &ptr.img.bpp,
 			&ptr.img.line_len, &ptr.img.endian);
