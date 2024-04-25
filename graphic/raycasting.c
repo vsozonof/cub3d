@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/24 13:28:57 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/25 09:22:04 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ void	digital_differential_analyser(t_math *ma, t_info *ptr)
 {
 	int 	i;
 	int 	j;
-
+	// char	**split; // donc la a l'aide du split, il faut que je verifie si la ligne existe
+ // ou sinon prendre ma len de la ligne actuelle et y ajouter mon stepx et voir si c'est ok
+	show_db_tab(ptr->utils->map);
 	while (ma->hit == 0)
 	{
 		i = 0;
@@ -93,13 +95,10 @@ void	digital_differential_analyser(t_math *ma, t_info *ptr)
 		if (ma->sidedistx < ma->sidedisty)
 		{
 			ma->sidedistx += ma->deltadistx;
-			j = ma->mapx += ma->stepx;
-			show_db_tab(ptr->utils->map);
 			printf("verif\n");
-			printf("voici mon j %d\n", j);
-			printf("voici mon y %d\n", ma->mapy);
-			printf("voici ma len %zu\n", ft_strlen(ptr->utils->map[2]));
-			i = ft_strlen(ptr->utils->map[j]);
+			printf("voici mon x %d ainsi que mon y %d\n", ma->mapx, ma->mapy);
+			printf("voici ma len %zu\n", ft_strlen(ptr->utils->map[ma->mapy]));
+			i = ft_strlen(ptr->utils->map[ma->mapy]);
 			ma->mapx += ma->stepx;
 			if (i < ma->mapx)
 			{
@@ -110,7 +109,6 @@ void	digital_differential_analyser(t_math *ma, t_info *ptr)
 		}
 		else
 		{
-			printf("je passe dans y\n");
 			ma->sidedisty += ma->deltadisty;
 			j = ma->mapy += ma->stepy;
 			i = ft_strlen(ptr->utils->map[j]);
@@ -125,6 +123,12 @@ void	digital_differential_analyser(t_math *ma, t_info *ptr)
 		printf("juste avant test de la map\n");
 		// printf("voici mes max de ses coordonne %zu %zu\n", ft_strlen(ptr->map[ma->mapx]), ft_strlen(ptr->map[ma->mapy]));
 		// printf("voici ma valeur %d\n", ptr->utils->map[ma->mapx][ma->mapy]);
+		printf("voici mon mapy %d et mapx %d\n", ma->mapx, ma->mapy);
+		if (ma->mapx < 0 || ma->mapy < 0)
+		{
+			ma->hit = 1;
+			break ;
+		}
 		if (ptr->utils->map[ma->mapy][ma->mapx] == '1') // regler le pb ici
 		{
 			// printf("sidex = %f et y %f\n", ma->sidedistx, ma->sidedisty);
