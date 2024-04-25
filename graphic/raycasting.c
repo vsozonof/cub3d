@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/25 14:04:48 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:11:30 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,22 +83,22 @@ void	ray_calculation(t_math *ma)
 
 void	digital_differential_analyser(t_math *ma, t_info *ptr)
 {
-	// int 	i;
-	// int 	j;
+	int 	i;
+	int 	j;
 	// char	**split; // donc la a l'aide du split, il faut que je verifie si la ligne existe
  // ou sinon prendre ma len de la ligne actuelle et y ajouter mon stepx et voir si c'est ok
 	printf("=====Nouvelle boucle======\n"); // faire verif len
 	while (ma->hit == 0)
 	{
-		// i = 0;
-		// j = 0;
+		i = 0;
+		j = 0;
 		if (ma->sidedistx < ma->sidedisty)
 		{
 			ma->sidedistx += ma->deltadistx;
 			printf("verif pour x\n");
 			printf("voici mon x %d ainsi que mon y %d\n", ma->mapx, ma->mapy);
 			printf("voici ma len %d\n", len_map(ptr->utils->map[ma->mapy]));
-			// i = len_map(ptr->utils->map[ma->mapy]);
+			i = len_map(ptr->utils->map[ma->mapy]);
 			ma->mapx += ma->stepx;
 			// if (i < ma->mapx)
 			// {
@@ -114,12 +114,12 @@ void	digital_differential_analyser(t_math *ma, t_info *ptr)
 			printf("voici mon x %d ainsi que mon y %d\n", ma->mapx, ma->mapy);
 			printf("voici ma len %d\n", len_map(ptr->utils->map[ma->mapy]));
 			printf("voici donc l'addition y = %d stepy = %d\n", ma->mapy, ma->stepy);
-			// i = len_map(ptr->utils->map[ma->mapy]);
+			i = len_map(ptr->utils->map[ma->mapy]);
 			ma->mapy += ma->stepy;
 			// if (i < ma->mapy)
 			// {
-			// 	ma->hit = 1;
-			// 	break;
+				// ma->hit = 1;
+				// break;
 			// }
 			ma->side = 1;
 		}

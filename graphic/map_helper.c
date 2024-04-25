@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/24 10:03:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:17:50 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,27 +83,27 @@ void	player_movement_map(t_math *ma, int input, t_info *ptr)
 	printf("voici input %d\n", input);
 	if (input == 1) // devant
 	{
+		if (x + 0.2 < 0)
+			return ;
+		x = x + 0.2;
+	}
+	else if (input == 4) // gauche
+	{
 		if (y - 0.2 < 0)
 			return ;
 		y = y - 0.2;
 	}
-	else if (input == 2) // gauche
+	else if (input == 3)// bas
 	{
 		if (x - 0.2 < 0)
 			return ;
 		x = x - 0.2;
 	}
-	else if (input == 3)// bas
+	else if (input == 2) // droite
 	{
 		if (y + 0.2 < 0)
 			return ;
 		y = y + 0.2;
-	}
-	else if (input == 4) // droite
-	{
-		if (x + 0.2 < 0)
-			return ;
-		x = x + 0.2;
 	}
 	ma->posy = y;
 	ma->posx = x;
