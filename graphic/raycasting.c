@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/25 11:03:48 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:44:51 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	digital_differential_analyser(t_math *ma, t_info *ptr)
 	int 	j;
 	// char	**split; // donc la a l'aide du split, il faut que je verifie si la ligne existe
  // ou sinon prendre ma len de la ligne actuelle et y ajouter mon stepx et voir si c'est ok
-	printf("voici mon mapy %d et mapx %d\n", ma->mapx, ma->mapy); // faire verif len
+	printf("=====Nouvelle boucle======\n"); // faire verif len
 	while (ma->hit == 0)
 	{
 		i = 0;
@@ -113,7 +113,7 @@ void	digital_differential_analyser(t_math *ma, t_info *ptr)
 			printf("verif pour y\n");
 			printf("voici mon x %d ainsi que mon y %d\n", ma->mapx, ma->mapy);
 			printf("voici ma len %d\n", len_map(ptr->utils->map[ma->mapy]));
-			j = ma->mapy += ma->stepy;
+			printf("voici donc l'addition y = %d stepy = %d\n", ma->mapy, ma->stepy);
 			i = len_map(ptr->utils->map[ma->mapy]);
 			ma->mapy += ma->stepy;
 			if (i < ma->mapy)
@@ -126,7 +126,7 @@ void	digital_differential_analyser(t_math *ma, t_info *ptr)
 		printf("juste avant test de la map\n");
 		// printf("voici mes max de ses coordonne %zu %zu\n", ft_strlen(ptr->map[ma->mapx]), ft_strlen(ptr->map[ma->mapy]));
 		// printf("voici ma valeur %d\n", ptr->utils->map[ma->mapx][ma->mapy]);
-		printf("voici mon mapy %d et mapx %d\n", ma->mapx, ma->mapy);
+		printf("voici mon mapx %d et mapy %d\n", ma->mapx, ma->mapy);
 		if (ma->mapx < 0 || ma->mapy < 0)
 		{
 			ma->hit = 1;
@@ -161,7 +161,7 @@ void	finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j)
 		ma->draw_end = WINDOW_HEIGHT - 1;
 	// printf("voici draw_start et end %d %d\n", ma->draw_start, ma->draw_end);
 	printf("voici x %d\n", x);
-	if (x > 1000)
+	if (x > 100)
 		usleep(5000000);
 	if (j < ptr->ma->draw_start)
 		while (j++ < ptr->ma->draw_start)
