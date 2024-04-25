@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:40:16 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/22 13:49:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/25 09:53:53 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	found_player_pos_x(char **argv)
 	int	i;
 	int	j;
 
-	i = 1;
+	i = 0;
 	while (argv[i])
 	{
 		j = 1;
@@ -42,7 +42,7 @@ int	found_player_pos_y(char **argv)
 	int	i;
 	int	j;
 
-	i = 1;
+	i = 0;
 	while (argv[i])
 	{
 		j = 1;

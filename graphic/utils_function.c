@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:11:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/24 10:03:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/25 10:05:00 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,18 @@ void	show_db_tab(char **map)
 		i++;
 	}
 	return ;
+}
+
+int		len_map(char *str) // strlen pour la map car les mur peuvent etre multiple
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '1')
+			return (i);
+		i++;
+	}
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/24 13:19:42 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/25 10:00:24 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,6 +266,6 @@ void		digital_differential_analyser(t_math *ma, t_info *ptr);
 void		finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j);
 void		setup_cardinal_point(t_math *ma, t_info *ptr);
 int			player_tag(t_info *ptr);
-
+int			len_map(char *str);
 
 #endif
