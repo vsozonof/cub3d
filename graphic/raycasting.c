@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/25 10:36:05 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/25 11:03:48 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,8 +160,9 @@ void	finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j)
 	if (ma->draw_end >= WINDOW_HEIGHT || ma->draw_end < 0)
 		ma->draw_end = WINDOW_HEIGHT - 1;
 	// printf("voici draw_start et end %d %d\n", ma->draw_start, ma->draw_end);
-	if (x < 100)
-		usleep(50000);
+	printf("voici x %d\n", x);
+	if (x > 1000)
+		usleep(5000000);
 	if (j < ptr->ma->draw_start)
 		while (j++ < ptr->ma->draw_start)
 			render_rect(&ptr->img, (t_rect){x, j, 1, 1, BLUE_PIXEL});
