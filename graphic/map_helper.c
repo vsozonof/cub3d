@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/27 14:02:34 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/27 14:26:53 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	player_movement(t_math *ma, int input, t_info *ptr)
 
 	y = ma->posy;
 	x = ma->posx;
-	printf("voici input %d et voici dirx %f t diry %f\n", input, ma->dirx, ma->diry);
+	// printf("voici input %d et voici dirx %f t diry %f\n", input, ma->dirx, ma->diry);
 	if (input == 1) // devant
 	{
 		tmp = (int)ma->posx;
@@ -78,9 +78,9 @@ void	player_movement_map(t_math *ma, int input, t_info *ptr)
 
 	y = ma->posy;
 	x = ma->posx;
-	printf("====NOUVELLE INPUT====\n");
-	printf("voici mes valeurs au debut de ma fonction %f %f\n", x, y);
-	printf("voici input %d\n", ptr->p_mov);
+	// printf("====NOUVELLE INPUT====\n");
+	// printf("voici mes valeurs au debut de ma fonction %f %f\n", x, y);
+	// printf("voici input %d\n", ptr->p_mov);
 	if (input == 1 || input == 3)
 		player_movement_front(x, y, ptr, ma);
 	else
@@ -114,13 +114,13 @@ void	player_movement_front(double x, double y, t_info *ptr, t_math *ma)
 	vertical_len = len_db_tab(ptr->utils->map);
 	horizontal_len = ft_strlen(ptr->utils->map[(int)y]);
 	horizontal_len--;
-	printf("voici mes valeurs pour verif les murs %f %f\n", x, y);
-	printf("VOICI MA LEN DANS MES MOUVEMENT %d et voici ma len vertical %d et horizon %d\n", i, vertical_len, horizontal_len);
+	// printf("voici mes valeurs pour verif les murs %f %f\n", x, y);
+	// printf("VOICI MA LEN DANS MES MOUVEMENT %d et voici ma len vertical %d et horizon %d\n", i, vertical_len, horizontal_len);
 	if (y < 1 || x < 1 || vertical_len <= (int)y
 		|| horizontal_len <= (int)x)
 	{
-		printf("JE SUIS SORTIS\n");
-		printf("DONC I = %d ET Y = %f\n", i, y);
+		// printf("JE SUIS SORTIS\n");
+		// printf("DONC I = %d ET Y = %f\n", i, y);
 		// exit(1);
 		return ;
 	}
@@ -128,7 +128,7 @@ void	player_movement_front(double x, double y, t_info *ptr, t_math *ma)
 		return ;
 	ma->posy = y;
 	ma->posx = x;
-	printf("nouvelle position %f %f\n", ma->posx, ma->posy);
+	// printf("nouvelle position %f %f\n", ma->posx, ma->posy);
 }
 
 void	player_movement_side(double x, double y, t_info *ptr, t_math *ma)
@@ -153,21 +153,21 @@ void	player_movement_side(double x, double y, t_info *ptr, t_math *ma)
 	vertical_len = len_db_tab(ptr->utils->map);
 	horizontal_len = ft_strlen(ptr->utils->map[(int)y]);
 	horizontal_len--;
-	printf("VOICI MA LEN DANS MES MOUVEMENT %d et voici ma len vertical %d\n", i, vertical_len);
+	// printf("VOICI MA LEN DANS MES MOUVEMENT %d et voici ma len vertical %d\n", i, vertical_len);
 	if (y < 1 || x < 1 || vertical_len <= (int)y
 		|| horizontal_len <= (int)x)
 	{
 		// printf("JE SUIS SORTIS\n");
 		// printf("DONC I = %d ET Y = %f\n", i, y);
 		// exit(1);
-		printf("je passe par ici\n");
+		// printf("je passe par ici\n");
 		return ;
 	}
 	if (ptr->utils->map[(int)y][(int)x] == '1')
 		return ;
 	ma->posy = y;
 	ma->posx = x;
-	printf("nouvelle position %f %f\n", ma->posx, ma->posy);
+	// printf("nouvelle position %f %f\n", ma->posx, ma->posy);
 }
 
 void	found_pos_player_minimap(t_info *ptr)

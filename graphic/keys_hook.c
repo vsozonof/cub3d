@@ -6,13 +6,11 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 10:22:35 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/24 10:03:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/27 14:27:55 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// pour ca j'ai besoin de cree des pointeur de la mlx
 
 int	get_key_hook(int keycode, t_info *ptr)
 {
@@ -36,21 +34,9 @@ int	get_key_hook(int keycode, t_info *ptr)
 	}
 	if (keycode == 119 || keycode == 97 || keycode == 115
 		|| keycode == 100)
-	{
-		// if (try_moove(ptr) == 0)
 		player_movement_map(ptr->ma, ptr->p_mov, ptr);
-	}
-	if (ptr->p_mov == 5 || ptr->p_mov == 6 ||
-		ptr->p_mov == 7 || ptr->p_mov == 8)
-	{
+	if (ptr->p_mov == 5 || ptr->p_mov == 7)
 		player_pov_rotation(ptr->ma, ptr->p_mov);
-	}
-	// else
-	// {
-	// 	ptr->ma->posx = 0;
-	// 	ptr->ma->posy = 0;
-	// 	ptr->pa = 0;
-	// }
 	return (0);
 }
 

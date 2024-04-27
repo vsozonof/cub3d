@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/27 14:21:50 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/27 14:29:42 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	raycasting(t_info *ptr)
 	ma = ptr->ma;
 	while (x < WINDOW_WIDTH)
 	{
-		printf("voici x %d\n", x);
+		// printf("voici x %d\n", x);
 		delta_distance_calculation(ma, x);
 		ray_calculation(ma);
 		digital_differential_analyser(ma, ptr);
@@ -40,9 +40,9 @@ void	delta_distance_calculation(t_math *ma, int x)
 		ma->camerax = 0.001042;
 	ma->raydirx = ma->dirx + ma->planex * ma->camerax;
 	ma->raydiry = ma->diry + ma->planey * ma->camerax;
-	printf("voici le calcul 2 * %d / %d\n", x, WINDOW_WIDTH - 1);
-	printf("voici camerax %f\n", ma->camerax);
-	printf("voici mon raydirx %f et mon raydiry %f\n", ma->raydirx, ma->raydiry);
+	// printf("voici le calcul 2 * %d / %d\n", x, WINDOW_WIDTH - 1);
+	// printf("voici camerax %f\n", ma->camerax);
+	// printf("voici mon raydirx %f et mon raydiry %f\n", ma->raydirx, ma->raydiry);
 	// printf("voici raydirx %f\n", ma->raydirx);
 	// printf("voici les composante de raydirx %f %f %f\n", ma->dirx, ma->planex, ma->camerax);
 	ma->mapx = (int)ma->posx;
@@ -127,14 +127,14 @@ void	finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j)
 	else
 		ma->perpwalldist = (ma->sidedisty - ma->deltadisty);
 	ma->line_Height = (int)(WINDOW_HEIGHT / ma->perpwalldist);
-	printf("voici mon perp %f voici mon line height %d\n", ma->perpwalldist, ma->line_Height);
+	// printf("voici mon perp %f voici mon line height %d\n", ma->perpwalldist, ma->line_Height);
 	ma->draw_start = -ma->line_Height / 2 + WINDOW_HEIGHT / 2;
 	if (ma->draw_start < 0)
 		ma->draw_start = 0;
 	ma->draw_end = ma->line_Height / 2 + WINDOW_HEIGHT / 2;
 	if (ma->draw_end >= WINDOW_HEIGHT || ma->draw_end < 0)
 		ma->draw_end = WINDOW_HEIGHT - 1;
-	printf("voici draw_start %d et end %d\n", ma->draw_start, ma->draw_end);
+	// printf("voici draw_start %d et end %d\n", ma->draw_start, ma->draw_end);
 	if (x > 960)
 	{
 		// usleep(500000);
