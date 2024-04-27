@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/27 13:20:40 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/27 14:02:34 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void	player_movement_side(double x, double y, t_info *ptr, t_math *ma)
 {
 	int		i;
 	int		vertical_len;
-	// int		horizontal_len;
+	int		horizontal_len;
 
 	if (ptr->p_mov == 4) // gauche
 	{
@@ -151,8 +151,11 @@ void	player_movement_side(double x, double y, t_info *ptr, t_math *ma)
 	}
 	i = len_map(ptr->utils->map[(int)y]);
 	vertical_len = len_db_tab(ptr->utils->map);
+	horizontal_len = ft_strlen(ptr->utils->map[(int)y]);
+	horizontal_len--;
 	printf("VOICI MA LEN DANS MES MOUVEMENT %d et voici ma len vertical %d\n", i, vertical_len);
-	if (y < 1 || x < 1 || vertical_len <= (int)y)
+	if (y < 1 || x < 1 || vertical_len <= (int)y
+		|| horizontal_len <= (int)x)
 	{
 		// printf("JE SUIS SORTIS\n");
 		// printf("DONC I = %d ET Y = %f\n", i, y);
@@ -160,6 +163,8 @@ void	player_movement_side(double x, double y, t_info *ptr, t_math *ma)
 		printf("je passe par ici\n");
 		return ;
 	}
+	if (ptr->utils->map[(int)y][(int)x] == '1')
+		return ;
 	ma->posy = y;
 	ma->posx = x;
 	printf("nouvelle position %f %f\n", ma->posx, ma->posy);

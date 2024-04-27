@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/27 11:25:27 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/27 14:00:28 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	delta_distance_calculation(t_math *ma, int x)
 	ma->mapx = (int)ma->posx;
 	ma->mapy = (int)ma->posy;
 	if (ma->raydirx == 0)
-		ma->deltadistx = 2.5;
+		ma->deltadistx = 2;
 	else
 		ma->deltadistx = fabs(1 / ma->raydirx);
 	if (ma->raydiry == 0)
-		ma->deltadisty = 2.5;
+		ma->deltadisty = 2;
 	else
 		ma->deltadisty = fabs(1 / ma->raydiry);
 	// printf("voici deltax %f et voici deltay %f\n", ma->deltadistx, ma->deltadisty);
@@ -85,9 +85,7 @@ void	digital_differential_analyser(t_math *ma, t_info *ptr)
 {
 	int 	i;
 	int 	j;
-	// char	**split; // donc la a l'aide du split, il faut que je verifie si la ligne existe
- // ou sinon prendre ma len de la ligne actuelle et y ajouter mon stepx et voir si c'est ok
-	// printf("=====Nouvelle boucle======\n"); // faire verif len
+
 	while (ma->hit == 0)
 	{
 		i = 0;
@@ -95,80 +93,47 @@ void	digital_differential_analyser(t_math *ma, t_info *ptr)
 		if (ma->sidedistx < ma->sidedisty)
 		{
 			ma->sidedistx += ma->deltadistx;
-			// printf("verif pour x\n");
-			// printf("voici mon x %d ainsi que mon y %d\n", ma->mapx, ma->mapy);
-			// printf("voici ma len %d\n", len_map(ptr->utils->map[ma->mapy]));
 			i = len_map(ptr->utils->map[ma->mapy]);
 			ma->mapx += ma->stepx;
-			// if (i < ma->mapx)
-			// {
-				// ma->hit = 1;
-				// break;
-			// }
 			ma->side = 0;
 		}
 		else
 		{
 			ma->sidedisty += ma->deltadisty;
-			// printf("verif pour y\n");
-			// printf("voici mon x %d ainsi que mon y %d\n", ma->mapx, ma->mapy);
-			// printf("voici ma len %d\n", len_map(ptr->utils->map[ma->mapy]));
-			// printf("voici donc l'addition y = %d stepy = %d\n", ma->mapy, ma->stepy);
 			i = len_map(ptr->utils->map[ma->mapy]);
 			ma->mapy += ma->stepy;
-			// if (i < ma->mapy)
-			// {
-				// ma->hit = 1;
-				// break;
-			// }
 			ma->side = 1;
 		}
-		// printf("juste avant test de la map\n");
-		// printf("voici mes max de ses coordonne %zu %zu\n", ft_strlen(ptr->map[ma->mapx]), ft_strlen(ptr->map[ma->mapy]));
-		// printf("voici ma valeur %d\n", ptr->utils->map[ma->mapx][ma->mapy]);
-		// printf("voici mon mapx %d et mapy %d\n", ma->mapx, ma->mapy);
 		if (ma->mapx < 0 || ma->mapy < 0)
 		{
 			ma->hit = 1;
 			break ;
 		}
-		if (ptr->utils->map[ma->mapy][ma->mapx] == '1') // regler le pb ici
-		{
-			// printf("sidex = %f et y %f\n", ma->sidedistx, ma->sidedisty);
-			// printf("voici sidex %f sidey %f\n", ma->sidedistx, ma->sidedisty);
-			// printf("voici la valeur de ma map %c\n", ptr->utils->map[ma->mapx][ma->mapy]);
+		if (ptr->utils->map[ma->mapy][ma->mapx] == '1')
 			ma->hit = 1;
-		}
 	}
-	// printf("voici ma->side %d\n", ma->side);
+}
+
+void	finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j)
+{
 	if (ma->side == 0)
 			ma->perpwalldist = (ma->sidedistx - ma->deltadistx);
 	else
 		ma->perpwalldist = (ma->sidedisty - ma->deltadisty);
 	ma->line_Height = (int)(WINDOW_HEIGHT / ma->perpwalldist);
-	// printf("line %d\n", ma->line_Height);
-	// printf("perp %f\n", ma->perpwalldist);
 	ma->draw_start = -ma->line_Height / 2 + WINDOW_HEIGHT / 2;
 	if (ma->draw_start < 0)
 		ma->draw_start = 0;
-	// printf("voici mon calcul %d\n", ma->line_Height);
-}
-
-void	finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j)
-{
 	ma->draw_end = ma->line_Height / 2 + WINDOW_HEIGHT / 2;
 	if (ma->draw_end >= WINDOW_HEIGHT || ma->draw_end < 0)
 		ma->draw_end = WINDOW_HEIGHT - 1;
-	// printf("voici draw_start %d et end %d\n", ma->draw_start, ma->draw_end);
-	// printf("voici x %d\n", x);
-	// if (x > 100)
-		// usleep(5000000);
-	// if (ma->draw_end < ma->draw_start)
-	// {
-	// 	tmp = ma->draw_end;
-	// 	ma->draw_end = ma->draw_start;
-	// 	ma->draw_start = tmp;
-	// } // jsp si c'est bon mais au moins ce n'est pas l'ascenseur
+	printf("voici draw_start %d et end %d\n", ma->draw_start, ma->draw_end);
+	printf("voici x %d\n", x);
+	if (x > 960)
+	{
+		// usleep(500000);
+		// return ;
+	}
 	if (j < ptr->ma->draw_start)
 		while (j++ < ptr->ma->draw_start)
 			render_rect(&ptr->img, (t_rect){x, j, 1, 1, BLUE_PIXEL});
