@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:11:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/27 10:59:31 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/27 11:39:27 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,19 @@ void	show_db_tab(char **map)
 	return ;
 }
 
+int	len_db_tab(char **map)
+{
+	int	i;
+
+	i = 0;
+	if (!map)
+		return (-1);
+	while (map[i])
+		i++;
+	i--;
+	return (i);
+}
+
 int		len_map(char *str) // strlen pour la map car les mur peuvent etre multiple
 {
 	int		i;
@@ -67,8 +80,8 @@ int		len_map(char *str) // strlen pour la map car les mur peuvent etre multiple
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '1')
-			return (i);
+		// if (str[i] == '1')
+			// return (i);
 		i++;
 	}
 	return (i);
