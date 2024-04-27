@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/27 14:26:53 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/27 16:09:48 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	player_pov_rotation(t_math *ma, int input)
 	printf("voici mon code %d\n", input);
 	if (input == 7) // droite
 	{
-		ma->dirx = ma->dirx * cos(1) - ma->diry * sin(-1);
+		ma->dirx = ma->dirx * cos(-1) - ma->diry * sin(-1);
 		ma->diry = oldDirX * sin(-1) + ma->diry * cos(-1);
 		oldPlaneX = ma->planex;
 		ma->planex = ma->planex * cos(-1) - ma->planey * sin(-1);
@@ -35,7 +35,6 @@ void	player_pov_rotation(t_math *ma, int input)
 		ma->planex = ma->planex * cos(1) - ma->planey * sin(1);
 		ma->planey = oldPlaneX * sin(1) + ma->planey * cos(1);
 	}
-	// printf("pdx = %f et pdy = %f\n", ptr->ma->posx, ptr->ma->posy);
 }
 
 void	player_movement(t_math *ma, int input, t_info *ptr)

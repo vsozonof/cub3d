@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/24 11:34:26 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/27 16:43:34 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,15 @@ void	setup_cardinal_point(t_math *ma, t_info *ptr)
 		printf("je suis dans le sud\n");
 		ma->dirx = 0;
 		ma->diry = 0; // initialisation des vecteurs
-		ma->planex = 0;
-		ma->planey = -0.66;
+		ma->planex = -0.66;
+		ma->planey = 0;
 	}
 	else if (player_tag(ptr) == 3) // Est
-	{
-		printf("je suis dans le est\n");
+	{ // voir comment changer les mouvement
 		ma->dirx = 0;
 		ma->diry = 0; // initialisation des vecteurs
 		ma->planex = 0;
-		ma->planey = -0.66;
+		ma->planey = 0.66;
 	}
 	else if (player_tag(ptr) == 4) // Ouest
 	{
@@ -77,7 +76,7 @@ void	setup_cardinal_point(t_math *ma, t_info *ptr)
 		ma->dirx = 0;
 		ma->diry = 0; // initialisation des vecteurs
 		ma->planex = 0;
-		ma->planey = -0.66;
+		ma->planey = 0.66;
 	}
 }
 
@@ -98,7 +97,7 @@ int	player_tag(t_info *ptr)
 				return (2);
 			else if (ptr->utils->map[i][j] == 'E')
 				return (3);
-			else if (ptr->utils->map[i][j] == 'O')
+			else if (ptr->utils->map[i][j] == 'W')
 				return (4);
 			j++;
 		}
