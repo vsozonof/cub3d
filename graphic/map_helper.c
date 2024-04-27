@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/27 11:48:24 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/27 13:20:40 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,33 +93,39 @@ void	player_movement_front(double x, double y, t_info *ptr, t_math *ma)
 {
 	int		i;
 	int		vertical_len;
+	int		horizontal_len;
 
 	// printf("voici mes valeurs juste avant le debut des calculs %f %f\n", x, y);
 	if (ptr->p_mov == 1) // devant
 	{
-		if (x + 0.5 < 0)
+		if (x + 0.2 < 0)
 			return ; // peut etre voir si c'est a utiliser
-		x = x + 0.5;
+		x = x + 0.2;
 	}
 	else if (ptr->p_mov == 3)// bas
 	{
-		if (x - 0.5 < 0)
+		if (x - 0.2 < 0)
 			return ;
-		x = x - 0.5;
+		x = x - 0.2;
 	}
 	// d'abord calculer la len voir si ca segfault, ensuite verif si c'est un mur dans
 	// la map
 	i = len_map(ptr->utils->map[(int)y]);
 	vertical_len = len_db_tab(ptr->utils->map);
+	horizontal_len = ft_strlen(ptr->utils->map[(int)y]);
+	horizontal_len--;
 	printf("voici mes valeurs pour verif les murs %f %f\n", x, y);
-	printf("VOICI MA LEN DANS MES MOUVEMENT %d et voici ma len vertical %d\n", i, vertical_len);
-	if (y < 1 || x < 1 || vertical_len <= (int)y)
+	printf("VOICI MA LEN DANS MES MOUVEMENT %d et voici ma len vertical %d et horizon %d\n", i, vertical_len, horizontal_len);
+	if (y < 1 || x < 1 || vertical_len <= (int)y
+		|| horizontal_len <= (int)x)
 	{
-		// printf("JE SUIS SORTIS\n");
-		// printf("DONC I = %d ET Y = %f\n", i, y);
+		printf("JE SUIS SORTIS\n");
+		printf("DONC I = %d ET Y = %f\n", i, y);
 		// exit(1);
 		return ;
 	}
+	if (ptr->utils->map[(int)y][(int)x] == '1')
+		return ;
 	ma->posy = y;
 	ma->posx = x;
 	printf("nouvelle position %f %f\n", ma->posx, ma->posy);
@@ -129,18 +135,19 @@ void	player_movement_side(double x, double y, t_info *ptr, t_math *ma)
 {
 	int		i;
 	int		vertical_len;
+	// int		horizontal_len;
 
 	if (ptr->p_mov == 4) // gauche
 	{
-		if (y - 0.5 < 0)
+		if (y - 0.2 < 0)
 			return ;
-		y = y - 0.5;
+		y = y - 0.2;
 	}
 	else if (ptr->p_mov == 2) // droite
 	{
-		if (y + 0.5 < 0)
+		if (y + 0.2 < 0)
 			return ;
-		y = y + 0.5;
+		y = y + 0.2;
 	}
 	i = len_map(ptr->utils->map[(int)y]);
 	vertical_len = len_db_tab(ptr->utils->map);
@@ -150,6 +157,7 @@ void	player_movement_side(double x, double y, t_info *ptr, t_math *ma)
 		// printf("JE SUIS SORTIS\n");
 		// printf("DONC I = %d ET Y = %f\n", i, y);
 		// exit(1);
+		printf("je passe par ici\n");
 		return ;
 	}
 	ma->posy = y;
