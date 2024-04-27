@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/25 14:17:50 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/27 11:01:34 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,27 +71,41 @@ void	player_movement(t_math *ma, int input, t_info *ptr)
 	// ptr->ma->posx = x;
 }
 
+/*
 void	player_movement_map(t_math *ma, int input, t_info *ptr)
 {
 	double	x;
 	double	y;
-	(void)ptr;
 
-	y = ma->posy;
-	x = ma->posx;
+	y = ptr->ma->posy;
+	x = ptr->ma->posx;
+	(void)ma;
+	printf("voici mes valeurs au debut de ma fonction %f %f\n", x, y);
+	printf("voici input %d\n", input);
+	if (input == 1 || input == 3)
+		player_movement_front(x, y, ptr, input);
+	else
+		player_movement_side(x, y, ptr, input);
+	// maintenant juste avant d'actualiser les positions, je dois faire en sorte
+	// que je sorte proprement pour faire comprendre que j'ai toucher un mur
+}
+*/
+
+void	player_movement_map(t_math *ma, int input, t_info *ptr)
+{
+	double	x;
+	double	y;
+
+	y = ptr->ma->posy;
+	x = ptr->ma->posx;
+	(void)ma;
 	printf("voici mes valeurs au debut de ma fonction %f %f\n", x, y);
 	printf("voici input %d\n", input);
 	if (input == 1) // devant
 	{
 		if (x + 0.2 < 0)
-			return ;
+			return ; // peut etre voir si c'est a utiliser
 		x = x + 0.2;
-	}
-	else if (input == 4) // gauche
-	{
-		if (y - 0.2 < 0)
-			return ;
-		y = y - 0.2;
 	}
 	else if (input == 3)// bas
 	{
@@ -99,46 +113,72 @@ void	player_movement_map(t_math *ma, int input, t_info *ptr)
 			return ;
 		x = x - 0.2;
 	}
+	if (input == 4) // gauche
+	{
+		if (y - 0.2 < 0)
+			return ;
+		y = y - 0.2;
+	}
 	else if (input == 2) // droite
 	{
 		if (y + 0.2 < 0)
 			return ;
 		y = y + 0.2;
 	}
-	ma->posy = y;
-	ma->posx = x;
-	printf("nouvelle position %f %f\n", ma->posx, ma->posy);
+	ptr->ma->posy = y;
+	ptr->ma->posx = x;
+	// maintenant juste avant d'actualiser les positions, je dois faire en sorte
+	// que je sorte proprement pour faire comprendre que j'ai toucher un mur
 }
 
-// void	wall_creation_map(t_info *ptr, int i)
-// {
-// 	t_math *ma;
-// 	int j;
+void	player_movement_front(int x, int y, t_info *ptr, int input)
+{
+	// int		i;
 
-// 	ma = ptr->ma;
-// 	i = 0;
-// 	j = 0;
-// 	// ma->draw_end = ma->draw_end / 2;
-// 	// ma->draw_start = 150; //CHANGER LES START ET END CAR C'EST PAS BON
-// 	while (i < WINDOW_HEIGHT)
-// 	{
-// 		j = 0;
-// 		if (j < ptr->ma->draw_start)
-// 		{
-// 			while (j++ < ptr->ma->draw_start)
-// 				render_rect(&ptr->img, (t_rect){i, j, 1, 1, BLUE_PIXEL});
-// 		}
-// 		if (j < ma->draw_end)
-// 			while (j++ < ma->draw_end)
-// 				img_pix_put(&ptr->img, i, j, RED_PIXEL);
-// 		if (j > ma->draw_end)
-// 			while (j++ < WINDOW_HEIGHT)
-// 				img_pix_put(&ptr->img, i, j, GREEN_PIXEL);
-// 		i++;
-// 	}
-// 	// printf("voici i %d\n", i);
-// 	// printf("voici draw_start %d end %d\n", ma->draw_start, ma->draw_end);
-// }
+	if (input == 1) // devant
+	{
+		if (x + 0.2 < 0)
+			return ; // peut etre voir si c'est a utiliser
+		x = x + 0.2;
+	}
+	else if (input == 3)// bas
+	{
+		if (x - 0.2 < 0)
+			return ;
+		x = x - 0.2;
+	}
+	// d'abord calculer la len voir si ca segfault, ensuite verif si c'est un mur dans
+	// la map
+	// i = len_map(ptr->utils->map[y]);
+	// if (i < y)
+	// {
+	// 	printf("JE SUIS SORTIS\n");
+	// 	printf("DONC I = %d ET Y = %d\n", i, y);
+	// 	exit(1);
+	// }
+	ptr->ma->posy = y;
+	ptr->ma->posx = x;
+	printf("nouvelle position %f %f\n", ptr->ma->posx, ptr->ma->posy);
+}
+
+void	player_movement_side(int x, int y, t_info *ptr, int input)
+{
+	if (input == 4) // gauche
+	{
+		if (y - 0.2 < 0)
+			return ;
+		y = y - 0.2;
+	}
+	else if (input == 2) // droite
+	{
+		if (y + 0.2 < 0)
+			return ;
+		y = y + 0.2;
+	}
+	ptr->ma->posy = y;
+	ptr->ma->posx = x;
+	printf("nouvelle position %f %f\n", ptr->ma->posx, ptr->ma->posy);
+}
 
 void	found_pos_player_minimap(t_info *ptr)
 {

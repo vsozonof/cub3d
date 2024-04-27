@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/25 10:00:24 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/27 10:55:54 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,5 +267,7 @@ void		finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j);
 void		setup_cardinal_point(t_math *ma, t_info *ptr);
 int			player_tag(t_info *ptr);
 int			len_map(char *str);
+void		player_movement_front(int x, int y, t_info *ptr, int input);
+void		player_movement_side(int x, int y, t_info *ptr, int input);
 
 #endif

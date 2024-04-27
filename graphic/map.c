@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/24 10:06:13 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/27 10:46:16 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	window_creation(t_data *data, t_utils *utils)
 		return (1);
 	ptr.crgb = data->ceiling_color;
 	ptr.frgb = data->floor_color;
-	// usleep(500000000);
 	int		i;
 	int		j;
 	i = 0;
