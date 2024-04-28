@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/27 14:29:42 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/28 12:46:34 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	raycasting(t_info *ptr)
 		digital_differential_analyser(ma, ptr);
 		j = 0;
 		finish_calcul_and_print(ptr, ma, x, j);
-		// printf("voici ma boucle %d\n", x);
 		x++;
 	}
 }
@@ -42,17 +41,18 @@ void	delta_distance_calculation(t_math *ma, int x)
 	ma->raydiry = ma->diry + ma->planey * ma->camerax;
 	// printf("voici le calcul 2 * %d / %d\n", x, WINDOW_WIDTH - 1);
 	// printf("voici camerax %f\n", ma->camerax);
-	// printf("voici mon raydirx %f et mon raydiry %f\n", ma->raydirx, ma->raydiry);
+	printf("voici mon raydirx %f et mon raydiry %f\n", ma->raydirx, ma->raydiry);
 	// printf("voici raydirx %f\n", ma->raydirx);
 	// printf("voici les composante de raydirx %f %f %f\n", ma->dirx, ma->planex, ma->camerax);
 	ma->mapx = (int)ma->posx;
 	ma->mapy = (int)ma->posy;
+	// printf("raydirx %f et raydiry %f\n", ma->raydirx, ma->raydiry);
 	if (ma->raydirx == 0)
-		ma->deltadistx = 2;
+		ma->deltadistx = 1;
 	else
 		ma->deltadistx = fabs(1 / ma->raydirx);
 	if (ma->raydiry == 0)
-		ma->deltadisty = 2;
+		ma->deltadisty = 1;
 	else
 		ma->deltadisty = fabs(1 / ma->raydiry);
 	// printf("voici deltax %f et voici deltay %f\n", ma->deltadistx, ma->deltadisty);

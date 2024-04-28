@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:12:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/20 14:20:47 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/28 12:32:43 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,7 @@ int	render(t_info *ptr)
 	render_background(&ptr->img, BLACK_PIXEL);
 	render_rect(&ptr->img, (t_rect){0, 0,
 				WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});
-	// while () // voir comment je peux le boucler en changeant la valeur
 	raycasting(ptr);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
-	// make_map(ptr, 0);
-	// wall_creation_map(ptr, 0);
 	return (0);
 }

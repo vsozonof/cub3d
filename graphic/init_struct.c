@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/28 11:06:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/28 12:48:04 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	setup_cardinal_point(t_math *ma, t_info *ptr)
 	{
 		printf("je suis dans le ouest\n");
 		ma->dirx = 0;
-		ma->diry = 0; // initialisation des vecteurs
+		ma->diry = 1; // initialisation des vecteurs
 		ma->planex = -0.66;
 		ma->planey = 0;
 	}
