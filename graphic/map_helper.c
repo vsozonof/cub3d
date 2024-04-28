@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/27 16:09:48 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/28 11:31:57 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ void	player_pov_rotation(t_math *ma, int input)
 	double oldPlaneX;
 
 	oldDirX = ma->dirx;
-	printf("voici mon code %d\n", input);
+	printf("voici mon code %d======\n", input);
+	printf("maintenant voici mes anciennes valeurs\n dirx %f diry %f\n", ma->dirx, ma->diry);
+	printf("planex %f planey %f\n", ma->planex, ma->planey);
 	if (input == 7) // droite
 	{
 		ma->dirx = ma->dirx * cos(-1) - ma->diry * sin(-1);
@@ -35,6 +37,8 @@ void	player_pov_rotation(t_math *ma, int input)
 		ma->planex = ma->planex * cos(1) - ma->planey * sin(1);
 		ma->planey = oldPlaneX * sin(1) + ma->planey * cos(1);
 	}
+	printf("maintenant voici mes Nouveau valeurs\n dirx %f diry %f\n", ma->dirx, ma->diry);
+	printf("planex %f planey %f\n======\n", ma->planex, ma->planey);
 }
 
 void	player_movement(t_math *ma, int input, t_info *ptr)
@@ -136,13 +140,13 @@ void	player_movement_side(double x, double y, t_info *ptr, t_math *ma)
 	int		vertical_len;
 	int		horizontal_len;
 
-	if (ptr->p_mov == 4) // gauche
+	if (ptr->p_mov == 2) // gauche
 	{
 		if (y - 0.2 < 0)
 			return ;
 		y = y - 0.2;
 	}
-	else if (ptr->p_mov == 2) // droite
+	else if (ptr->p_mov == 4) // droite
 	{
 		if (y + 0.2 < 0)
 			return ;

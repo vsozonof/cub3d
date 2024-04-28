@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/27 16:43:34 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/28 11:06:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,28 @@ void	setup_cardinal_point(t_math *ma, t_info *ptr)
 		ma->planex = 0;
 		ma->planey = -0.66;
 	}
-	else if (player_tag(ptr) == 2) // Sud
-	{
+	else if (player_tag(ptr) == 2) // Sud -> deuxieme bon
+	{ // voir comment changer les mouvements 
 		printf("je suis dans le sud\n");
 		ma->dirx = 0;
 		ma->diry = 0; // initialisation des vecteurs
 		ma->planex = -0.66;
 		ma->planey = 0;
 	}
-	else if (player_tag(ptr) == 3) // Est
-	{ // voir comment changer les mouvement
+	else if (player_tag(ptr) == 3) // Est -> le seul bon pour le moment
+	{ // voir comment changer les mouvements
 		ma->dirx = 0;
 		ma->diry = 0; // initialisation des vecteurs
 		ma->planex = 0;
 		ma->planey = 0.66;
 	}
-	else if (player_tag(ptr) == 4) // Ouest
+	else if (player_tag(ptr) == 4) // West
 	{
 		printf("je suis dans le ouest\n");
 		ma->dirx = 0;
 		ma->diry = 0; // initialisation des vecteurs
-		ma->planex = 0;
-		ma->planey = 0.66;
+		ma->planex = -0.66;
+		ma->planey = 0;
 	}
 }
 
