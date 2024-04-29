@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/29 11:28:25 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:28:36 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	raycasting(t_info *ptr)
 
 	x = 0;
 	ma = ptr->ma;
-	setup_color_ceiling(ptr);
+	printf("===\n");
+	setup_color_ceiling_floor(ptr);
+	printf("===\n");
 	while (x < WINDOW_WIDTH)
 	{
 		// printf("voici x %d\n", x);
@@ -136,13 +138,13 @@ void	finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j)
 		ma->draw_end = WINDOW_HEIGHT - 1;
 	if (j < ptr->ma->draw_start)
 		while (j++ < ptr->ma->draw_start)
-			render_rect(&ptr->img, (t_rect){x, j, 1, 1, BLUE_PIXEL});
+			render_rect(&ptr->img, (t_rect){x, j, 1, 1, ptr->crgb});
 	if (j < ma->draw_end)
 		while (j++ < ma->draw_end)
 			img_pix_put(&ptr->img, x, j, RED_PIXEL);
 	if (j > ma->draw_end)
 		while (j++ < WINDOW_HEIGHT)
-			img_pix_put(&ptr->img, x, j, GREEN_PIXEL);
+			img_pix_put(&ptr->img, x, j, ptr->frgb);
 }
 
 /*

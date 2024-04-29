@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:11:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/29 11:28:37 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:27:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,63 @@ int		len_map(char *str) // strlen pour la map car les mur peuvent etre multiple
 	return (i);
 }
 
-void	setup_color_ceiling(t_info *ptr)
+int	setup_color_ceiling_floor(t_info *ptr)
 {
-	// char 	*str;
-	int		i;
+	ptr->crgb =  ft_atoi(ptr->utils->ceiling_color[0]) * 65536 + ft_atoi(ptr->utils->ceiling_color[1]) * 256 + ft_atoi(ptr->utils->ceiling_color[2]);
+	ptr->frgb = ft_atoi(ptr->utils->floor_color[0]) * 65536 + ft_atoi(ptr->utils->floor_color[1]) * 256 + ft_atoi(ptr->utils->floor_color[2]);
+	printf("voici mon test %d ainsi que mon floor %d\n", ptr->crgb, ptr->frgb);
+	return (0);
+}
+
+//donc la je dois: prendre mon code (255. 165. 12)
+//diviser mon premier int par 16
+//prendre mes unite et les passer en base 16 -> premiere lettre de mon nb
+//puis prendre mon nb apres la virgule, la multiplier par 16 ca fera mon second nb base 16
+
+/*
+int	setup_color_ceiling(t_info *ptr)
+{
+	int			i;
+	double		nb1;
+	double		nb2;
+	char		*base;
+	int			index_base;
+	int			test;
 
 	i = 0;
-	// ptr->utils->ceiling_color;
+	base = "0123456789ABCDEF";
+	ptr->crgb = malloc(sizeof(char) * 9);
+	if (!ptr->crgb)
+		return (printf("problem when alloc rgb\n"), -1);
 	while (ptr->utils->ceiling_color[i])
 	{
-		printf("%s\n", ptr->utils->ceiling_color[i]);
+		printf("voici toute mes donnees %s\n", ptr->utils->ceiling_color[i]);
 		i++;
 	}
-	// ptr->crgb = 
+	ptr->crgb[0] = '0';
+	ptr->crgb[1] = 'x';
+	i = 0;
+	index_base = 2;
+	while (ptr->utils->ceiling_color[i])
+	{
+		printf("voici mon i %d\n", i);
+		printf("voici mon nb %d\n", ft_atoi(ptr->utils->ceiling_color[i]));
+		nb1 = ft_atoi(ptr->utils->ceiling_color[i]);
+		nb1 = nb1 / 16;
+		printf("voici mon nb avec virgule %f\n", nb1);
+		nb2 = nb1 - (int)nb1;
+		nb2 = nb2 * 16;
+		printf("voici mon nb2 %f\n", nb2);
+		ptr->crgb[index_base] = base[(int)nb1];
+		index_base++;
+		ptr->crgb[index_base] = base[(int)nb2];
+		i++;
+		index_base++;
+	}
+	ptr->crgb[index_base] = '\0';
+	printf("voici mon rgb final %s et voici ce qui passe avec atoi %d\n", ptr->crgb, ft_atoi(ptr->crgb));
+	test = ft_atoi(ptr->utils->ceiling_color[0]) * 65536 + ft_atoi(ptr->utils->ceiling_color[1]) * 256 + ft_atoi(ptr->utils->ceiling_color[2]);
+	printf("voici mon test %d\n", test);
+	return (0);
 }
+*/

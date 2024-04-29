@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/29 11:28:49 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:27:44 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # define CHECK_TEXTUR	"Checking wall textures"
 # define CHECK_COLORS	"Checking color codes"
 
-# define WINDOW_WIDTH 1920 //longueur
-# define WINDOW_HEIGHT 1080 //largueur
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
 # define MLX_ERROR 1
 # define RED_PIXEL 0xFF0000
 # define GREEN_PIXEL 0xFF00
@@ -166,8 +166,8 @@ typedef struct s_info
 	double	pa; // player angle
 	int		w_size;
 	int		fov;
-	char	*frgb;
-	char	*crgb;
+	int		frgb;
+	int		crgb;
 	int		mapS;
 	int		x_map_max;
 	int		y_map_max;
@@ -275,7 +275,6 @@ int			len_map(char *str);
 void		player_movement_front(double x, double y, t_info *ptr, t_math *ma);
 void		player_movement_side(double x, double y, t_info *ptr, t_math *ma);
 int			len_db_tab(char **map);
-void		tup_color_ceiling(t_info *ptr);
-void		tup_color_ceiling(t_info *ptr);
+int			setup_color_ceiling_floor(t_info *ptr);
 
 #endif

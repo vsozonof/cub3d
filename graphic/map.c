@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/28 12:31:11 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:26:31 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,11 @@ int	window_creation(t_data *data, t_utils *utils)
 {
 	t_info	ptr;
 	t_math	ma;
+	(void)data;
 
 	ptr.utils = utils;
 	if (init_struct(&ptr, utils, &ma) == 1)
 		return (1);
-	ptr.crgb = data->ceiling_color;
-	ptr.frgb = data->floor_color;
 	ptr.img.mlx_img = mlx_new_image(ptr.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	ptr.img.addr = mlx_get_data_addr(ptr.img.mlx_img, &ptr.img.bpp,
 			&ptr.img.line_len, &ptr.img.endian);
