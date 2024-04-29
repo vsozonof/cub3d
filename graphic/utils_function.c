@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:11:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/29 14:27:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:44:41 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int	setup_color_ceiling_floor(t_info *ptr)
 {
 	ptr->crgb =  ft_atoi(ptr->utils->ceiling_color[0]) * 65536 + ft_atoi(ptr->utils->ceiling_color[1]) * 256 + ft_atoi(ptr->utils->ceiling_color[2]);
 	ptr->frgb = ft_atoi(ptr->utils->floor_color[0]) * 65536 + ft_atoi(ptr->utils->floor_color[1]) * 256 + ft_atoi(ptr->utils->floor_color[2]);
-	printf("voici mon test %d ainsi que mon floor %d\n", ptr->crgb, ptr->frgb);
 	return (0);
 }
 
