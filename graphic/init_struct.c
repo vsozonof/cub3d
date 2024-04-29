@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/29 10:27:12 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/29 10:45:10 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,36 +47,36 @@ t_math	*ma_init(t_math *ma, t_info *ptr)
 
 void	setup_cardinal_point(t_math *ma, t_info *ptr)
 {
-	if (player_tag(ptr) == 1) // Nord
+	if (player_tag(ptr) == 1)
 	{
 		printf("je suis dans le nord\n");
 		ma->dirx = 0;
-		ma->diry = 0; // initialisation des vecteurs
-		ma->planex = 0;
-		ma->planey = -0.66;
+		ma->diry = -1;
+		ma->planex = 0.66;
+		ma->planey = 0;
 	}
-	else if (player_tag(ptr) == 2) // Sud -> deuxieme bon
-	{ // voir comment changer les mouvements 
+	else if (player_tag(ptr) == 2)
+	{
 		printf("je suis dans le sud\n");
 		ma->dirx = 0;
-		ma->diry = 1; // initialisation des vecteurs
+		ma->diry = 1;
 		ma->planex = -0.66;
 		ma->planey = 0;
 	}
-	else if (player_tag(ptr) == 3) // Est -> le seul bon pour le moment
-	{ // voir comment changer les mouvements
+	else if (player_tag(ptr) == 3)
+	{
 		ma->dirx = 1;
-		ma->diry = 0; // initialisation des vecteurs
+		ma->diry = 0;
 		ma->planex = 0;
 		ma->planey = 0.66;
 	}
-	else if (player_tag(ptr) == 4) // West
+	else if (player_tag(ptr) == 4)
 	{
 		printf("je suis dans le ouest\n");
-		ma->dirx = 0;
-		ma->diry = 1; // initialisation des vecteurs
-		ma->planex = -0.66;
-		ma->planey = 0;
+		ma->dirx = -1;
+		ma->diry = 0;
+		ma->planex = 0;
+		ma->planey = -0.66;
 	}
 }
 
