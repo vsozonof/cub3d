@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/28 12:46:28 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/29 09:04:41 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,57 +21,24 @@ void	player_pov_rotation(t_math *ma, int input)
 	// printf("voici mon code %d======\n", input);
 	// printf("maintenant voici mes anciennes valeurs\n dirx %f diry %f\n", ma->dirx, ma->diry);
 	// printf("planex %f planey %f\n", ma->planex, ma->planey);
-	if (input == 7) // droite
+	if (input == 5) // droite
 	{
-		ma->dirx = ma->dirx * cos(-1) - ma->diry * sin(-1);
-		ma->diry = oldDirX * sin(-1) + ma->diry * cos(-1);
+		ma->dirx = ma->dirx * cos(-0.2) - ma->diry * sin(-0.2);
+		ma->diry = oldDirX * sin(-0.2) + ma->diry * cos(-0.2);
 		oldPlaneX = ma->planex;
-		ma->planex = ma->planex * cos(-1) - ma->planey * sin(-1);
-		ma->planey = oldPlaneX * sin(-1) + ma->planey * cos(-1);
+		ma->planex = ma->planex * cos(-0.2) - ma->planey * sin(-0.2);
+		ma->planey = oldPlaneX * sin(-0.2) + ma->planey * cos(-0.2);
 	}
-	else if (input == 5) // gauche
+	else if (input == 7) // gauche
 	{
-		ma->dirx = ma->dirx * cos(1) - ma->diry * sin(1);
-		ma->diry = oldDirX * sin(1) + ma->diry * cos(1);
+		ma->dirx = ma->dirx * cos(0.2) - ma->diry * sin(0.2);
+		ma->diry = oldDirX * sin(0.2) + ma->diry * cos(0.2);
 		oldPlaneX = ma->planex;
-		ma->planex = ma->planex * cos(1) - ma->planey * sin(1);
-		ma->planey = oldPlaneX * sin(1) + ma->planey * cos(1);
+		ma->planex = ma->planex * cos(0.2) - ma->planey * sin(0.2);
+		ma->planey = oldPlaneX * sin(0.2) + ma->planey * cos(0.2);
 	}
 	// printf("maintenant voici mes Nouveau valeurs\n dirx %f diry %f\n", ma->dirx, ma->diry);
 	// printf("planex %f planey %f\n======\n", ma->planex, ma->planey);
-}
-
-void	player_movement(t_math *ma, int input, t_info *ptr)
-{
-	int	x;
-	int	y;
-	int	tmp;
-
-	y = ma->posy;
-	x = ma->posx;
-	// printf("voici input %d et voici dirx %f t diry %f\n", input, ma->dirx, ma->diry);
-	if (input == 1) // devant
-	{
-		tmp = (int)ma->posx;
-		if(ptr->utils->map[tmp + (int)ma->dirx * 1][(int)ma->posy] == 0) 
-			ma->posx += ma->dirx * 1;
-		if(ptr->utils->map[(int)ma->posx][(int)ma->posy + (int)ma->diry * 1] == 0) 
-			ma->posy += ma->diry * 1;
-	}
-	// else if (input == 2) // gauche
-		// ma->posx -= ma->dirx - 0.5;
-	else if (input == 3) // bas
-	{
-		tmp = (int)ma->posx;
-		if(ptr->utils->map[tmp - (int)ma->dirx * 1][(int)ma->posy] == 0) 
-			ma->posx -= ma->dirx * 1;
-		if(ptr->utils->map[(int)ma->posx][(int)ma->posy - (int)ma->diry * 1] == 0) 
-			ma->posy -= ma->diry * 1;
-	}
-	// else if (input == 4) // droite
-		// ma->posx -= ma->dirx - 0.5;
-	// ptr->ma->posy = y;
-	// ptr->ma->posx = x;
 }
 
 void	player_movement_map(t_math *ma, int input, t_info *ptr)
@@ -103,20 +70,21 @@ void	player_movement_front(double x, double y, t_info *ptr, t_math *ma)
 	{
 		if (x + 0.2 < 0)
 			return ; // peut etre voir si c'est a utiliser
-		x = x + 0.2;
+		x += ma->dirx * 0.2;
+		y += ma->diry * 0.2;
 	}
 	else if (ptr->p_mov == 3)// bas
 	{
 		if (x - 0.2 < 0)
 			return ;
-		x = x - 0.2;
+		x -= ma->dirx * 0.2;
+		y -= ma->diry * 0.2;
 	}
 	// d'abord calculer la len voir si ca segfault, ensuite verif si c'est un mur dans
 	// la map
 	i = len_map(ptr->utils->map[(int)y]);
 	vertical_len = len_db_tab(ptr->utils->map);
-	horizontal_len = ft_strlen(ptr->utils->map[(int)y]);
-	horizontal_len--;
+	horizontal_len = ft_strlen(ptr->utils->map[(int)y]) - 1;
 	// printf("voici mes valeurs pour verif les murs %f %f\n", x, y);
 	// printf("VOICI MA LEN DANS MES MOUVEMENT %d et voici ma len vertical %d et horizon %d\n", i, vertical_len, horizontal_len);
 	if (y < 1 || x < 1 || vertical_len <= (int)y
@@ -144,18 +112,19 @@ void	player_movement_side(double x, double y, t_info *ptr, t_math *ma)
 	{
 		if (y - 0.2 < 0)
 			return ;
-		y = y - 0.2;
+		x += ma->dirx * 0.2;
+		y += ma->diry * 0.2;
 	}
 	else if (ptr->p_mov == 4) // droite
 	{
 		if (y + 0.2 < 0)
 			return ;
-		y = y + 0.2;
+		x += ma->dirx * 0.2;
+		y -= ma->diry * 0.2;
 	}
 	i = len_map(ptr->utils->map[(int)y]);
 	vertical_len = len_db_tab(ptr->utils->map);
-	horizontal_len = ft_strlen(ptr->utils->map[(int)y]);
-	horizontal_len--;
+	horizontal_len = ft_strlen(ptr->utils->map[(int)y]) - 1;
 	// printf("VOICI MA LEN DANS MES MOUVEMENT %d et voici ma len vertical %d\n", i, vertical_len);
 	if (y < 1 || x < 1 || vertical_len <= (int)y
 		|| horizontal_len <= (int)x)
@@ -195,6 +164,41 @@ void	found_pos_player_minimap(t_info *ptr)
 		i++;
 	}
 }
+
+/*
+void	player_movement(t_math *ma, int input, t_info *ptr)
+{
+	int	x;
+	int	y;
+	int	tmp;
+
+	y = ma->posy;
+	x = ma->posx;
+	// printf("voici input %d et voici dirx %f t diry %f\n", input, ma->dirx, ma->diry);
+	if (input == 1) // devant
+	{
+		tmp = (int)ma->posx;
+		if(ptr->utils->map[tmp + (int)ma->dirx * 1][(int)ma->posy] == 0) 
+			ma->posx += ma->dirx * 1;
+		if(ptr->utils->map[(int)ma->posx][(int)ma->posy + (int)ma->diry * 1] == 0) 
+			ma->posy += ma->diry * 1;
+	}
+	// else if (input == 2) // gauche
+		// ma->posx -= ma->dirx - 0.5;
+	else if (input == 3) // bas
+	{
+		tmp = (int)ma->posx;
+		if(ptr->utils->map[tmp - (int)ma->dirx * 1][(int)ma->posy] == 0) 
+			ma->posx -= ma->dirx * 1;
+		if(ptr->utils->map[(int)ma->posx][(int)ma->posy - (int)ma->diry * 1] == 0) 
+			ma->posy -= ma->diry * 1;
+	}
+	// else if (input == 4) // droite
+		// ma->posx -= ma->dirx - 0.5;
+	// ptr->ma->posy = y;
+	// ptr->ma->posx = x;
+}
+*/
 
 /* code du 6 avril juste minimap
 void	player_pov_rotation(t_info *ptr, int input)
