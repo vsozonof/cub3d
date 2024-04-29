@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/29 10:45:10 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:24:49 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,18 +105,3 @@ int	player_tag(t_info *ptr)
 	}
 	return (-1);
 }
-
-// if (ptr->p_mov == 1) // devant
-// 	{
-// 		if (x + 0.2 < 0)
-// 			return ; // peut etre voir si c'est a utiliser
-// 		x += ma->dirx * 0.2;
-// 		y += ma->diry * 0.2;
-// 	}
-// 	else if (ptr->p_mov == 3)// bas
-// 	{
-// 		if (x - 0.2 < 0)
-// 			return ;
-// 		x -= ma->dirx * 0.2;
-// 		y -= ma->diry * 0.2;
-// 	}

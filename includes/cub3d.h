@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/29 11:06:26 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:28:49 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,5 +275,7 @@ int			len_map(char *str);
 void		player_movement_front(double x, double y, t_info *ptr, t_math *ma);
 void		player_movement_side(double x, double y, t_info *ptr, t_math *ma);
 int			len_db_tab(char **map);
+void		tup_color_ceiling(t_info *ptr);
+void		tup_color_ceiling(t_info *ptr);
 
 #endif

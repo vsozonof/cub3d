@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:11:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/27 13:07:04 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:28:37 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,19 @@ int		len_map(char *str) // strlen pour la map car les mur peuvent etre multiple
 		i++;
 	}
 	return (i);
+}
+
+void	setup_color_ceiling(t_info *ptr)
+{
+	// char 	*str;
+	int		i;
+
+	i = 0;
+	// ptr->utils->ceiling_color;
+	while (ptr->utils->ceiling_color[i])
+	{
+		printf("%s\n", ptr->utils->ceiling_color[i]);
+		i++;
+	}
+	// ptr->crgb = 
 }
