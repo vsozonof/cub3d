@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/10 14:48:02 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:06:26 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,16 @@
 # define CHECK_TEXTUR	"Checking wall textures"
 # define CHECK_COLORS	"Checking color codes"
 
-#define WINDOW_WIDTH 600 //longueur
-#define WINDOW_HEIGHT 300 //largueur
-#define MLX_ERROR 1
-#define RED_PIXEL 0xFF0000
-#define GREEN_PIXEL 0xFF00
-#define WHITE_PIXEL 0xFFFFFF
-#define YELLOW_PIXEL 0xFFFF00
-#define BLACK_PIXEL 0x000000
-#define PI 3.14159265359
+# define WINDOW_WIDTH 1920 //longueur
+# define WINDOW_HEIGHT 1080 //largueur
+# define MLX_ERROR 1
+# define RED_PIXEL 0xFF0000
+# define GREEN_PIXEL 0xFF00
+# define WHITE_PIXEL 0xFFFFFF
+# define YELLOW_PIXEL 0xFFFF00
+# define BLACK_PIXEL 0x000000
+# define BLUE_PIXEL 0x0000FF
+# define PI 3.14159265359
 
 # include "../libft/includes/libft.h"
 # include "mlx.h"
@@ -109,21 +110,67 @@ typedef struct s_rect
 	int color;
 }	t_rect;
 
+typedef struct s_math
+{
+	double	camerax;
+	double	raydirx;
+	double	raydiry;
+	double	posx; // position player
+	double	posy;
+	double	dirx; // where the player look
+	double	diry;
+	double	planex;
+	double	planey;
+	double	sidedistx;
+	double	sidedisty;
+	double	deltadistx;
+	double	deltadisty;
+	double	perpwalldist;
+	double	old_dirx;
+	double	old_diry;
+	double	old_planex;
+	double	wall_x;
+	int		fov;
+	int		out;
+	int		mapx;
+	int		mapy;
+	int		stepx;
+	int		stepy;
+	int		hit;
+	int		side;
+	int		line_Height;
+	int		draw_start;
+	int		draw_end;
+}	t_math;
+
+typedef struct s_line
+{
+	int		x;
+	int		y;
+	int		yb;
+	int		yf;
+	int		tex_x;
+	int		tex_y;
+}	t_line;
+
 typedef struct s_info
 {
     void	*mlx;
 	void	*win;
 	t_img	img;
+	t_math	*ma;
+	t_line	*line;
+	t_utils	*utils;
 	int		cur_img;
 	int		p_mov;
-	int		p_x;
-	int		p_y;
-	float	pdx;
-	float	pdy;
-	float	pa; // player angle
+	double	pa; // player angle
 	int		w_size;
 	int		fov;
-	char	**map;
+	char	*frgb;
+	char	*crgb;
+	int		mapS;
+	int		x_map_max;
+	int		y_map_max;
 }	t_info;
 
 int		main(int argc, char **argv);
@@ -172,9 +219,7 @@ void	pr_error_spe(char *msg, int *i);
 //graphic
 
 int			render(t_info *info);
-int			exec_manager(int argc, char **argv, t_data *data, t_utils *utils);
 int			exec_tmp(void);
-int			window_create(t_data *data, t_utils *utils);
 void		game_start(t_info *ptr);
 int			mouse_hook(t_info *ptr);
 int			get_key_hook(int keycode, t_info *ptr);
@@ -200,19 +245,35 @@ int			render_rect(t_img *img, t_rect rect);
 int			handle_keypress(int keysym, t_info *ptr);
 int			window_creation(t_data *data, t_utils *utils);
 int			make_minimap(t_info *ptr);
-void		player_movement_minimap(t_info *ptr, int input);
+void		player_movement(t_math *ma, int input, t_info *ptr);
 int			get_key_hook(int keycode, t_info *ptr);
 int			try_moove(t_info *ptr);
-int			init_struct(t_info *ptr);
+int			init_struct(t_info *ptr, t_utils *util, t_math *ma);
 void		wall_creation_minimap(t_info *ptr);
 void		show_db_tab(char **map);
 void		found_pos_player_minimap(t_info *ptr);
 int			check_keycode(int keycode);
-void		player_pov_rotation(t_info *ptr, int input);
+void		player_pov_rotation(t_math *ma, int input);
 void		player_creation_minimap(t_info *ptr);
 void		make_ray(t_info *ptr, int fi_x, int fi_y);
 void		found_case_ray(int bgx, int bgy, int fix, int fiy);
-
-
+void		raycasting(t_info *ptr);
+int			make_map(t_info *ptr, int i);
+void		digital_differential_analyser(t_math *ma, t_info *ptr);
+t_math		*ma_init(t_math *ma, t_info *ptr);
+void		player_movement_minimap(t_math *ma, int input, t_info *ptr);
+void		wall_creation_map(t_info *ptr, int i);
+void		make_cf(t_info *ptr);
+void		player_movement_map(t_math *ma, int input, t_info *ptr);
+void		delta_distance_calculation(t_math *ma, int x);
+void		ray_calculation(t_math *ma);
+void		digital_differential_analyser(t_math *ma, t_info *ptr);
+void		finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j);
+void		setup_cardinal_point(t_math *ma, t_info *ptr);
+int			player_tag(t_info *ptr);
+int			len_map(char *str);
+void		player_movement_front(double x, double y, t_info *ptr, t_math *ma);
+void		player_movement_side(double x, double y, t_info *ptr, t_math *ma);
+int			len_db_tab(char **map);
 
 #endif

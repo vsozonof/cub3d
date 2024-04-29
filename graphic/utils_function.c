@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:11:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/03 11:01:20 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/27 13:07:04 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@ void	struct_map(char **map, t_info *ptr)
 	i = 0;
 	len = ft_strlen(map[i]);
 	len++;
-	ptr->map = malloc(sizeof(char *) * (len + 1));
+	ptr->utils->map = malloc(sizeof(char *) * (len + 1));
 	while (map[i])
 	{
 		j = 0;
-		ptr->map[i] = malloc(sizeof(char) * (len + 1));
+		ptr->utils->map[i] = malloc(sizeof(char) * (len + 1));
 		while (map[i][j])
 		{
-			ptr->map[i][j] = map[i][j];
+			ptr->utils->map[i][j] = map[i][j];
 			j++;
 		}
-		ptr->map[i][j] = '\0';
+		ptr->utils->map[i][j] = '\0';
 		i++;
 	}
-	ptr->map[i] = '\0';
+	ptr->utils->map[i] = NULL;
 }
 
 void	show_db_tab(char **map)
@@ -58,4 +58,31 @@ void	show_db_tab(char **map)
 		i++;
 	}
 	return ;
+}
+
+int	len_db_tab(char **map)
+{
+	int	i;
+
+	i = 0;
+	if (!map)
+		return (-1);
+	while (map[i])
+		i++;
+	i--;
+	return (i);
+}
+
+int		len_map(char *str) // strlen pour la map car les mur peuvent etre multiple
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		// if (str[i] == '1')
+			// return (i);
+		i++;
+	}
+	return (i);
 }

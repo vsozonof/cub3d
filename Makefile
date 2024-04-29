@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
+#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 14:09:59 by vsozonof          #+#    #+#              #
-#    Updated: 2024/04/10 14:47:23 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/04/29 11:05:21 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,13 +35,16 @@ SRCS = main.c \
 	   parsing/wall_checker.c \
 	   parsing/wall_checker-utils.c \
 	   parsing/printers/print-tools-1.c \
-	   graphic/graphic1.c \
-	   graphic/exemple_graphic.c \
-	   graphic/window_create.c \
 	   graphic/players_utils.c \
-	   graphic/minimap.c \
+	   graphic/map.c \
 	   graphic/utils_function.c \
-	   graphic/minimap_helper.c \
+	   graphic/map_helper.c \
+	   graphic/mlx_utils.c \
+	   graphic/raycasting.c \
+	   graphic/drawing.c \
+	   graphic/keys_hook.c \
+	   graphic/init_struct.c\
+	   graphic/img_creation.c \
 
 
 OBJS = $(SRCS:.c=.o)

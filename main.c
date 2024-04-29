@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:10:02 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/04/08 17:00:19 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:06:59 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int	main(int argc, char **argv)
 	initialize_struct(&data, &utils);
 	if (parsing_manager(&data, argc, argv, &utils))
 		return (1);
-	// exec_manager(argc, argv, &data, &utils);
+	window_creation(&data, &utils);
 	return (0);
 }
