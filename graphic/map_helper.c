@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/29 09:04:41 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/29 10:27:58 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,15 +112,15 @@ void	player_movement_side(double x, double y, t_info *ptr, t_math *ma)
 	{
 		if (y - 0.2 < 0)
 			return ;
-		x += ma->dirx * 0.2;
-		y += ma->diry * 0.2;
+		x -= ma->planex * 0.2;
+		y -= ma->planey * 0.2;
 	}
 	else if (ptr->p_mov == 4) // droite
 	{
 		if (y + 0.2 < 0)
 			return ;
-		x += ma->dirx * 0.2;
-		y -= ma->diry * 0.2;
+		x += ma->planex * 0.2;
+		y += ma->planey * 0.2;
 	}
 	i = len_map(ptr->utils->map[(int)y]);
 	vertical_len = len_db_tab(ptr->utils->map);
