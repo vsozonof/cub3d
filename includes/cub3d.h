@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/29 14:27:44 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/30 10:08:44 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,10 @@ typedef struct s_info
 	int		mapS;
 	int		x_map_max;
 	int		y_map_max;
+	char	*img_1;
+	char	*img_2;
+	char	*img_3;
+	char	*img_4;
 }	t_info;
 
 int		main(int argc, char **argv);
@@ -276,5 +280,8 @@ void		player_movement_front(double x, double y, t_info *ptr, t_math *ma);
 void		player_movement_side(double x, double y, t_info *ptr, t_math *ma);
 int			len_db_tab(char **map);
 int			setup_color_ceiling_floor(t_info *ptr);
+int			tmp_image(t_info *ptr);
+void		print_img_simulation(t_info *ptr, int x, int j, t_math *ma);
+void 		*get_image(t_info *ptr, t_math *ma);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/30 08:53:21 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/30 10:10:49 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		init_struct(t_info *ptr, t_utils *util, t_math *ma)
 		free(ptr->win);
 		return (MLX_ERROR);
 	}
+	tmp_image(ptr);
 	// found_pos_player_minimap();
 	ptr->p_mov = 0;
 	ptr->pa = 90;
@@ -100,4 +101,22 @@ int	player_tag(t_info *ptr)
 		i++;
 	}
 	return (-1);
+}
+
+int	tmp_image(t_info *ptr)
+{
+	int		img_width;
+	int		img_height;
+
+	img_height = 32;
+	img_width = 32;
+	ptr->img_1 = mlx_xpm_file_to_image(ptr->utils->mlx,
+			"texture/colorstone.xpm", &img_width, &img_height);
+	ptr->img_2 = mlx_xpm_file_to_image(ptr->utils->mlx,
+			"texture/eagle.xpm", &img_width, &img_height);
+	ptr->img_3 = mlx_xpm_file_to_image(ptr->utils->mlx,
+			"texture/greystone.xpm", &img_width, &img_height);
+	ptr->img_4 = mlx_xpm_file_to_image(ptr->utils->mlx,
+			"texture/redbrick.xpm", &img_width, &img_height);
+	return (0);
 }

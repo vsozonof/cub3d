@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/30 08:52:44 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/30 09:48:40 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,15 +134,7 @@ void	finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j)
 	ma->draw_end = ma->line_Height / 2 + WINDOW_HEIGHT / 2;
 	if (ma->draw_end >= WINDOW_HEIGHT || ma->draw_end < 0)
 		ma->draw_end = WINDOW_HEIGHT - 1;
-	if (j < ptr->ma->draw_start)
-		while (j++ < ptr->ma->draw_start)
-			render_rect(&ptr->img, (t_rect){x, j, 1, 1, ptr->crgb});
-	if (j < ma->draw_end)
-		while (j++ < ma->draw_end)
-			img_pix_put(&ptr->img, x, j, RED_PIXEL);
-	if (j > ma->draw_end)
-		while (j++ < WINDOW_HEIGHT)
-			img_pix_put(&ptr->img, x, j, ptr->frgb);
+	print_img_simulation(ptr, x, j, ma);
 }
 
 /*
