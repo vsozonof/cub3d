@@ -6,7 +6,7 @@
 #    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 14:09:59 by vsozonof          #+#    #+#              #
-#    Updated: 2024/04/29 11:05:21 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/04/30 15:56:54 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ SRCS = main.c \
 	   graphic/map_helper.c \
 	   graphic/mlx_utils.c \
 	   graphic/raycasting.c \
-	   graphic/drawing.c \
 	   graphic/keys_hook.c \
 	   graphic/init_struct.c\
 	   graphic/img_creation.c \

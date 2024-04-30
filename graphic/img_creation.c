@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:12:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/28 12:32:43 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:01:43 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,25 @@
 
 void	img_pix_put(t_img *img, int x, int y, int color)
 {
-	char    *pixel;
+	char	*pixel;
 	int		i;
 
 	i = img->bpp - 8;
-    pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	while (i >= 0)
 	{
-		/* big endian, MSB is the leftmost bit */
 		if (img->endian != 0)
 			*pixel++ = (color >> i) & 0xFF;
-		/* little endian, LSB is the leftmost bit */
 		else
 			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
 		i -= 8;
 	}
 }
 
-/* The x and y coordinates of the rect corresponds to its upper left corner. */
-
-int render_rect(t_img *img, t_rect rect)
+int	render_rect(t_img *img, t_rect rect)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = rect.y;
 	while (i < rect.y + rect.height)
@@ -82,7 +78,7 @@ int	render(t_info *ptr)
 		return (1);
 	render_background(&ptr->img, BLACK_PIXEL);
 	render_rect(&ptr->img, (t_rect){0, 0,
-				WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});
+		WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});
 	raycasting(ptr);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
 	return (0);

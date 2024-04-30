@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/30 10:08:44 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:21:12 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ typedef struct s_info
 	t_math	*ma;
 	t_line	*line;
 	t_utils	*utils;
+	t_data	*data;
 	int		cur_img;
 	int		p_mov;
 	double	pa; // player angle

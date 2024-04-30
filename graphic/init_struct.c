@@ -6,40 +6,39 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/30 10:10:49 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:03:04 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		init_struct(t_info *ptr, t_utils *util, t_math *ma)
+int	init_struct(t_info *ptr, t_utils *util, t_math *ma)
 {
 	ptr->mlx = util->mlx;
 	if (ptr->mlx == NULL)
 		return (MLX_ERROR);
-	ptr->win = mlx_new_window(ptr->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "my window");
+	ptr->win = mlx_new_window(ptr->mlx, WINDOW_WIDTH,
+			WINDOW_HEIGHT, "my window");
 	if (ptr->win == NULL)
 	{
 		free(ptr->win);
 		return (MLX_ERROR);
 	}
 	tmp_image(ptr);
-	// found_pos_player_minimap();
 	ptr->p_mov = 0;
 	ptr->pa = 90;
 	ptr->ma = ma_init(ma, ptr);
-	// ptr->x
 	return (0);
 }
 
 t_math	*ma_init(t_math *ma, t_info *ptr)
 {
-	ma->posx = found_player_pos_x(ptr->utils->map) + 0.5; /// trouver pos joueur
+	ma->posx = found_player_pos_x(ptr->utils->map) + 0.5;
 	if (ma->posx < 0)
-		return (NULL); // faudra free
+		return (NULL);
 	ma->posy = found_player_pos_y(ptr->utils->map) + 0.5;
 	if (ma->posy < 0)
-		return (NULL); // faudra free
+		return (NULL);
 	setup_cardinal_point(ma, ptr);
 	ma->out = 0;
 	return (ma);

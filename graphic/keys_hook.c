@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 10:22:35 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/27 14:27:55 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:57:46 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ int	get_key_hook(int keycode, t_info *ptr)
 
 int	check_keycode(int keycode)
 {
-	if (keycode == 65363) // droite
+	if (keycode == 65363)
 		return (7);
-	else if (keycode == 65362) // haut
+	else if (keycode == 65362)
 		return (6);
-	else if (keycode == 65361) // gauche
+	else if (keycode == 65361)
 		return (5);
-	else if (keycode == 65364) // bas
+	else if (keycode == 65364)
 		return (8);
 	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/30 10:17:43 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:00:41 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,9 @@
 int	make_map(t_info *ptr, int i)//les position du joueur doit deprendre de sa pos de depart
 {
 	(void)i;
-	// render_background(&ptr->img, BLACK_PIXEL);
-	// render_rect(&ptr->img, (t_rect){0, 0,
-				// WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});
-	// wall_creation_map(ptr, i);
-	// player_creation_minimap(ptr);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
 	return (0);
 }
-
-/*
-int	make_map(t_info *ptr)//les position du joueur doit deprendre de sa pos de depart
-{
-	(void)ptr;
-	// int		map_w;
-	// int		map_h;
-
-	// map_w = WINDOW_WIDTH / 100 * 10;
-	render_background(&ptr->img, BLACK_PIXEL);
-	render_rect(&ptr->img, (t_rect){0, 0, // le deuxieme est la hauteur
-				WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});
-	// wall_creation_minimap(ptr);
-	// player_creation_minimap(ptr);
-	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
-	return (0);
-}
-*/
 
 int	window_creation(t_data *data, t_utils *utils)
 {
@@ -79,7 +56,8 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 		{
 			tmp = ptr->img.mlx_img;
 			// envoyer l'image concerne: suivant si je pointe vers le Nord Sud Est ou West
-			ptr->img.mlx_img = get_image(ptr, ma);
+			// il faut que je trouve comment avoir la couleur du pixel de l'image
+			// ptr->img.mlx_img = get_image(ptr, ma);
 			img_pix_put(&ptr->img, x, j, c++);
 			ptr->img.mlx_img = tmp;
 		}
