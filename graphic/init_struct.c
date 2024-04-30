@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/29 11:24:49 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/30 08:53:21 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_math	*ma_init(t_math *ma, t_info *ptr)
 	ma->posy = found_player_pos_y(ptr->utils->map) + 0.5;
 	if (ma->posy < 0)
 		return (NULL); // faudra free
-	printf("\nmes position de base x %f y %f \n", ma->posx, ma->posy);
 	setup_cardinal_point(ma, ptr);
 	ma->out = 0;
 	return (ma);
@@ -49,7 +48,6 @@ void	setup_cardinal_point(t_math *ma, t_info *ptr)
 {
 	if (player_tag(ptr) == 1)
 	{
-		printf("je suis dans le nord\n");
 		ma->dirx = 0;
 		ma->diry = -1;
 		ma->planex = 0.66;
@@ -57,7 +55,6 @@ void	setup_cardinal_point(t_math *ma, t_info *ptr)
 	}
 	else if (player_tag(ptr) == 2)
 	{
-		printf("je suis dans le sud\n");
 		ma->dirx = 0;
 		ma->diry = 1;
 		ma->planex = -0.66;
@@ -72,7 +69,6 @@ void	setup_cardinal_point(t_math *ma, t_info *ptr)
 	}
 	else if (player_tag(ptr) == 4)
 	{
-		printf("je suis dans le ouest\n");
 		ma->dirx = -1;
 		ma->diry = 0;
 		ma->planex = 0;

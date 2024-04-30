@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/29 14:28:36 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/04/30 08:52:44 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ void	raycasting(t_info *ptr)
 
 	x = 0;
 	ma = ptr->ma;
-	printf("===\n");
 	setup_color_ceiling_floor(ptr);
-	printf("===\n");
 	while (x < WINDOW_WIDTH)
 	{
 		// printf("voici x %d\n", x);
