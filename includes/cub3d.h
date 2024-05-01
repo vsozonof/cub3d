@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/30 15:21:12 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/01 13:35:24 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,30 +68,6 @@ typedef struct s_utils
 	char	**ceiling_color;
 }	t_utils;
 
-// typedef struct s_game
-// {
-// 	int		x;
-// 	int		y;
-// 	int		nb_exit;
-// 	int		nb_player;
-// 	int		p_x;
-// 	int		p_y;
-// 	int		exit_x;
-// 	int		exit_y;
-// 	int		exit;
-// 	int		p_mov;
-// 	int		mov;
-// 	void	*mlx;
-// 	void	*win;
-// 	char	**map;
-// 	char	*img_0;
-// 	char	*img_1;
-// 	char	*img_2;
-// 	char	*img_3;
-// 	char	*img_4;
-// 	char	*img_5;
-// }		t_game;
-
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -115,9 +91,9 @@ typedef struct s_math
 	double	camerax;
 	double	raydirx;
 	double	raydiry;
-	double	posx; // position player
+	double	posx; 
 	double	posy;
-	double	dirx; // where the player look
+	double	dirx;
 	double	diry;
 	double	planex;
 	double	planey;
@@ -284,5 +260,6 @@ int			setup_color_ceiling_floor(t_info *ptr);
 int			tmp_image(t_info *ptr);
 void		print_img_simulation(t_info *ptr, int x, int j, t_math *ma);
 void 		*get_image(t_info *ptr, t_math *ma);
+void		image_helper(t_info *ptr, int x, int j, t_math* ma);
 
 #endif

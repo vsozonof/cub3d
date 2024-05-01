@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/30 16:00:41 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:52:07 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 			tmp = ptr->img.mlx_img;
 			// envoyer l'image concerne: suivant si je pointe vers le Nord Sud Est ou West
 			// il faut que je trouve comment avoir la couleur du pixel de l'image
+			// parcourir l'image au meme coordonnee que ma fenetre puis recuperer
+			// mon pixel
 			// ptr->img.mlx_img = get_image(ptr, ma);
+			image_helper(ptr, x, j, ma);
 			img_pix_put(&ptr->img, x, j, c++);
 			ptr->img.mlx_img = tmp;
 		}
@@ -65,6 +68,30 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 	if (j > ma->draw_end)
 		while (j++ < WINDOW_HEIGHT)
 			img_pix_put(&ptr->img, x, j, ptr->frgb);
+}
+
+void	image_helper(t_info *ptr, int x, int j, t_math* ma)
+{
+	(void)x;
+	(void)j;
+	(void)ptr;
+	double	step;
+	double	texpos;
+	int		texy;
+	int		y;
+	int		color;
+
+	step = 1 * tex_height / ma->line_Height;
+	texpos = (ma->draw_start - WINDOW_HEIGHT / 2 + ma->line_Height / 2) * step;
+	y = ma->draw_start;
+	while (y < ma->draw_end)
+	{
+		texy = (int)texpos  + (texhight - 1);
+		texpos += step;
+		color = texture[texnum][texheight * texy + texx];
+		
+		y++;
+	}
 }
 
 void *get_image(t_info *ptr, t_math *ma)

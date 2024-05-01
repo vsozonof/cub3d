@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/30 16:03:04 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:56:13 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,18 +104,16 @@ int	player_tag(t_info *ptr)
 
 int	tmp_image(t_info *ptr)
 {
-	int		img_width;
-	int		img_height;
+	ptr->ma->tex_height;
+	ptr->ma->tex_width;
 
-	img_height = 32;
-	img_width = 32;
 	ptr->img_1 = mlx_xpm_file_to_image(ptr->utils->mlx,
-			"texture/colorstone.xpm", &img_width, &img_height);
+			"texture/colorstone.xpm", ma->tex_width, ma->tex_height);
 	ptr->img_2 = mlx_xpm_file_to_image(ptr->utils->mlx,
-			"texture/eagle.xpm", &img_width, &img_height);
+			"texture/eagle.xpm", ma->tex_width, ma->tex_height);
 	ptr->img_3 = mlx_xpm_file_to_image(ptr->utils->mlx,
-			"texture/greystone.xpm", &img_width, &img_height);
+			"texture/greystone.xpm", ma->tex_width, ma->tex_height);
 	ptr->img_4 = mlx_xpm_file_to_image(ptr->utils->mlx,
-			"texture/redbrick.xpm", &img_width, &img_height);
+			"texture/redbrick.xpm", ma->tex_width, ma->tex_height);
 	return (0);
 }
