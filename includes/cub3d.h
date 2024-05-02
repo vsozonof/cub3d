@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/01 13:35:24 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/02 12:59:40 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ typedef struct s_math
 	double	old_diry;
 	double	old_planex;
 	double	wall_x;
+	double	texpos;
+	double	wlx;
 	int		fov;
 	int		out;
 	int		mapx;
@@ -200,51 +202,31 @@ void	pr_error_spe(char *msg, int *i);
 //graphic
 
 int			render(t_info *info);
-int			exec_tmp(void);
 void		game_start(t_info *ptr);
 int			mouse_hook(t_info *ptr);
 int			get_key_hook(int keycode, t_info *ptr);
 void		close_windows_esc(t_info *ptr);
-int			essaie(t_data *data, t_info *ptr, t_utils *utils);
-
-// graphic utils
 int			found_player_type(t_utils *utils);
-int			found_player_pos(char **argv);
 int			refresh_player_pos(char **argv, t_info *ptr);
 int			found_player_pos_x(char **argv);
 int			found_player_pos_y(char **argv);
-void		initialize_game(t_info *ptr);
 void		struct_map(char **map, t_info *ptr);
-
-//mini_map
-int			minimap_manager(t_info *ptr);
-int			draw_player_minimap(t_info *ptr);
-int			draw_wall_minimap(t_info *ptr);
 void		img_pix_put(t_img *img, int x, int y, int color);
 void		render_background(t_img *img, int color);
 int			render_rect(t_img *img, t_rect rect);
 int			handle_keypress(int keysym, t_info *ptr);
 int			window_creation(t_data *data, t_utils *utils);
-int			make_minimap(t_info *ptr);
-void		player_movement(t_math *ma, int input, t_info *ptr);
 int			get_key_hook(int keycode, t_info *ptr);
 int			try_moove(t_info *ptr);
 int			init_struct(t_info *ptr, t_utils *util, t_math *ma);
-void		wall_creation_minimap(t_info *ptr);
-void		show_db_tab(char **map);
 void		found_pos_player_minimap(t_info *ptr);
 int			check_keycode(int keycode);
 void		player_pov_rotation(t_math *ma, int input);
 void		player_creation_minimap(t_info *ptr);
 void		make_ray(t_info *ptr, int fi_x, int fi_y);
-void		found_case_ray(int bgx, int bgy, int fix, int fiy);
 void		raycasting(t_info *ptr);
 int			make_map(t_info *ptr, int i);
 void		digital_differential_analyser(t_math *ma, t_info *ptr);
-t_math		*ma_init(t_math *ma, t_info *ptr);
-void		player_movement_minimap(t_math *ma, int input, t_info *ptr);
-void		wall_creation_map(t_info *ptr, int i);
-void		make_cf(t_info *ptr);
 void		player_movement_map(t_math *ma, int input, t_info *ptr);
 void		delta_distance_calculation(t_math *ma, int x);
 void		ray_calculation(t_math *ma);
@@ -261,5 +243,7 @@ int			tmp_image(t_info *ptr);
 void		print_img_simulation(t_info *ptr, int x, int j, t_math *ma);
 void 		*get_image(t_info *ptr, t_math *ma);
 void		image_helper(t_info *ptr, int x, int j, t_math* ma);
+static int	texx(t_info *ptr, int texx, int texn);
+void		verify_texture(t_info *ptr, int texn, int y, int x);
 
 #endif

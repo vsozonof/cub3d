@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/01 14:52:07 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/02 14:33:31 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,3 +107,77 @@ void *get_image(t_info *ptr, t_math *ma)
 	// printf("voici une texture %s\n", ptr->img_1);
 	return (NULL);
 }
+
+static	int	texx(t_info *ptr, int texx, int texn)
+{
+	if (ptr->ma->side == 0 && ptr->ma->raydirx < 0)
+		texx = WINDOW_WIDTH - texx - 1;
+	if (ptr->ma->side == 0 && ptr->ma->raydirx >= 0)
+		texx = texx - WINDOW_WIDTH - 1;
+	if (ptr->ma->side == 1 && ptr->ma->raydiry >= 0)
+		texx = WINDOW_WIDTH - texx - 1;
+	return (texx);
+}
+
+void	verify_texture(t_info *ptr, int texn, int y, int x)
+{
+	int			texx;
+	int			texy;
+	double		step;
+
+	if (ptr->ma->side == 0)
+		ptr->ma->wlx = ptr->ma->posy + ptr->ma->perpwalldist * ptr->ma->raydiry;
+	else
+		ptr->ma->wlx = ptr->ma->posx + ptr->ma->perpwalldist * ptr->ma->raydirx;
+	ptr->ma->wlx -= floor((ptr->ma->wlx));
+	step = 1.0 * WINDOW_HEIGHT / ptr->ma->line_Height;
+	texx = (int)(ptr->ma->wlx * (double)WINDOW_WIDTH);
+	texx = ft_texx(ptr, texx, texn);
+	ptr->ma->texpos = (ptr->ma->draw_start - WINDOW_HEIGHT / 2 + ptr->ma->line_Height / 2)
+		 * step;
+	while (++y <= ptr->ma->draw_end)
+	{
+		texy = (int)ptr->ma->texpos & (WINDOW_HEIGHT - 1);
+		ptr->ma->texpos += step;
+		if (y < (WINDOW_HEIGHT - 1) && ptr->ma->raydirx < (WINDOW_WIDTH - 1))
+			ptr->img.addr[y * ptr->img.line_len / 4 + x] = \
+				ptr->wall[texn].addr[texy * ptr->img.line_len / 4 + texx];
+	}
+}
+
+// static    int    ft_texx(t_vars *vars, int texx, int texn)
+// {
+//     if (vars->ray.side == 0 && vars->ray.raydirx < 0)
+//         texx = vars->wall[texn].w - texx - 1;
+//     if (vars->ray.side == 0 && vars->ray.raydirx >= 0)
+//         texx = texx - vars->wall[texn].w - 1;
+//     if (vars->ray.side == 1 && vars->ray.raydiry >= 0)
+//         texx = vars->wall[texn].w - texx - 1;
+//     return (texx);
+// }
+
+// void    ft_test_texture(t_vars *vars, int texn, int y)
+// {
+//     int        texx;
+//     int        texy;
+//     double    step;
+
+//     if (vars->ray.side == 0)
+//         vars->wlx = vars->ray.posy + vars->ray.perpwalldist * vars->ray.raydiry;
+//     else
+//         vars->wlx = vars->ray.posx + vars->ray.perpwalldist * vars->ray.raydirx;
+//     vars->wlx -= floor((vars->wlx));
+//     step = 1.0 * vars->wall[0].h / vars->ray.lineheight;
+//     texx = (int)(vars->wlx * (double)vars->wall[texn].w);
+//     texx = ft_texx(vars, texx, texn);
+//     vars->texpos = \
+//     (vars->ray.drawstart - vars->sizey / 2 + vars->ray.lineheight / 2) * step;
+//     while (++y <= vars->ray.drawend)
+//     {
+//         texy = (int)vars->texpos & (vars->wall[texn].h - 1);
+//         vars->texpos += step;
+//         if (y < (vars->sizey - 1) && vars->ray.x < (vars->sizex - 1))
+//             vars->img.addr[y * vars->img.llen / 4 + vars->ray.x] = \
+//             vars->wall[texn].addr[texy * vars->wall[texn].llen / 4 + texx];
+//     }
+// }
