@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/02 14:33:31 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:22:58 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,18 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 {
 	int		c;
 	void	*tmp;
+	int		*test;
 
 	c = 0;
+	printf("voici endian %d\n", &ptr->img.endian);
+	printf("voici line_len %d\n", &ptr->img.line_len);
+	printf("voici bpp %d\n", &ptr->img.bpp);
+	test = (int *)mlx_get_data_addr(ptr->img_1, &ptr->img.bpp, &ptr->img.line_len, &ptr->img.endian);
+	while (test[c])
+	{
+		printf("voici la valeur de tmp %d\n", test[c]);
+		c++;
+	}
 	if (j < ptr->ma->draw_start)
 		while (j++ < ptr->ma->draw_start)
 			render_rect(&ptr->img, (t_rect){x, j, 1, 1, ptr->crgb});
@@ -60,7 +70,7 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 			// parcourir l'image au meme coordonnee que ma fenetre puis recuperer
 			// mon pixel
 			// ptr->img.mlx_img = get_image(ptr, ma);
-			image_helper(ptr, x, j, ma);
+			// verify_texture(ptr, 0, j, x);
 			img_pix_put(&ptr->img, x, j, c++);
 			ptr->img.mlx_img = tmp;
 		}
@@ -70,29 +80,28 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 			img_pix_put(&ptr->img, x, j, ptr->frgb);
 }
 
-void	image_helper(t_info *ptr, int x, int j, t_math* ma)
-{
-	(void)x;
-	(void)j;
-	(void)ptr;
-	double	step;
-	double	texpos;
-	int		texy;
-	int		y;
-	int		color;
+// void	image_helper(t_info *ptr, int x, int j, t_math* ma)
+// {
+// 	(void)x;
+// 	(void)j;
+// 	(void)ptr;
+// 	double	step;
+// 	double	texpos;
+// 	int		texy;
+// 	int		y;
+// 	int		color;
 
-	step = 1 * tex_height / ma->line_Height;
-	texpos = (ma->draw_start - WINDOW_HEIGHT / 2 + ma->line_Height / 2) * step;
-	y = ma->draw_start;
-	while (y < ma->draw_end)
-	{
-		texy = (int)texpos  + (texhight - 1);
-		texpos += step;
-		color = texture[texnum][texheight * texy + texx];
-		
-		y++;
-	}
-}
+// 	step = 1 * tex_height / ma->line_Height;
+// 	texpos = (ma->draw_start - WINDOW_HEIGHT / 2 + ma->line_Height / 2) * step;
+// 	y = ma->draw_start;
+// 	while (y < ma->draw_end)
+// 	{
+// 		texy = (int)texpos  + (texhight - 1);
+// 		texpos += step;
+// 		color = texture[texnum][texheight * texy + texx];
+// 		y++;
+// 	}
+// }
 
 void *get_image(t_info *ptr, t_math *ma)
 {
@@ -108,42 +117,48 @@ void *get_image(t_info *ptr, t_math *ma)
 	return (NULL);
 }
 
-static	int	texx(t_info *ptr, int texx, int texn)
-{
-	if (ptr->ma->side == 0 && ptr->ma->raydirx < 0)
-		texx = WINDOW_WIDTH - texx - 1;
-	if (ptr->ma->side == 0 && ptr->ma->raydirx >= 0)
-		texx = texx - WINDOW_WIDTH - 1;
-	if (ptr->ma->side == 1 && ptr->ma->raydiry >= 0)
-		texx = WINDOW_WIDTH - texx - 1;
-	return (texx);
-}
+// texn est utile pour savoir a quel texture j'ai a faire
+// recup la taille de mon image
+//utiliser token pour savoir de quel image on parle
 
-void	verify_texture(t_info *ptr, int texn, int y, int x)
-{
-	int			texx;
-	int			texy;
-	double		step;
+// static	int	ft_texx(t_info *ptr, int texx, int texn, char *texture)
+// {
+// 	int		tmp;
 
-	if (ptr->ma->side == 0)
-		ptr->ma->wlx = ptr->ma->posy + ptr->ma->perpwalldist * ptr->ma->raydiry;
-	else
-		ptr->ma->wlx = ptr->ma->posx + ptr->ma->perpwalldist * ptr->ma->raydirx;
-	ptr->ma->wlx -= floor((ptr->ma->wlx));
-	step = 1.0 * WINDOW_HEIGHT / ptr->ma->line_Height;
-	texx = (int)(ptr->ma->wlx * (double)WINDOW_WIDTH);
-	texx = ft_texx(ptr, texx, texn);
-	ptr->ma->texpos = (ptr->ma->draw_start - WINDOW_HEIGHT / 2 + ptr->ma->line_Height / 2)
-		 * step;
-	while (++y <= ptr->ma->draw_end)
-	{
-		texy = (int)ptr->ma->texpos & (WINDOW_HEIGHT - 1);
-		ptr->ma->texpos += step;
-		if (y < (WINDOW_HEIGHT - 1) && ptr->ma->raydirx < (WINDOW_WIDTH - 1))
-			ptr->img.addr[y * ptr->img.line_len / 4 + x] = \
-				ptr->wall[texn].addr[texy * ptr->img.line_len / 4 + texx];
-	}
-}
+// 	if (ptr->ma->side == 0 && ptr->ma->raydirx < 0)
+// 		texx = ptr->tex[texn].w - texx - 1;
+// 	if (ptr->ma->side == 0 && ptr->ma->raydirx >= 0)
+// 		texx = texx - ptr->tex[texn].w - 1;
+// 	if (ptr->ma->side == 1 && ptr->ma->raydiry >= 0)
+// 		texx = ptr->tex[texn].w - texx - 1;
+//     return (texx);
+// }
+
+// void	verify_texture(t_info *ptr, int texn, int y, int x)
+// {
+// 	int			texx;
+// 	int			texy;
+// 	double		step;
+
+// 	if (ptr->ma->side == 0)
+// 		ptr->ma->wlx = ptr->ma->posy + ptr->ma->perpwalldist * ptr->ma->raydiry;
+// 	else
+// 		ptr->ma->wlx = ptr->ma->posx + ptr->ma->perpwalldist * ptr->ma->raydirx;
+// 	ptr->ma->wlx -= floor((ptr->ma->wlx));
+// 	step = 1.0 * WINDOW_HEIGHT / ptr->ma->line_Height;
+// 	texx = (int)(ptr->ma->wlx * (double)WINDOW_WIDTH);
+// 	texx = ft_texx(ptr, texx, texn);
+// 	ptr->ma->texpos = (ptr->ma->draw_start - WINDOW_HEIGHT / 2 + ptr->ma->line_Height / 2)
+// 		 * step;
+// 	while (++y <= ptr->ma->draw_end)
+// 	{
+// 		texy = (int)ptr->ma->texpos & (WINDOW_HEIGHT - 1);
+// 		ptr->ma->texpos += step;
+// 		if (y < (WINDOW_HEIGHT - 1) && ptr->ma->raydirx < (WINDOW_WIDTH - 1))
+// 			ptr->img.addr[y * ptr->img.line_len / 4 + x] = \
+// 				ptr->data->north_texture[texy * ptr->img.line_len / 4 + texx];
+// 	}
+// }
 
 // static    int    ft_texx(t_vars *vars, int texx, int texn)
 // {

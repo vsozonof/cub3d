@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/02 12:59:40 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:03:59 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,14 @@ typedef struct s_line
 	int		tex_y;
 }	t_line;
 
+typedef struct s_texture
+{
+	char	**texture;
+	int		**fd;
+	int		w;
+	int		h;
+}	t_text;
+
 typedef struct s_info
 {
     void	*mlx;
@@ -140,9 +148,10 @@ typedef struct s_info
 	t_line	*line;
 	t_utils	*utils;
 	t_data	*data;
+	t_text	*tex;
 	int		cur_img;
 	int		p_mov;
-	double	pa; // player angle
+	double	pa;
 	int		w_size;
 	int		fov;
 	int		frgb;
@@ -150,6 +159,7 @@ typedef struct s_info
 	int		mapS;
 	int		x_map_max;
 	int		y_map_max;
+	int		token;
 	char	*img_1;
 	char	*img_2;
 	char	*img_3;
@@ -243,7 +253,10 @@ int			tmp_image(t_info *ptr);
 void		print_img_simulation(t_info *ptr, int x, int j, t_math *ma);
 void 		*get_image(t_info *ptr, t_math *ma);
 void		image_helper(t_info *ptr, int x, int j, t_math* ma);
-static int	texx(t_info *ptr, int texx, int texn);
+// static int	ft_texx(t_info *ptr, int texx, int texn)
 void		verify_texture(t_info *ptr, int texn, int y, int x);
+int			get_size_tex(t_info *ptr);
+void		init_tex(t_text *tex, t_info *ptr);
+t_math		*ma_init(t_math *ma, t_info *ptr);
 
 #endif

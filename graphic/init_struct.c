@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/01 14:56:13 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:04:26 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	init_struct(t_info *ptr, t_utils *util, t_math *ma)
 		free(ptr->win);
 		return (MLX_ERROR);
 	}
-	tmp_image(ptr);
+	// tmp_image(ptr);
 	ptr->p_mov = 0;
 	ptr->pa = 90;
 	ptr->ma = ma_init(ma, ptr);
@@ -102,18 +102,18 @@ int	player_tag(t_info *ptr)
 	return (-1);
 }
 
-int	tmp_image(t_info *ptr)
-{
-	ptr->ma->tex_height;
-	ptr->ma->tex_width;
+// int	tmp_image(t_info *ptr)
+// {
+// 	ptr->ma->tex_height;
+// 	ptr->ma->tex_width;
 
-	ptr->img_1 = mlx_xpm_file_to_image(ptr->utils->mlx,
-			"texture/colorstone.xpm", ma->tex_width, ma->tex_height);
-	ptr->img_2 = mlx_xpm_file_to_image(ptr->utils->mlx,
-			"texture/eagle.xpm", ma->tex_width, ma->tex_height);
-	ptr->img_3 = mlx_xpm_file_to_image(ptr->utils->mlx,
-			"texture/greystone.xpm", ma->tex_width, ma->tex_height);
-	ptr->img_4 = mlx_xpm_file_to_image(ptr->utils->mlx,
-			"texture/redbrick.xpm", ma->tex_width, ma->tex_height);
-	return (0);
-}
+// 	ptr->img_1 = mlx_xpm_file_to_image(ptr->utils->mlx,
+// 			"texture/colorstone.xpm", ma->tex_width, ma->tex_height);
+// 	ptr->img_2 = mlx_xpm_file_to_image(ptr->utils->mlx,
+// 			"texture/eagle.xpm", ma->tex_width, ma->tex_height);
+// 	ptr->img_3 = mlx_xpm_file_to_image(ptr->utils->mlx,
+// 			"texture/greystone.xpm", ma->tex_width, ma->tex_height);
+// 	ptr->img_4 = mlx_xpm_file_to_image(ptr->utils->mlx,
+// 			"texture/redbrick.xpm", ma->tex_width, ma->tex_height);
+// 	return (0);
+// }
