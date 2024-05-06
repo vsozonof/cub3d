@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/03 14:22:58 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/06 14:21:43 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,20 @@ int	window_creation(t_data *data, t_utils *utils)
 {
 	t_info	ptr;
 	t_math	ma;
+	int		i;
 	(void)data;
 
+	i = 0;
 	ptr.utils = utils;
 	if (init_struct(&ptr, utils, &ma) == 1)
 		return (1);
 	ptr.img.mlx_img = mlx_new_image(ptr.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	while (i < 3)
+	{
+		if (init_wall(&ptr, i) == -1)
+			exit (1);// penser a free
+		i++;
+	}
 	ptr.img.addr = mlx_get_data_addr(ptr.img.mlx_img, &ptr.img.bpp,
 			&ptr.img.line_len, &ptr.img.endian);
 	mlx_loop_hook(ptr.mlx, &render, &ptr);
@@ -45,18 +53,11 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 {
 	int		c;
 	void	*tmp;
-	int		*test;
 
 	c = 0;
-	printf("voici endian %d\n", &ptr->img.endian);
-	printf("voici line_len %d\n", &ptr->img.line_len);
-	printf("voici bpp %d\n", &ptr->img.bpp);
-	test = (int *)mlx_get_data_addr(ptr->img_1, &ptr->img.bpp, &ptr->img.line_len, &ptr->img.endian);
-	while (test[c])
-	{
-		printf("voici la valeur de tmp %d\n", test[c]);
-		c++;
-	}
+	// printf("voici endian %d\n", ptr->img.endian);
+	// printf("voici line_len %d\n", ptr->img.line_len);
+	// printf("voici bpp %d\n", ptr->img.bpp);
 	if (j < ptr->ma->draw_start)
 		while (j++ < ptr->ma->draw_start)
 			render_rect(&ptr->img, (t_rect){x, j, 1, 1, ptr->crgb});
@@ -70,7 +71,7 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 			// parcourir l'image au meme coordonnee que ma fenetre puis recuperer
 			// mon pixel
 			// ptr->img.mlx_img = get_image(ptr, ma);
-			// verify_texture(ptr, 0, j, x);
+			// verify_texture(ptr, 1, j, x);
 			img_pix_put(&ptr->img, x, j, c++);
 			ptr->img.mlx_img = tmp;
 		}
@@ -103,28 +104,26 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 // 	}
 // }
 
-void *get_image(t_info *ptr, t_math *ma)
-{
-	if (ma->raydirx == 1 && ma->side == 0)
-		return (ptr->img_1); // Est
-	else if (ma->raydiry == -1 && ma->side == 0)
-		return (ptr->img_2); // West
-	else if (ma->raydiry == 1 && ma->side == 1)
-		return (ptr->img_3); // North
-	else if (ma->raydiry == -1 && ma->side == 0)
-		return (ptr->img_4); // South
-	// printf("voici une texture %s\n", ptr->img_1);
-	return (NULL);
-}
+// void *get_image(t_info *ptr, t_math *ma)
+// {
+// 	if (ma->raydirx == 1 && ma->side == 0)
+// 		return (ptr->img_1); // Est
+// 	else if (ma->raydiry == -1 && ma->side == 0)
+// 		return (ptr->img_2); // West
+// 	else if (ma->raydiry == 1 && ma->side == 1)
+// 		return (ptr->img_3); // North
+// 	else if (ma->raydiry == -1 && ma->side == 0)
+// 		return (ptr->img_4); // South
+// 	// printf("voici une texture %s\n", ptr->img_1);
+// 	return (NULL);
+// }
 
 // texn est utile pour savoir a quel texture j'ai a faire
 // recup la taille de mon image
 //utiliser token pour savoir de quel image on parle
 
-// static	int	ft_texx(t_info *ptr, int texx, int texn, char *texture)
+// static	int	ft_texx(t_info *ptr, int texx, int texn)
 // {
-// 	int		tmp;
-
 // 	if (ptr->ma->side == 0 && ptr->ma->raydirx < 0)
 // 		texx = ptr->tex[texn].w - texx - 1;
 // 	if (ptr->ma->side == 0 && ptr->ma->raydirx >= 0)
@@ -168,7 +167,12 @@ void *get_image(t_info *ptr, t_math *ma)
 //         texx = texx - vars->wall[texn].w - 1;
 //     if (vars->ray.side == 1 && vars->ray.raydiry >= 0)
 //         texx = vars->wall[texn].w - texx - 1;
-//     return (texx);
+	// wall.addr =
+        // (int *)mlx_get_data_addr(wall.img, &wall.bpp, &wall.llen, &wall.endian);
+    // if (wall.h != 64 || wall.w != 64)
+        // ft_free_mlx(0, vars);
+    // vars->wall[i] = wall;
+    // return (texx);
 // }
 
 // void    ft_test_texture(t_vars *vars, int texn, int y)

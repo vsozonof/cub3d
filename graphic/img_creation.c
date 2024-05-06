@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:12:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/30 16:01:43 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/06 10:23:02 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,18 @@ int	render(t_info *ptr)
 {
 	if (ptr->win == NULL)
 		return (1);
+	// ptr->tex[1].img = mlx_new_image(ptr->mlx, 64, 64);
+	// printf("voici endian %d\n", ptr->tex[1].endian);
+	// printf("voici line_len %d\n", ptr->tex[1].line_len);
+	// printf("voici bpp %d\n", ptr->tex[1].bpp);
+	// ptr->tex[1].addr = (int *)mlx_get_data_addr(ptr->utils->north, &ptr->tex[1].bpp,
+	// 		&ptr->tex[1].line_len, &ptr->tex[1].endian);
+	// ptr->tex[2].texture = mlx_new_image(ptr->mlx, 64, 64);
+	// ptr->tex[3].texture = mlx_new_image(ptr->mlx, 64, 64);
+	// ptr->tex[4].texture = mlx_new_image(ptr->mlx, 64, 64);
+	// ptr->tex[2].addr = (int *)mlx_get_data_addr(ptr->utils->north, &ptr->tex[2].bpp, &ptr->tex[2].line_len, &ptr->tex[2].endian);
+	// ptr->tex[3].addr = (int *)mlx_get_data_addr(ptr->utils->north, &ptr->tex[3].bpp, &ptr->tex[3].line_len, &ptr->tex[3].endian);
+	// ptr->tex[4].addr = (int *)mlx_get_data_addr(ptr->utils->north, &ptr->tex[4].bpp, &ptr->tex[4].line_len, &ptr->tex[4].endian);
 	render_background(&ptr->img, BLACK_PIXEL);
 	render_rect(&ptr->img, (t_rect){0, 0,
 		WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});

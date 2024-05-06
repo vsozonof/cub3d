@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/03 14:03:59 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/06 13:21:33 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,13 @@ typedef struct s_line
 
 typedef struct s_texture
 {
-	char	**texture;
+	char	*texture;
+	void	*img;
 	int		**fd;
+	int		*addr;
+	int		endian;
+	int		line_len;
+	int		bpp;
 	int		w;
 	int		h;
 }	t_text;
@@ -160,10 +165,6 @@ typedef struct s_info
 	int		x_map_max;
 	int		y_map_max;
 	int		token;
-	char	*img_1;
-	char	*img_2;
-	char	*img_3;
-	char	*img_4;
 }	t_info;
 
 int		main(int argc, char **argv);
@@ -258,5 +259,6 @@ void		verify_texture(t_info *ptr, int texn, int y, int x);
 int			get_size_tex(t_info *ptr);
 void		init_tex(t_text *tex, t_info *ptr);
 t_math		*ma_init(t_math *ma, t_info *ptr);
+int			init_wall(t_info *ptr, int i);
 
 #endif

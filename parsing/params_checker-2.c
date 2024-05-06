@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 18:09:18 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/04/30 11:29:15 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/06 13:34:58 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	are_textures_valid(t_data *data, t_utils *utils)
 	int	img_height;
 
 	pr_msg(CHECK_TEXTUR, 0);
+	img_width = 64;
+	img_height = 64;
 	utils->north = mlx_xpm_file_to_image(utils->mlx, data->north_texture,
 			&img_width, &img_height);
 	utils->south = mlx_xpm_file_to_image(utils->mlx, data->south_texture,
