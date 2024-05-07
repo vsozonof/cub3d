@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/06 14:21:43 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/07 09:19:32 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ int	window_creation(t_data *data, t_utils *utils)
 	if (init_struct(&ptr, utils, &ma) == 1)
 		return (1);
 	ptr.img.mlx_img = mlx_new_image(ptr.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	ptr.tex = malloc(sizeof(t_text) * 4);
+	if (!ptr.tex)
+	{
+		printf("error\n");
+		exit(1);
+	}
 	while (i < 3)
 	{
 		if (init_wall(&ptr, i) == -1)
@@ -71,7 +77,7 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 			// parcourir l'image au meme coordonnee que ma fenetre puis recuperer
 			// mon pixel
 			// ptr->img.mlx_img = get_image(ptr, ma);
-			// verify_texture(ptr, 1, j, x);
+			verify_texture(ptr, 1, j, x);
 			img_pix_put(&ptr->img, x, j, c++);
 			ptr->img.mlx_img = tmp;
 		}
@@ -122,42 +128,42 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 // recup la taille de mon image
 //utiliser token pour savoir de quel image on parle
 
-// static	int	ft_texx(t_info *ptr, int texx, int texn)
-// {
-// 	if (ptr->ma->side == 0 && ptr->ma->raydirx < 0)
-// 		texx = ptr->tex[texn].w - texx - 1;
-// 	if (ptr->ma->side == 0 && ptr->ma->raydirx >= 0)
-// 		texx = texx - ptr->tex[texn].w - 1;
-// 	if (ptr->ma->side == 1 && ptr->ma->raydiry >= 0)
-// 		texx = ptr->tex[texn].w - texx - 1;
-//     return (texx);
-// }
+static	int	ft_texx(t_info *ptr, int texx, int texn)
+{
+	if (ptr->ma->side == 0 && ptr->ma->raydirx < 0)
+		texx = ptr->tex[texn].w - texx - 1;
+	if (ptr->ma->side == 0 && ptr->ma->raydirx >= 0)
+		texx = texx - ptr->tex[texn].w - 1;
+	if (ptr->ma->side == 1 && ptr->ma->raydiry >= 0)
+		texx = ptr->tex[texn].w - texx - 1;
+    return (texx);
+}
 
-// void	verify_texture(t_info *ptr, int texn, int y, int x)
-// {
-// 	int			texx;
-// 	int			texy;
-// 	double		step;
+void	verify_texture(t_info *ptr, int texn, int y, int x)
+{
+	int			texx;
+	int			texy;
+	double		step;
 
-// 	if (ptr->ma->side == 0)
-// 		ptr->ma->wlx = ptr->ma->posy + ptr->ma->perpwalldist * ptr->ma->raydiry;
-// 	else
-// 		ptr->ma->wlx = ptr->ma->posx + ptr->ma->perpwalldist * ptr->ma->raydirx;
-// 	ptr->ma->wlx -= floor((ptr->ma->wlx));
-// 	step = 1.0 * WINDOW_HEIGHT / ptr->ma->line_Height;
-// 	texx = (int)(ptr->ma->wlx * (double)WINDOW_WIDTH);
-// 	texx = ft_texx(ptr, texx, texn);
-// 	ptr->ma->texpos = (ptr->ma->draw_start - WINDOW_HEIGHT / 2 + ptr->ma->line_Height / 2)
-// 		 * step;
-// 	while (++y <= ptr->ma->draw_end)
-// 	{
-// 		texy = (int)ptr->ma->texpos & (WINDOW_HEIGHT - 1);
-// 		ptr->ma->texpos += step;
-// 		if (y < (WINDOW_HEIGHT - 1) && ptr->ma->raydirx < (WINDOW_WIDTH - 1))
-// 			ptr->img.addr[y * ptr->img.line_len / 4 + x] = \
-// 				ptr->data->north_texture[texy * ptr->img.line_len / 4 + texx];
-// 	}
-// }
+	if (ptr->ma->side == 0)
+		ptr->ma->wlx = ptr->ma->posy + ptr->ma->perpwalldist * ptr->ma->raydiry;
+	else
+		ptr->ma->wlx = ptr->ma->posx + ptr->ma->perpwalldist * ptr->ma->raydirx;
+	ptr->ma->wlx -= floor((ptr->ma->wlx));
+	step = 1.0 * WINDOW_HEIGHT / ptr->ma->line_Height;
+	texx = (int)(ptr->ma->wlx * (double)WINDOW_WIDTH);
+	texx = ft_texx(ptr, texx, texn);
+	ptr->ma->texpos = (ptr->ma->draw_start - WINDOW_HEIGHT / 2 + ptr->ma->line_Height / 2)
+		 * step;
+	while (++y <= ptr->ma->draw_end)
+	{
+		texy = (int)ptr->ma->texpos & (WINDOW_HEIGHT - 1);
+		ptr->ma->texpos += step;
+		if (y < (WINDOW_HEIGHT - 1) && ptr->ma->raydirx < (WINDOW_WIDTH - 1))
+			ptr->img.addr[y * ptr->img.line_len / 4 + x] = \
+				ptr->data->north_texture[texy * ptr->img.line_len / 4 + texx];
+	}
+}
 
 // static    int    ft_texx(t_vars *vars, int texx, int texn)
 // {
@@ -167,7 +173,7 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 //         texx = texx - vars->wall[texn].w - 1;
 //     if (vars->ray.side == 1 && vars->ray.raydiry >= 0)
 //         texx = vars->wall[texn].w - texx - 1;
-	// wall.addr =
+	// wall.addr = \
         // (int *)mlx_get_data_addr(wall.img, &wall.bpp, &wall.llen, &wall.endian);
     // if (wall.h != 64 || wall.w != 64)
         // ft_free_mlx(0, vars);
