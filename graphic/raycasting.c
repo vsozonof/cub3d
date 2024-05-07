@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/30 16:00:01 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/07 11:15:02 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	ray_calculation(t_math *ma)
 
 void	digital_differential_analyser(t_math *ma, t_info *ptr)
 {
-	int 	i;
-	int 	j;
+	int		i;
+	int		j;
 
 	while (ma->hit == 0)
 	{

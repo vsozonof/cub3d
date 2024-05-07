@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/07 10:31:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:02:35 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,7 @@ int	window_creation(t_data *data, t_utils *utils)
 	if (init_struct(&ptr, utils, &ma) == 1)
 		return (1);
 	ptr.img.mlx_img = mlx_new_image(ptr.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	while (i < 3)
-	{
-		ptr.tex[i].addr = (int *)mlx_get_data_addr(ptr.utils->north, &ptr.tex[i].bpp,
-			&ptr.tex[i].line_len, &ptr.tex[i].endian);
-		i++;
-	}
+	ptr = initialize_tex(ptr);
 	ptr.img.addr = mlx_get_data_addr(ptr.img.mlx_img, &ptr.img.bpp,
 			&ptr.img.line_len, &ptr.img.endian);
 	mlx_loop_hook(ptr.mlx, &render, &ptr);
@@ -52,30 +47,20 @@ int	window_creation(t_data *data, t_utils *utils)
 void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 {
 	int		c;
-	void	*tmp;
 
 	c = 0;
-	// printf("voici endian %d\n", ptr->img.endian);
-	// printf("voici line_len %d\n", ptr->img.line_len);
-	// printf("voici bpp %d\n", ptr->img.bpp);
+	// printf("\n===voici mon x %d et mon debut j %d\n", x, j);
+	// printf("voici mon draw start %d\n", ma->draw_start);
 	if (j < ptr->ma->draw_start)
 		while (j++ < ptr->ma->draw_start)
 			render_rect(&ptr->img, (t_rect){x, j, 1, 1, ptr->crgb});
+	// printf("voici mon j avant mur %d\n", j);
+	// printf("voici mon draw end %d\n", ma->draw_end);
 	if (j < ma->draw_end)
 	{
-		while (j++ < ma->draw_end)
-		{
-			tmp = ptr->img.mlx_img;
-			// envoyer l'image concerne: suivant si je pointe vers le Nord Sud Est ou West
-			// il faut que je trouve comment avoir la couleur du pixel de l'image
-			// parcourir l'image au meme coordonnee que ma fenetre puis recuperer
-			// mon pixel
-			// ptr->img.mlx_img = get_image(ptr, ma);
-			verify_texture(ptr, 1, j, x);
-			img_pix_put(&ptr->img, x, j, c++);
-			ptr->img.mlx_img = tmp;
-		}
+		j = verify_texture(ptr, 0, j, x);
 	}
+	// printf("voici mon fin j %d\n", j);
 	if (j > ma->draw_end)
 		while (j++ < WINDOW_HEIGHT)
 			img_pix_put(&ptr->img, x, j, ptr->frgb);
@@ -133,7 +118,7 @@ static	int	ft_texx(t_info *ptr, int texx, int texn)
     return (texx);
 }
 
-void	verify_texture(t_info *ptr, int texn, int y, int x)
+int	verify_texture(t_info *ptr, int texn, int y, int x)
 {
 	int			texx;
 	int			texy;
@@ -151,6 +136,7 @@ void	verify_texture(t_info *ptr, int texn, int y, int x)
 		 * step;
 	while (y <= ptr->ma->draw_end)
 	{
+		// printf("voici mon ptr %d\n", ptr->tex[texn].addr[texy * ptr->tex[texn].line_len / 4 + texx]);
 		texy = (int)ptr->ma->texpos & (ptr->tex[texn].h - 1);
 		ptr->ma->texpos += step;
 		if (y < (WINDOW_HEIGHT - 1) && ptr->ma->raydirx < (WINDOW_WIDTH - 1))
@@ -158,6 +144,7 @@ void	verify_texture(t_info *ptr, int texn, int y, int x)
 				ptr->tex[texn].addr[texy * ptr->tex[texn].line_len / 4 + texx];
 		y++;
 	}
+	return (y);
 }
 
 // static    int    ft_texx(t_vars *vars, int texx, int texn)
@@ -201,3 +188,37 @@ void	verify_texture(t_info *ptr, int texn, int y, int x)
 //             vars->wall[texn].addr[texy * vars->wall[texn].llen / 4 + texx];
 //     }
 // }
+
+/*
+void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
+{
+	int		c;
+	void	*tmp;
+
+	c = 0;
+	// printf("voici endian %d\n", ptr->img.endian);
+	// printf("voici line_len %d\n", ptr->img.line_len);
+	// printf("voici bpp %d\n", ptr->img.bpp);
+	if (j < ptr->ma->draw_start)
+		while (j++ < ptr->ma->draw_start)
+			render_rect(&ptr->img, (t_rect){x, j, 1, 1, ptr->crgb});
+	if (j < ma->draw_end)
+	{
+		while (j++ < ma->draw_end)
+		{
+			tmp = ptr->img.mlx_img;
+			// envoyer l'image concerne: suivant si je pointe vers le Nord Sud Est ou West
+			// il faut que je trouve comment avoir la couleur du pixel de l'image
+			// parcourir l'image au meme coordonnee que ma fenetre puis recuperer
+			// mon pixel
+			// ptr->img.mlx_img = get_image(ptr, ma);
+			j = verify_texture(ptr, 1, j, x);
+			// img_pix_put(&ptr->img, x, j, c++);
+			ptr->img.mlx_img = tmp;
+		}
+	}
+	if (j > ma->draw_end)
+		while (j++ < WINDOW_HEIGHT)
+			img_pix_put(&ptr->img, x, j, ptr->frgb);
+}
+*/

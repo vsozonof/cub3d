@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/07 09:47:18 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:08:00 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ typedef struct s_texture
 	void	*img;
 	int		**fd;
 	int		*addr;
+	void	*save;
 	int		endian;
 	int		line_len;
 	int		bpp;
@@ -255,9 +256,9 @@ void		print_img_simulation(t_info *ptr, int x, int j, t_math *ma);
 void 		*get_image(t_info *ptr, t_math *ma);
 void		image_helper(t_info *ptr, int x, int j, t_math* ma);
 // static int	ft_texx(t_info *ptr, int texx, int texn)
-void		verify_texture(t_info *ptr, int texn, int y, int x);
+int			verify_texture(t_info *ptr, int texn, int y, int x);
 int			get_size_tex(t_info *ptr);
 void		init_tex(t_text *tex, t_info *ptr);
 t_math		*ma_init(t_math *ma, t_info *ptr);
-
+t_info		initialize_tex(t_info ptr);
 #endif
