@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/07 09:14:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/07 09:47:18 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # include <string.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
-# include "math.h"
+# include <math.h>
 
 typedef struct s_data
 {
@@ -153,7 +153,7 @@ typedef struct s_info
 	t_line	*line;
 	t_utils	*utils;
 	t_data	*data;
-	t_text	*tex;
+	t_text	tex[4];
 	int		cur_img;
 	int		p_mov;
 	double	pa;
@@ -259,6 +259,5 @@ void		verify_texture(t_info *ptr, int texn, int y, int x);
 int			get_size_tex(t_info *ptr);
 void		init_tex(t_text *tex, t_info *ptr);
 t_math		*ma_init(t_math *ma, t_info *ptr);
-int			init_wall(t_info *ptr, int i);
 
 #endif

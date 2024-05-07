@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/07 09:19:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/07 10:31:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,10 @@ int	window_creation(t_data *data, t_utils *utils)
 	if (init_struct(&ptr, utils, &ma) == 1)
 		return (1);
 	ptr.img.mlx_img = mlx_new_image(ptr.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	ptr.tex = malloc(sizeof(t_text) * 4);
-	if (!ptr.tex)
-	{
-		printf("error\n");
-		exit(1);
-	}
 	while (i < 3)
 	{
-		if (init_wall(&ptr, i) == -1)
-			exit (1);// penser a free
+		ptr.tex[i].addr = (int *)mlx_get_data_addr(ptr.utils->north, &ptr.tex[i].bpp,
+			&ptr.tex[i].line_len, &ptr.tex[i].endian);
 		i++;
 	}
 	ptr.img.addr = mlx_get_data_addr(ptr.img.mlx_img, &ptr.img.bpp,
@@ -150,18 +144,19 @@ void	verify_texture(t_info *ptr, int texn, int y, int x)
 	else
 		ptr->ma->wlx = ptr->ma->posx + ptr->ma->perpwalldist * ptr->ma->raydirx;
 	ptr->ma->wlx -= floor((ptr->ma->wlx));
-	step = 1.0 * WINDOW_HEIGHT / ptr->ma->line_Height;
-	texx = (int)(ptr->ma->wlx * (double)WINDOW_WIDTH);
+	step = 1.0 * ptr->tex[0].h / ptr->ma->line_Height;
+	texx = (int)(ptr->ma->wlx * (double)ptr->tex[texn].w);
 	texx = ft_texx(ptr, texx, texn);
 	ptr->ma->texpos = (ptr->ma->draw_start - WINDOW_HEIGHT / 2 + ptr->ma->line_Height / 2)
 		 * step;
-	while (++y <= ptr->ma->draw_end)
+	while (y <= ptr->ma->draw_end)
 	{
-		texy = (int)ptr->ma->texpos & (WINDOW_HEIGHT - 1);
+		texy = (int)ptr->ma->texpos & (ptr->tex[texn].h - 1);
 		ptr->ma->texpos += step;
 		if (y < (WINDOW_HEIGHT - 1) && ptr->ma->raydirx < (WINDOW_WIDTH - 1))
 			ptr->img.addr[y * ptr->img.line_len / 4 + x] = \
-				ptr->data->north_texture[texy * ptr->img.line_len / 4 + texx];
+				ptr->tex[texn].addr[texy * ptr->tex[texn].line_len / 4 + texx];
+		y++;
 	}
 }
 

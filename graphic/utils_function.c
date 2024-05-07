@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:11:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/07 09:18:05 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/07 09:47:14 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,42 +64,5 @@ int	setup_color_ceiling_floor(t_info *ptr)
 {
 	ptr->crgb =  ft_atoi(ptr->utils->ceiling_color[0]) * 65536 + ft_atoi(ptr->utils->ceiling_color[1]) * 256 + ft_atoi(ptr->utils->ceiling_color[2]);
 	ptr->frgb = ft_atoi(ptr->utils->floor_color[0]) * 65536 + ft_atoi(ptr->utils->floor_color[1]) * 256 + ft_atoi(ptr->utils->floor_color[2]);
-	return (0);
-}
-
-int	init_wall(t_info *ptr, int i)
-{
-	t_text	tex;
-
-	tex.addr = (int *)mlx_get_data_addr(ptr->utils->north, &tex.bpp,
-			&tex.line_len, &tex.endian);
-	ptr->tex[i] = tex;
-	// printf("%d %d\n", tex.h, tex.w);
-	// if (tex.h != 64 || tex.w != 64)
-		// return (-1);
-	// 	&ptr->tex[0].line_len, &ptr->tex[0].endian);
-	// ptr->tex.img = mlx_new_image(ptr->mlx, 64, 64);
-	// ptr->tex.addr = (int *)mlx_get_data_addr(ptr->utils->north, &ptr->tex.bpp,
-		// &ptr->tex.line_len, &ptr->tex.endian);
-	// tex[0].img = mlx_new_image(ptr->mlx, 64, 64);
-	// ptr->tex[0].addr = (int *)mlx_get_data_addr(ptr->utils->north, &ptr->tex[0].bpp,
-	// 	&ptr->tex[0].line_len, &ptr->tex[0].endian);
-	// if (!ptr->tex[0].img)
-	// 	return (-1);
-	// ptr->tex[1].img = mlx_new_image(ptr->mlx, 64, 64);
-	// ptr->tex[1].addr = (int *)mlx_get_data_addr(ptr->utils->north, &ptr->tex[1].bpp,
-	// 	&ptr->tex[1].line_len, &ptr->tex[1].endian);
-	// if (!ptr->tex[1].img)
-	// 	return (-1);
-	// ptr->tex[2].img = mlx_new_image(ptr->mlx, 64, 64);
-	// ptr->tex[2].addr = (int *)mlx_get_data_addr(ptr->utils->north, &ptr->tex[2].bpp,
-	// 	&ptr->tex[2].line_len, &ptr->tex[2].endian);
-	// if (!ptr->tex[2].img)
-	// 	return (-1);
-	// ptr->tex[3].img = mlx_new_image(ptr->mlx, 64, 64);
-	// ptr->tex[3].addr = (int *)mlx_get_data_addr(ptr->utils->north, &ptr->tex[3].bpp,
-	// 	&ptr->tex[3].line_len, &ptr->tex[3].endian);
-	// if (!ptr->tex[3].img)
-	// 	return (-1);
 	return (0);
 }
