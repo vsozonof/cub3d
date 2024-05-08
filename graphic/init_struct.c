@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/07 15:17:08 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/08 10:31:16 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,13 +143,13 @@ t_info	initialize_tex(t_info ptr)
 	ptr.tex[2].h = 64;
 	ptr.tex[3].w = 64;
 	ptr.tex[3].h = 64;
-	ptr.tex[0].addr = (int *)mlx_get_data_addr(ptr.utils->north, &ptr.tex[0].bpp,
+	ptr.tex[0].addr = (int *)mlx_get_data_addr(ptr.tex[0].save, &ptr.tex[0].bpp,
 		&ptr.tex[0].line_len, &ptr.tex[0].endian);
-	ptr.tex[1].addr = (int *)mlx_get_data_addr(ptr.utils->east, &ptr.tex[1].bpp,
+	ptr.tex[1].addr = (int *)mlx_get_data_addr(ptr.tex[1].save, &ptr.tex[1].bpp,
 		&ptr.tex[1].line_len, &ptr.tex[1].endian);
-	ptr.tex[2].addr = (int *)mlx_get_data_addr(ptr.utils->south, &ptr.tex[2].bpp,
+	ptr.tex[2].addr = (int *)mlx_get_data_addr(ptr.tex[2].save, &ptr.tex[2].bpp,
 		&ptr.tex[2].line_len, &ptr.tex[2].endian);
-	ptr.tex[3].addr = (int *)mlx_get_data_addr(ptr.utils->west, &ptr.tex[3].bpp,
+	ptr.tex[3].addr = (int *)mlx_get_data_addr(ptr.tex[3].save, &ptr.tex[3].bpp,
 		&ptr.tex[3].line_len, &ptr.tex[3].endian);
 	return (ptr);
 }

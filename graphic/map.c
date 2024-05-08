@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/07 15:12:03 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/08 13:56:36 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 	// printf("voici mon draw end %d\n", ma->draw_end);
 	if (j < ma->draw_end)
 	{
-		j = verify_texture(ptr, 0, j, x);
+		j = verify_texture(ptr, 3, j, x);
 	}
 	// printf("voici mon fin j %d\n", j);
 	if (j > ma->draw_end)
@@ -89,24 +89,6 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 // 	}
 // }
 
-// void *get_image(t_info *ptr, t_math *ma)
-// {
-// 	if (ma->raydirx == 1 && ma->side == 0)
-// 		return (ptr->img_1); // Est
-// 	else if (ma->raydiry == -1 && ma->side == 0)
-// 		return (ptr->img_2); // West
-// 	else if (ma->raydiry == 1 && ma->side == 1)
-// 		return (ptr->img_3); // North
-// 	else if (ma->raydiry == -1 && ma->side == 0)
-// 		return (ptr->img_4); // South
-// 	// printf("voici une texture %s\n", ptr->img_1);
-// 	return (NULL);
-// }
-
-// texn est utile pour savoir a quel texture j'ai a faire
-// recup la taille de mon image
-//utiliser token pour savoir de quel image on parle
-
 static	int	ft_texx(t_info *ptr, int texx, int texn)
 {
 	if (ptr->ma->side == 0 && ptr->ma->raydirx < 0)
@@ -124,16 +106,33 @@ int	verify_texture(t_info *ptr, int texn, int y, int x)
 	int			texy;
 	double		step;
 
+	printf("nouvelle boucle\n\n\n voici mon index %d\n", x);
 	if (ptr->ma->side == 0)
+	{
 		ptr->ma->wlx = ptr->ma->posy + ptr->ma->perpwalldist * ptr->ma->raydiry;
+		printf("voici mon side a 0 donc %f\n", ptr->ma->wlx);
+	}
 	else
+	{
 		ptr->ma->wlx = ptr->ma->posx + ptr->ma->perpwalldist * ptr->ma->raydirx;
+		printf("voici mon side autre donc %f\n", ptr->ma->wlx);
+	}
 	ptr->ma->wlx -= floor((ptr->ma->wlx));
-	step = 1.0 * ptr->tex[0].h / ptr->ma->line_Height;
+	printf("voici wlx a la sortie des if %f\n", ptr->ma->wlx);
+	step = 1.0 * ptr->tex[texn].h / ptr->ma->line_Height;
+	printf("voici step %f\n", step);
+	printf("|voici les differentes composantes de step|\n %d", ptr->tex[texn].h);
+	printf(" et maintenant le calcul total %f \n", 1.0 * ptr->tex[texn].h / ptr->ma->line_Height);
 	texx = (int)(ptr->ma->wlx * (double)ptr->tex[texn].w);
+	printf("voici texx avant %f\n", step);
 	texx = ft_texx(ptr, texx, texn);
+	printf("voici texx apres fct %f\n", step);
 	ptr->ma->texpos = (ptr->ma->draw_start - WINDOW_HEIGHT / 2 + ptr->ma->line_Height / 2)
-		 * step;
+		* step;
+	printf("voici texpos %f\n", ptr->ma->texpos);
+	printf("maintenant voici les differentes composante de texpos\n\n");
+	printf("start %d line hieght %d et step %f\n", ptr->ma->draw_start, ptr->ma->line_Height, step);
+	usleep(50);
 	while (y <= ptr->ma->draw_end)
 	{
 		// printf("voici mon ptr %d\n", ptr->tex[texn].addr[texy * ptr->tex[texn].line_len / 4 + texx]);
@@ -142,6 +141,7 @@ int	verify_texture(t_info *ptr, int texn, int y, int x)
 		if (y < (WINDOW_HEIGHT - 1) && ptr->ma->raydirx < (WINDOW_WIDTH - 1))
 			ptr->img.addr[y * ptr->img.line_len / 4 + x] = \
 				ptr->tex[texn].addr[texy * ptr->tex[texn].line_len / 4 + texx];
+		// render_rect(&ptr->img, (t_rect){x, y, 1, 1, ptr->crgb});
 		y++;
 	}
 	return (y);
