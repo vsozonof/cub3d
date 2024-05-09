@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/08 13:56:36 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:34:28 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,45 +49,17 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 	int		c;
 
 	c = 0;
-	// printf("\n===voici mon x %d et mon debut j %d\n", x, j);
-	// printf("voici mon draw start %d\n", ma->draw_start);
 	if (j < ptr->ma->draw_start)
 		while (j++ < ptr->ma->draw_start)
 			render_rect(&ptr->img, (t_rect){x, j, 1, 1, ptr->crgb});
-	// printf("voici mon j avant mur %d\n", j);
-	// printf("voici mon draw end %d\n", ma->draw_end);
 	if (j < ma->draw_end)
 	{
-		j = verify_texture(ptr, 3, j, x);
+		j = verify_texture(ptr, 2, j, x);
 	}
-	// printf("voici mon fin j %d\n", j);
 	if (j > ma->draw_end)
 		while (j++ < WINDOW_HEIGHT)
 			img_pix_put(&ptr->img, x, j, ptr->frgb);
 }
-
-// void	image_helper(t_info *ptr, int x, int j, t_math* ma)
-// {
-// 	(void)x;
-// 	(void)j;
-// 	(void)ptr;
-// 	double	step;
-// 	double	texpos;
-// 	int		texy;
-// 	int		y;
-// 	int		color;
-
-// 	step = 1 * tex_height / ma->line_Height;
-// 	texpos = (ma->draw_start - WINDOW_HEIGHT / 2 + ma->line_Height / 2) * step;
-// 	y = ma->draw_start;
-// 	while (y < ma->draw_end)
-// 	{
-// 		texy = (int)texpos  + (texhight - 1);
-// 		texpos += step;
-// 		color = texture[texnum][texheight * texy + texx];
-// 		y++;
-// 	}
-// }
 
 static	int	ft_texx(t_info *ptr, int texx, int texn)
 {
@@ -106,46 +78,57 @@ int	verify_texture(t_info *ptr, int texn, int y, int x)
 	int			texy;
 	double		step;
 
-	printf("nouvelle boucle\n\n\n voici mon index %d\n", x);
 	if (ptr->ma->side == 0)
-	{
 		ptr->ma->wlx = ptr->ma->posy + ptr->ma->perpwalldist * ptr->ma->raydiry;
-		printf("voici mon side a 0 donc %f\n", ptr->ma->wlx);
-	}
 	else
-	{
 		ptr->ma->wlx = ptr->ma->posx + ptr->ma->perpwalldist * ptr->ma->raydirx;
-		printf("voici mon side autre donc %f\n", ptr->ma->wlx);
-	}
 	ptr->ma->wlx -= floor((ptr->ma->wlx));
-	printf("voici wlx a la sortie des if %f\n", ptr->ma->wlx);
-	step = 1.0 * ptr->tex[texn].h / ptr->ma->line_Height;
-	printf("voici step %f\n", step);
-	printf("|voici les differentes composantes de step|\n %d", ptr->tex[texn].h);
-	printf(" et maintenant le calcul total %f \n", 1.0 * ptr->tex[texn].h / ptr->ma->line_Height);
+	step = 1.0 * ptr->tex[0].h / ptr->ma->line_Height;
 	texx = (int)(ptr->ma->wlx * (double)ptr->tex[texn].w);
-	printf("voici texx avant %f\n", step);
 	texx = ft_texx(ptr, texx, texn);
-	printf("voici texx apres fct %f\n", step);
 	ptr->ma->texpos = (ptr->ma->draw_start - WINDOW_HEIGHT / 2 + ptr->ma->line_Height / 2)
 		* step;
-	printf("voici texpos %f\n", ptr->ma->texpos);
-	printf("maintenant voici les differentes composante de texpos\n\n");
-	printf("start %d line hieght %d et step %f\n", ptr->ma->draw_start, ptr->ma->line_Height, step);
-	usleep(50);
-	while (y <= ptr->ma->draw_end)
+	while (++y <= ptr->ma->draw_end)
 	{
-		// printf("voici mon ptr %d\n", ptr->tex[texn].addr[texy * ptr->tex[texn].line_len / 4 + texx]);
 		texy = (int)ptr->ma->texpos & (ptr->tex[texn].h - 1);
 		ptr->ma->texpos += step;
 		if (y < (WINDOW_HEIGHT - 1) && ptr->ma->raydirx < (WINDOW_WIDTH - 1))
+		{
 			ptr->img.addr[y * ptr->img.line_len / 4 + x] = \
 				ptr->tex[texn].addr[texy * ptr->tex[texn].line_len / 4 + texx];
-		// render_rect(&ptr->img, (t_rect){x, y, 1, 1, ptr->crgb});
-		y++;
+			// render_rect(&ptr->img, (t_rect){x, y, 1, 1, });
+		}
+		// printf("voici les composantes de mon calcul %d %d %d\n", texy, ptr->tex[texn].line_len, texx);
+		// printf("voici le resultat de mon calcul %d\n", texy * ptr->tex[texn].line_len / 4 + texx);
 	}
 	return (y);
 }
+
+// void    ft_test_texture(t_vars *vars, int texn, int y)
+// {
+//     int        texx;
+//     int        texy;
+//     double    step;
+
+//     if (vars->ray.side == 0)
+//         vars->wlx = vars->ray.posy + vars->ray.perpwalldist * vars->ray.raydiry;
+//     else
+//         vars->wlx = vars->ray.posx + vars->ray.perpwalldist * vars->ray.raydirx;
+//     vars->wlx -= floor((vars->wlx));
+//     step = 1.0 * vars->wall[0].h / vars->ray.lineheight;
+//     texx = (int)(vars->wlx * (double)vars->wall[texn].w);
+//     texx = ft_texx(vars, texx, texn);
+//     vars->texpos = \
+//     (vars->ray.drawstart - vars->sizey / 2 + vars->ray.lineheight / 2) * step;
+//     while (++y <= vars->ray.drawend)
+//     {
+//         texy = (int)vars->texpos & (vars->wall[texn].h - 1);
+//         vars->texpos += step;
+//         if (y < (vars->sizey - 1) && vars->ray.x < (vars->sizex - 1))
+//             vars->img.addr[y * vars->img.llen / 4 + vars->ray.x] = \
+//             vars->wall[texn].addr[texy * vars->wall[texn].llen / 4 + texx];
+//     }
+// }
 
 // static    int    ft_texx(t_vars *vars, int texx, int texn)
 // {
@@ -188,6 +171,57 @@ int	verify_texture(t_info *ptr, int texn, int y, int x)
 //             vars->wall[texn].addr[texy * vars->wall[texn].llen / 4 + texx];
 //     }
 // }
+
+/*
+
+int	verify_texture(t_info *ptr, int texn, int y, int x)
+{
+	int			texx;
+	int			texy;
+	double		step;
+
+	// printf("nouvelle boucle\n\n\n voici mon index %d\n", x);
+	if (ptr->ma->side == 0)
+	{
+		ptr->ma->wlx = ptr->ma->posy + ptr->ma->perpwalldist * ptr->ma->raydiry;
+		// printf("voici mon side a 0 donc %f\n", ptr->ma->wlx);
+	}
+	else
+	{
+		ptr->ma->wlx = ptr->ma->posx + ptr->ma->perpwalldist * ptr->ma->raydirx;
+		// printf("voici mon side autre donc %f\n", ptr->ma->wlx);
+	}
+	ptr->ma->wlx -= floor((ptr->ma->wlx));
+	// printf("voici wlx a la sortie des if %f\n", ptr->ma->wlx);
+	step = 1.0 * ptr->tex[0].h / ptr->ma->line_Height;
+	// printf("voici step %f\n", step);
+	// printf("|voici les differentes composantes de step|\n %d", ptr->tex[texn].h);
+	// printf(" et maintenant le calcul total %f \n", 1.0 * ptr->tex[texn].h / ptr->ma->line_Height);
+	texx = (int)(ptr->ma->wlx * (double)ptr->tex[texn].w);
+	// printf("voici texx avant %f\n", step);
+	texx = ft_texx(ptr, texx, texn);
+	// printf("voici texx apres fct %f\n", step);
+	ptr->ma->texpos = (ptr->ma->draw_start - WINDOW_HEIGHT / 2 + ptr->ma->line_Height / 2)
+		* step;
+	// printf("voici texpos %f\n", ptr->ma->texpos);
+	// printf("maintenant voici les differentes composante de texpos\n\n");
+	// printf("start %d line hieght %d et step %f\n", ptr->ma->draw_start, ptr->ma->line_Height, step);
+	usleep(50);
+	while (++y <= ptr->ma->draw_end)
+	{
+		// printf("voici mon ptr %d\n", ptr->tex[texn].addr[texy * ptr->tex[texn].line_len / 4 + texx]);
+		texy = (int)ptr->ma->texpos & (ptr->tex[texn].h - 1);
+		ptr->ma->texpos += step;
+		if (y < (WINDOW_HEIGHT - 1) && ptr->ma->raydirx < (WINDOW_WIDTH - 1))
+			ptr->img.addr[y * ptr->img.line_len / 4 + x] = \
+				ptr->tex[texn].addr[texy * ptr->tex[texn].line_len / 4 + texx];
+		// printf("voici le poucentage %d\n", texy * ptr->tex[texn].line_len / 4 + texx);
+		// printf("l'endroit ou je vais ecrire dans l'adresse %d\n", y * ptr->img.line_len / 4 + x);
+		// render_rect(&ptr->img, (t_rect){x, y, 1, 1, ptr->crgb});
+	}
+	return (y);
+}
+*/
 
 /*
 void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
