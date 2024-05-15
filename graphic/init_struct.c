@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/15 10:14:17 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:15:31 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ t_info	initialize_tex(t_info ptr)
 			&ptr.tex[2].w, &ptr.tex[2].h);
 	ptr.tex[3].save = mlx_xpm_file_to_image(ptr.utils->mlx, "texture/redbrick.xpm",
 			&ptr.tex[3].w, &ptr.tex[3].h);
-	printf("len = %d\n", ptr.tex[0].h);
 	// while (i++ < 4)
 	// {
 	// 	if (ptr.tex[i])
@@ -145,5 +144,7 @@ t_info	initialize_tex(t_info ptr)
 		&ptr.tex[2].line_len, &ptr.tex[2].endian);
 	ptr.tex[3].addr = (int *)mlx_get_data_addr(ptr.tex[3].save, &ptr.tex[3].bpp,
 		&ptr.tex[3].line_len, &ptr.tex[3].endian);
+	// printf("voici en sortant la taille de mes image %d\n", ptr.tex[0].line_len);
+	// usleep(50000000);
 	return (ptr);
 }

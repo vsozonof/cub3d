@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/15 11:16:12 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:19:37 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 			// img_pix_put(&ptr->img, x, j, YELLOW_PIXEL);
 			// j++;
 		// }
-		j = verify_texture(ptr, 2, j, x);
+		j = verify_texture(ptr, 0, j, x);
 	}
 	while (j++ < WINDOW_HEIGHT)
 		img_pix_put(&ptr->img, x, j, ptr->frgb);
@@ -87,7 +87,7 @@ int	verify_texture(t_info *ptr, int texn, int y, int x)
 	else
 		ptr->ma->wlx = ptr->ma->posx + ptr->ma->perpwalldist * ptr->ma->raydirx;
 	ptr->ma->wlx -= floor((ptr->ma->wlx));
-	step = 1.0 * ptr->tex[0].h / ptr->ma->line_Height;
+	step = 1.0 * ptr->tex[texn].h / ptr->ma->line_Height;
 	texx = (int)(ptr->ma->wlx * (double)ptr->tex[texn].w);
 	texx = ft_texx(ptr, texx, texn);
 	ptr->ma->texpos = (ptr->ma->draw_start - WINDOW_HEIGHT / 2 + ptr->ma->line_Height / 2)
@@ -100,7 +100,6 @@ int	verify_texture(t_info *ptr, int texn, int y, int x)
 		{
 			ptr->img.addr[y * ptr->img.line_len / 4 + x] = \
 				ptr->tex[texn].addr[texy * ptr->tex[texn].line_len / 4 + texx];
-			// render_rect(&ptr->img, (t_rect){x, y, 1, 1, });
 		}
 		y++;
 		// printf("voici toute mes valeurs \n");
