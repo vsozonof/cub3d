@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/09 11:41:34 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:14:17 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,31 +118,25 @@ int	player_tag(t_info *ptr)
 // 	return (0);
 // }
 
-//mlx file to img
-
 t_info	initialize_tex(t_info ptr)
 {
-	int	img_width;
-	int	img_height;
+	int	i;
 
-	img_width = 64;
-	img_height = 64;
+	i = 0;
 	ptr.tex[0].save = mlx_xpm_file_to_image(ptr.utils->mlx, "texture/colorstone.xpm",
-			&img_width, &img_height);
+			&ptr.tex[0].w, &ptr.tex[0].h);
 	ptr.tex[1].save = mlx_xpm_file_to_image(ptr.utils->mlx, "texture/eagle.xpm",
-			&img_width, &img_height);
+			&ptr.tex[1].w, &ptr.tex[1].h);
 	ptr.tex[2].save = mlx_xpm_file_to_image(ptr.utils->mlx, "texture/greystone.xpm",
-			&img_width, &img_height);
+			&ptr.tex[2].w, &ptr.tex[2].h);
 	ptr.tex[3].save = mlx_xpm_file_to_image(ptr.utils->mlx, "texture/redbrick.xpm",
-			&img_width, &img_height);
-	ptr.tex[0].w = 64;
-	ptr.tex[0].h = 64;
-	ptr.tex[1].w = 64;
-	ptr.tex[1].h = 64;
-	ptr.tex[2].w = 64;
-	ptr.tex[2].h = 64;
-	ptr.tex[3].w = 64;
-	ptr.tex[3].h = 64;
+			&ptr.tex[3].w, &ptr.tex[3].h);
+	printf("len = %d\n", ptr.tex[0].h);
+	// while (i++ < 4)
+	// {
+	// 	if (ptr.tex[i])
+		
+	// }
 	ptr.tex[0].addr = (int *)mlx_get_data_addr(ptr.tex[0].save, &ptr.tex[0].bpp,
 		&ptr.tex[0].line_len, &ptr.tex[0].endian);
 	ptr.tex[1].addr = (int *)mlx_get_data_addr(ptr.tex[1].save, &ptr.tex[1].bpp,

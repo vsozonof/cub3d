@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/07 14:08:00 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:30:36 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct s_math
 	double	camerax;
 	double	raydirx;
 	double	raydiry;
-	double	posx; 
+	double	posx;
 	double	posy;
 	double	dirx;
 	double	diry;

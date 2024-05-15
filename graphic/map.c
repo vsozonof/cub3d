@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/09 14:34:28 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/15 11:16:12 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,15 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 			render_rect(&ptr->img, (t_rect){x, j, 1, 1, ptr->crgb});
 	if (j < ma->draw_end)
 	{
+		// while (j < ma->draw_end)
+		// {
+			// img_pix_put(&ptr->img, x, j, YELLOW_PIXEL);
+			// j++;
+		// }
 		j = verify_texture(ptr, 2, j, x);
 	}
-	if (j > ma->draw_end)
-		while (j++ < WINDOW_HEIGHT)
-			img_pix_put(&ptr->img, x, j, ptr->frgb);
+	while (j++ < WINDOW_HEIGHT)
+		img_pix_put(&ptr->img, x, j, ptr->frgb);
 }
 
 static	int	ft_texx(t_info *ptr, int texx, int texn)
@@ -88,16 +92,19 @@ int	verify_texture(t_info *ptr, int texn, int y, int x)
 	texx = ft_texx(ptr, texx, texn);
 	ptr->ma->texpos = (ptr->ma->draw_start - WINDOW_HEIGHT / 2 + ptr->ma->line_Height / 2)
 		* step;
-	while (++y <= ptr->ma->draw_end)
+	while (y <= ptr->ma->draw_end)
 	{
 		texy = (int)ptr->ma->texpos & (ptr->tex[texn].h - 1);
 		ptr->ma->texpos += step;
-		if (y < (WINDOW_HEIGHT - 1) && ptr->ma->raydirx < (WINDOW_WIDTH - 1))
+		if (y < (WINDOW_HEIGHT - 1) && x < (WINDOW_WIDTH - 1))
 		{
 			ptr->img.addr[y * ptr->img.line_len / 4 + x] = \
 				ptr->tex[texn].addr[texy * ptr->tex[texn].line_len / 4 + texx];
 			// render_rect(&ptr->img, (t_rect){x, y, 1, 1, });
 		}
+		y++;
+		// printf("voici toute mes valeurs \n");
+		// printf("texy %d texpos %f\n", texy, ptr->ma->texpos);
 		// printf("voici les composantes de mon calcul %d %d %d\n", texy, ptr->tex[texn].line_len, texx);
 		// printf("voici le resultat de mon calcul %d\n", texy * ptr->tex[texn].line_len / 4 + texx);
 	}
