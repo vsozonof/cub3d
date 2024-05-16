@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/15 15:19:37 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/16 10:39:38 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,37 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 			// img_pix_put(&ptr->img, x, j, YELLOW_PIXEL);
 			// j++;
 		// }
-		j = verify_texture(ptr, 0, j, x);
+		j = verify_texture(ptr, 3, j, x);
 	}
 	while (j++ < WINDOW_HEIGHT)
 		img_pix_put(&ptr->img, x, j, ptr->frgb);
 }
+
+/*
+void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
+{
+	int		c;
+
+	c = 0;
+	if (j < ptr->ma->draw_start)
+		while (j++ < ptr->ma->draw_start)
+			render_rect(&ptr->img, (t_rect){x, j, 1, 1, ptr->crgb});
+	if (j < ma->draw_end)
+	{
+		// while (j < ma->draw_end)
+		// {
+			// img_pix_put(&ptr->img, x, j, YELLOW_PIXEL);
+			// j++;
+		// }
+		j = verify_texture(ptr, 0, j, x);
+	}
+	printf("je suis sortis voici mon j %d ainsi que mon x %d et ma taille max %d\n", j, x, WINDOW_HEIGHT);
+	while (j++ < WINDOW_HEIGHT)
+		img_pix_put(&ptr->img, x, j, ptr->frgb);
+	printf("voici mon j a la sortie %d\n", j);
+	usleep(500000);
+}
+*/
 
 static	int	ft_texx(t_info *ptr, int texx, int texn)
 {
@@ -98,10 +124,14 @@ int	verify_texture(t_info *ptr, int texn, int y, int x)
 		ptr->ma->texpos += step;
 		if (y < (WINDOW_HEIGHT - 1) && x < (WINDOW_WIDTH - 1))
 		{
-			ptr->img.addr[y * ptr->img.line_len / 4 + x] = \
-				ptr->tex[texn].addr[texy * ptr->tex[texn].line_len / 4 + texx];
+			// ptr->img.addr[y * ptr->img.line_len / 4 + x] =
+			// ptr->tex[texn].addr[texy * ptr->tex[texn].line_len / 4 + texx];
+			// printf("la j'ecris dans mon image a la position y = %d x = %d \n", y, x);
+			img_pix_put(&ptr->img, x, y, ptr->tex[texn].addr[texy * ptr->tex[texn].line_len / 4 + texx]);
+			// printf("voici mon byte per pixel %d\n", ptr->tex->bpp);
 		}
 		y++;
+		// printf("voici ou je dessine %d %d %d\n", y, ptr->img.line_len, x);
 		// printf("voici toute mes valeurs \n");
 		// printf("texy %d texpos %f\n", texy, ptr->ma->texpos);
 		// printf("voici les composantes de mon calcul %d %d %d\n", texy, ptr->tex[texn].line_len, texx);
