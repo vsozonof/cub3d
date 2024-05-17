@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/16 10:39:38 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/17 08:16:44 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	window_creation(t_data *data, t_utils *utils)
 void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 {
 	int		c;
+	int		w;
 
 	c = 0;
 	if (j < ptr->ma->draw_start)
@@ -54,12 +55,14 @@ void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 			render_rect(&ptr->img, (t_rect){x, j, 1, 1, ptr->crgb});
 	if (j < ma->draw_end)
 	{
-		// while (j < ma->draw_end)
-		// {
-			// img_pix_put(&ptr->img, x, j, YELLOW_PIXEL);
-			// j++;
-		// }
-		j = verify_texture(ptr, 3, j, x);
+		w = 0;
+		if (ptr->ma->side == 0 && ptr->ma->raydirx < 0)
+			w = 3;
+		if (ptr->ma->side == 0 && ptr->ma->raydirx >= 0)
+			w = 1;
+		if (ptr->ma->side == 1 && ptr->ma->raydiry >= 0)
+			w = 2;
+		j = verify_texture(ptr, w, j, x);
 	}
 	while (j++ < WINDOW_HEIGHT)
 		img_pix_put(&ptr->img, x, j, ptr->frgb);
