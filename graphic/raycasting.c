@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/17 11:19:07 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/17 11:26:17 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	raycasting(t_info *ptr)
 	{
 		delta_distance_calculation(ma, x);
 		ray_calculation(ma);
-		digital_dif_analyser(ma, ptr, 0, 0);
+		digital_dif_analyser(ma, ptr);
 		j = 0;
 		finish_calcul_and_print(ptr, ma, x, j);
 		x++;
@@ -76,22 +76,19 @@ void	ray_calculation(t_math *ma)
 	}
 }
 
-void	digital_dif_analyser(t_math *ma, t_info *ptr, int i, int j)
+void	digital_dif_analyser(t_math *ma, t_info *ptr)
 {
 	while (ma->hit == 0)
 	{
-		i = ((j = 0));
 		if (ma->sidedistx < ma->sidedisty)
 		{
 			ma->sidedistx += ma->deltadistx;
-			i = len_map(ptr->utils->map[ma->mapy]);
 			ma->mapx += ma->stepx;
 			ma->side = 0;
 		}
 		else
 		{
 			ma->sidedisty += ma->deltadisty;
-			i = len_map(ptr->utils->map[ma->mapy]);
 			ma->mapy += ma->stepy;
 			ma->side = 1;
 		}

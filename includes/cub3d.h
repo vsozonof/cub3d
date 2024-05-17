@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/17 11:19:07 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/17 11:26:11 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,7 @@ void		player_creation_minimap(t_info *ptr);
 void		make_ray(t_info *ptr, int fi_x, int fi_y);
 void		raycasting(t_info *ptr);
 int			make_map(t_info *ptr, int i);
-void		digital_dif_analyser(t_math *ma, t_info *ptr, int i, int j);
+void		digital_dif_analyser(t_math *ma, t_info *ptr);
 void		player_movement_map(t_math *ma, int input, t_info *ptr);
 void		delta_distance_calculation(t_math *ma, int x);
 void		ray_calculation(t_math *ma);
