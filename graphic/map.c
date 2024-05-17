@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/17 10:44:40 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/17 11:16:30 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ void	start_simulation(t_info ptr)
 
 void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
 {
-	int		c;
 	int		w;
 
-	c = 0;
 	if (j < ptr->ma->draw_start)
 		while (j++ < ptr->ma->draw_start)
 			render_rect(&ptr->img, (t_rect){x, j, 1, 1, ptr->crgb});
