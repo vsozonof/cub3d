@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/17 10:53:35 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/17 11:08:14 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ void		initialize_struct(t_data *data, t_utils *utils);
 
 // Basic parsing
 
-int			parsing_manager(t_data *data, int argc, char **argv, t_utils *utils);
+int			parsing_manage(t_data *data, int argc, char **argv, t_utils *utils);
 int			is_there_enough_args(int n);
 int			argument_checker(t_data *data);
 int			read_map(t_data *data);

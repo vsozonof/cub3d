@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 15:54:57 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/04/08 14:21:30 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/17 11:08:38 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	put_map_to_double_char(t_data *data, t_utils *utils)
 	utils->map = ft_split(data->map, '\n');
 }
 
-int	parsing_manager(t_data *data, int argc, char **argv, t_utils *utils)
+int	parsing_manage(t_data *data, int argc, char **argv, t_utils *utils)
 {
 	pr_parsing_start();
 	if (is_there_enough_args(argc))
