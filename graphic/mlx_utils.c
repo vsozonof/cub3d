@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 08:24:12 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/06 08:24:50 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/17 10:31:06 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,8 @@ void	close_windows_esc(t_info *ptr)
 	mlx_destroy_window(ptr->mlx, ptr->win);
 	mlx_destroy_display(ptr->mlx);
 	free(ptr->mlx);
+	free_db_tab(ptr->utils->map);
 	exit(0);
-}
-
-void	game_start(t_info *ptr)
-{
-	mlx_loop_hook(ptr->mlx, &render, ptr);
-	mlx_hook(ptr->win, 17, 0, mouse_hook, ptr);
-	mlx_key_hook(ptr->win, get_key_hook, ptr);
-	mlx_loop(ptr->mlx);
 }
 
 int	mouse_hook(t_info *ptr)
@@ -33,5 +26,6 @@ int	mouse_hook(t_info *ptr)
 	mlx_destroy_window(ptr->mlx, ptr->win);
 	mlx_destroy_display(ptr->mlx);
 	free(ptr->mlx);
+	free_db_tab(ptr->utils->map);
 	exit (0);
 }

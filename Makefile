@@ -6,7 +6,7 @@
 #    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 14:09:59 by vsozonof          #+#    #+#              #
-#    Updated: 2024/04/30 15:56:54 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/05/17 08:49:04 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS = main.c \
 	   graphic/keys_hook.c \
 	   graphic/init_struct.c\
 	   graphic/img_creation.c \
+	   graphic/free_all.c \
 
 
 OBJS = $(SRCS:.c=.o)

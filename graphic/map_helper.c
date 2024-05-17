@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:05:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/04/30 16:04:58 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/17 10:42:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	player_movement_map(t_math *ma, int input, t_info *ptr)
 
 void	player_movement_front(double x, double y, t_info *ptr, t_math *ma)
 {
-	int		i;
 	int		vertical_len;
 	int		horizontal_len;
 
@@ -69,11 +68,9 @@ void	player_movement_front(double x, double y, t_info *ptr, t_math *ma)
 		x -= ma->dirx * 0.2;
 		y -= ma->diry * 0.2;
 	}
-	i = len_map(ptr->utils->map[(int)y]);
 	vertical_len = len_db_tab(ptr->utils->map);
 	horizontal_len = ft_strlen(ptr->utils->map[(int)y]) - 1;
-	if (y < 1 || x < 1 || vertical_len <= (int)y
-		|| horizontal_len <= (int)x)
+	if (y < 1 || x < 1 || vertical_len <= (int)y || horizontal_len <= (int)x)
 		return ;
 	if (ptr->utils->map[(int)y][(int)x] == '1')
 		return ;
@@ -83,7 +80,6 @@ void	player_movement_front(double x, double y, t_info *ptr, t_math *ma)
 
 void	player_movement_side(double x, double y, t_info *ptr, t_math *ma)
 {
-	int		i;
 	int		vertical_len;
 	int		horizontal_len;
 
@@ -101,11 +97,9 @@ void	player_movement_side(double x, double y, t_info *ptr, t_math *ma)
 		x += ma->planex * 0.2;
 		y += ma->planey * 0.2;
 	}
-	i = len_map(ptr->utils->map[(int)y]);
 	vertical_len = len_db_tab(ptr->utils->map);
 	horizontal_len = ft_strlen(ptr->utils->map[(int)y]) - 1;
-	if (y < 1 || x < 1 || vertical_len <= (int)y
-		|| horizontal_len <= (int)x)
+	if (y < 1 || x < 1 || vertical_len <= (int)y || horizontal_len <= (int)x)
 		return ;
 	if (ptr->utils->map[(int)y][(int)x] == '1')
 		return ;

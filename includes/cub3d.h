@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/15 10:30:36 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/17 10:53:35 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ typedef struct s_rect
 {
 	int	x;
 	int	y;
-	int width;
-	int height;
-	int color;
+	int	width;
+	int	height;
+	int	color;
 }	t_rect;
 
 typedef struct s_math
@@ -116,7 +116,7 @@ typedef struct s_math
 	int		stepy;
 	int		hit;
 	int		side;
-	int		line_Height;
+	int		line_height;
 	int		draw_start;
 	int		draw_end;
 }	t_math;
@@ -135,7 +135,6 @@ typedef struct s_texture
 {
 	char	*texture;
 	void	*img;
-	int		**fd;
 	int		*addr;
 	void	*save;
 	int		endian;
@@ -147,7 +146,7 @@ typedef struct s_texture
 
 typedef struct s_info
 {
-    void	*mlx;
+	void	*mlx;
 	void	*win;
 	t_img	img;
 	t_math	*ma;
@@ -162,54 +161,54 @@ typedef struct s_info
 	int		fov;
 	int		frgb;
 	int		crgb;
-	int		mapS;
+	int		maps;
 	int		x_map_max;
 	int		y_map_max;
 	int		token;
 }	t_info;
 
-int		main(int argc, char **argv);
-void	initialize_struct(t_data *data, t_utils *utils);
+int			main(int argc, char **argv);
+void		initialize_struct(t_data *data, t_utils *utils);
 
 // Basic parsing
 
-int		parsing_manager(t_data *data, int argc, char **argv, t_utils *utils);
-int		is_there_enough_args(int n);
-int		argument_checker(t_data *data);
-int		read_map(t_data *data);
-int		open_map(char *map_name);
-int		is_valid_name(char *map_name);
+int			parsing_manager(t_data *data, int argc, char **argv, t_utils *utils);
+int			is_there_enough_args(int n);
+int			argument_checker(t_data *data);
+int			read_map(t_data *data);
+int			open_map(char *map_name);
+int			is_valid_name(char *map_name);
 
 // File parsing
 
-int		map_file_parser(t_data *data);
-int		texture_path_getter(t_data *data, int i);
-int		color_code_getter(t_data *data, int i);
-int		double_checker_1(char *str, int *i, int mode, t_data *data);
-int		double_checker_2(char *str, int *i, int mode, t_data *data);
-char	*extract_path(char *str, int *i);
-int		are_params_valid(t_data *data, t_utils *utils);
+int			map_file_parser(t_data *data);
+int			texture_path_getter(t_data *data, int i);
+int			color_code_getter(t_data *data, int i);
+int			double_checker_1(char *str, int *i, int mode, t_data *data);
+int			double_checker_2(char *str, int *i, int mode, t_data *data);
+char		*extract_path(char *str, int *i);
+int			are_params_valid(t_data *data, t_utils *utils);
 
 // Map parsing
 
-int		is_map_valid(t_data *data, t_utils *utils);
-int		check_map(char **map, int len);
+int			is_map_valid(t_data *data, t_utils *utils);
+int			check_map(char **map, int len);
 
 // WALL CHECKING
-int		are_walls_placed_correctly(t_utils *utils);
-int		check_first_line(char *f_line, int *len);
-int		check_last_line(char *line);
-void	replace_wspace_by_walls(char **map);
+int			are_walls_placed_correctly(t_utils *utils);
+int			check_first_line(char *f_line, int *len);
+int			check_last_line(char *line);
+void		replace_wspace_by_walls(char **map);
 
 // PARSING UTILS
 
-int		get_n_lines(char *map);
-int		double_tab_len(char **p);
+int			get_n_lines(char *map);
+int			double_tab_len(char **p);
 
 // ! Printing
-void	pr_parsing_start(void);
-void	pr_msg(char *msg, int mode);
-void	pr_error_spe(char *msg, int *i);
+void		pr_parsing_start(void);
+void		pr_msg(char *msg, int mode);
+void		pr_error_spe(char *msg, int *i);
 
 //graphic
 
@@ -227,7 +226,7 @@ void		img_pix_put(t_img *img, int x, int y, int color);
 void		render_background(t_img *img, int color);
 int			render_rect(t_img *img, t_rect rect);
 int			handle_keypress(int keysym, t_info *ptr);
-int			window_creation(t_data *data, t_utils *utils);
+int			window_creation(t_utils *utils);
 int			get_key_hook(int keycode, t_info *ptr);
 int			try_moove(t_info *ptr);
 int			init_struct(t_info *ptr, t_utils *util, t_math *ma);
@@ -238,11 +237,10 @@ void		player_creation_minimap(t_info *ptr);
 void		make_ray(t_info *ptr, int fi_x, int fi_y);
 void		raycasting(t_info *ptr);
 int			make_map(t_info *ptr, int i);
-void		digital_differential_analyser(t_math *ma, t_info *ptr);
+void		digital_dif_analyser(t_math *ma, t_info *ptr, int i, int j);
 void		player_movement_map(t_math *ma, int input, t_info *ptr);
 void		delta_distance_calculation(t_math *ma, int x);
 void		ray_calculation(t_math *ma);
-void		digital_differential_analyser(t_math *ma, t_info *ptr);
 void		finish_calcul_and_print(t_info *ptr, t_math *ma, int x, int j);
 void		setup_cardinal_point(t_math *ma, t_info *ptr);
 int			player_tag(t_info *ptr);
@@ -253,12 +251,16 @@ int			len_db_tab(char **map);
 int			setup_color_ceiling_floor(t_info *ptr);
 int			tmp_image(t_info *ptr);
 void		print_img_simulation(t_info *ptr, int x, int j, t_math *ma);
-void 		*get_image(t_info *ptr, t_math *ma);
-void		image_helper(t_info *ptr, int x, int j, t_math* ma);
-// static int	ft_texx(t_info *ptr, int texx, int texn)
+void		*get_image(t_info *ptr, t_math *ma);
+void		image_helper(t_info *ptr, int x, int j, t_math *ma);
 int			verify_texture(t_info *ptr, int texn, int y, int x);
 int			get_size_tex(t_info *ptr);
 void		init_tex(t_text *tex, t_info *ptr);
 t_math		*ma_init(t_math *ma, t_info *ptr);
 t_info		initialize_tex(t_info ptr);
+void		start_simulation(t_info ptr);
+void		free_db_tab(char **map);
+void		free_all(t_info ptr, t_data *data);
+void		setup_cardinal_helper(t_math *ma, t_info *ptr);
+
 #endif

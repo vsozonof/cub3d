@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/15 13:15:31 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/17 10:35:39 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	init_struct(t_info *ptr, t_utils *util, t_math *ma)
 		free(ptr->win);
 		return (MLX_ERROR);
 	}
-	// tmp_image(ptr);
 	ptr->p_mov = 0;
 	ptr->pa = 90;
 	ptr->ma = ma_init(ma, ptr);
@@ -60,7 +59,13 @@ void	setup_cardinal_point(t_math *ma, t_info *ptr)
 		ma->planex = -0.66;
 		ma->planey = 0;
 	}
-	else if (player_tag(ptr) == 3)
+	else
+		setup_cardinal_helper(ma, ptr);
+}
+
+void	setup_cardinal_helper(t_math *ma, t_info *ptr)
+{
+	if (player_tag(ptr) == 3)
 	{
 		ma->dirx = 1;
 		ma->diry = 0;
@@ -76,75 +81,23 @@ void	setup_cardinal_point(t_math *ma, t_info *ptr)
 	}
 }
 
-int	player_tag(t_info *ptr)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (ptr->utils->map[i])
-	{
-		j = 0;
-		while (ptr->utils->map[i][j])
-		{
-			if (ptr->utils->map[i][j] == 'N')
-				return (1);
-			else if (ptr->utils->map[i][j] == 'S')
-				return (2);
-			else if (ptr->utils->map[i][j] == 'E')
-				return (3);
-			else if (ptr->utils->map[i][j] == 'W')
-				return (4);
-			j++;
-		}
-		i++;
-	}
-	return (-1);
-}
-
-// int	tmp_image(t_info *ptr)
-// {
-// 	ptr->ma->tex_height;
-// 	ptr->ma->tex_width;
-
-// 	ptr->img_1 = mlx_xpm_file_to_image(ptr->utils->mlx,
-// 			"texture/colorstone.xpm", ma->tex_width, ma->tex_height);
-// 	ptr->img_2 = mlx_xpm_file_to_image(ptr->utils->mlx,
-// 			"texture/eagle.xpm", ma->tex_width, ma->tex_height);
-// 	ptr->img_3 = mlx_xpm_file_to_image(ptr->utils->mlx,
-// 			"texture/greystone.xpm", ma->tex_width, ma->tex_height);
-// 	ptr->img_4 = mlx_xpm_file_to_image(ptr->utils->mlx,
-// 			"texture/redbrick.xpm", ma->tex_width, ma->tex_height);
-// 	return (0);
-// }
-
 t_info	initialize_tex(t_info ptr)
 {
-	int	i;
-
-	i = 0;
-	ptr.tex[0].save = mlx_xpm_file_to_image(ptr.utils->mlx, "texture/colorstone.xpm",
-			&ptr.tex[0].w, &ptr.tex[0].h);
-	ptr.tex[1].save = mlx_xpm_file_to_image(ptr.utils->mlx, "texture/eagle.xpm",
-			&ptr.tex[1].w, &ptr.tex[1].h);
-	ptr.tex[2].save = mlx_xpm_file_to_image(ptr.utils->mlx, "texture/greystone.xpm",
-			&ptr.tex[2].w, &ptr.tex[2].h);
-	ptr.tex[3].save = mlx_xpm_file_to_image(ptr.utils->mlx, "texture/redbrick.xpm",
-			&ptr.tex[3].w, &ptr.tex[3].h);
-	// while (i++ < 4)
-	// {
-	// 	if (ptr.tex[i])
-		
-	// }
+	ptr.tex[0].save = mlx_xpm_file_to_image(ptr.utils->mlx,
+			"texture/colorstone.xpm", &ptr.tex[0].w, &ptr.tex[0].h);
+	ptr.tex[1].save = mlx_xpm_file_to_image(ptr.utils->mlx,
+			"texture/eagle.xpm", &ptr.tex[1].w, &ptr.tex[1].h);
+	ptr.tex[2].save = mlx_xpm_file_to_image(ptr.utils->mlx,
+			"texture/greystone.xpm", &ptr.tex[2].w, &ptr.tex[2].h);
+	ptr.tex[3].save = mlx_xpm_file_to_image(ptr.utils->mlx,
+			"texture/redbrick.xpm", &ptr.tex[3].w, &ptr.tex[3].h);
 	ptr.tex[0].addr = (int *)mlx_get_data_addr(ptr.tex[0].save, &ptr.tex[0].bpp,
-		&ptr.tex[0].line_len, &ptr.tex[0].endian);
+			&ptr.tex[0].line_len, &ptr.tex[0].endian);
 	ptr.tex[1].addr = (int *)mlx_get_data_addr(ptr.tex[1].save, &ptr.tex[1].bpp,
-		&ptr.tex[1].line_len, &ptr.tex[1].endian);
+			&ptr.tex[1].line_len, &ptr.tex[1].endian);
 	ptr.tex[2].addr = (int *)mlx_get_data_addr(ptr.tex[2].save, &ptr.tex[2].bpp,
-		&ptr.tex[2].line_len, &ptr.tex[2].endian);
+			&ptr.tex[2].line_len, &ptr.tex[2].endian);
 	ptr.tex[3].addr = (int *)mlx_get_data_addr(ptr.tex[3].save, &ptr.tex[3].bpp,
-		&ptr.tex[3].line_len, &ptr.tex[3].endian);
-	// printf("voici en sortant la taille de mes image %d\n", ptr.tex[0].line_len);
-	// usleep(50000000);
+			&ptr.tex[3].line_len, &ptr.tex[3].endian);
 	return (ptr);
 }

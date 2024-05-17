@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:11:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/07 11:14:02 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/17 08:45:32 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,18 @@ int	setup_color_ceiling_floor(t_info *ptr)
 		+ ft_atoi(ptr->utils->floor_color[1]) * 256
 		+ ft_atoi(ptr->utils->floor_color[2]);
 	return (0);
+}
+
+void	free_db_tab(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+	return ;
 }
