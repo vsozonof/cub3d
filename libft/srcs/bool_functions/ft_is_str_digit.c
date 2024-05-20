@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 07:35:38 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/04/06 15:12:38 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/20 12:50:11 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	ft_is_str_digit(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] >= '0' && str[i] <= '9')
+		if ((str[i] >= '0' && str[i] <= '9')
+			|| str[i] == ' ' || str[i] == '\t')
 			i++;
 		else
 			return (1);

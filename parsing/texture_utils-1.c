@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:10:54 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/05/20 12:20:18 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/20 12:45:38 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*extract_path(char *str, int *i)
 	while (str[*i] && ft_is_whitespace(str[*i]))
 		*i += 1;
 	c = *i;
-	while (str[*i] && !ft_is_whitespace(str[*i]))
+	while (str[*i] && str[*i] != '\n')
 		*i += 1;
 	return (ft_substr(str, c, *i - c));
 }

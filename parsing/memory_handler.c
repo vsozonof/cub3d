@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:09:25 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/05/20 12:20:11 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:05:49 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,16 @@ void	free_memory_utils(t_utils *utils)
 {
 	if (utils->mlx)
 	{
+		if (utils->north)
+			mlx_destroy_image(utils->mlx, utils->north);
+		if (utils->south)
+			mlx_destroy_image(utils->mlx, utils->south);
+		if (utils->west)
+			mlx_destroy_image(utils->mlx, utils->west);
+		if (utils->east)
+			mlx_destroy_image(utils->mlx, utils->east);
 		mlx_destroy_display(utils->mlx);
 		free(utils->mlx);
-	}
-	if (utils->north)
-		free(utils->north);
-	if (utils->south)
-		free(utils->south);
-	if (utils->west)
-		free(utils->west);
-	if (utils->east)
-		free(utils->east);
-	if (utils->floor_color)
-	{	
-		if (utils->floor_color[0])
-			free(utils->floor_color[0]);
-		if (utils->floor_color[1])
-			free(utils->floor_color[1]);
-		if (utils->floor_color[2])
-			free(utils->floor_color[2]);
-		free(utils->floor_color);
 	}
 	ft_split_free(utils->map);
 	free_memory_utils_2(utils);
@@ -58,6 +48,16 @@ void	free_memory_utils_2(t_utils *utils)
 		if (utils->ceiling_color[2])
 			free(utils->ceiling_color[2]);
 		free(utils->ceiling_color);
+	}
+	if (utils->floor_color)
+	{	
+		if (utils->floor_color[0])
+			free(utils->floor_color[0]);
+		if (utils->floor_color[1])
+			free(utils->floor_color[1]);
+		if (utils->floor_color[2])
+			free(utils->floor_color[2]);
+		free(utils->floor_color);
 	}
 }
 

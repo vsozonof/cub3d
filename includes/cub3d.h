@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/20 12:19:31 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:04:51 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,5 +290,7 @@ void		memory_handler(t_data *data, t_utils *utils);
 void		free_memory_data(t_data *data);
 void		free_memory_utils(t_utils *utils);
 void		free_memory_utils_2(t_utils *utils);
+void		free_and_set_to_null_1(t_data *data);
+void		free_and_set_to_null_2(t_data *data);
 
 #endif
