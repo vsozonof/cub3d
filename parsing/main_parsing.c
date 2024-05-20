@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 15:54:57 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/05/17 11:08:38 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/20 08:55:07 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ int	parsing_manage(t_data *data, int argc, char **argv, t_utils *utils)
 	put_map_to_double_char(data, utils);
 	if (is_map_valid(data, utils))
 		return (1);
+	free(data->map);
 	return (0);
 }

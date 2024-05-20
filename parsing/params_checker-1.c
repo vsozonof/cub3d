@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:03:08 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/04/09 07:39:57 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/20 08:32:09 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	update_map_var(t_data *data)
 	i = iterate_to_map_location(data->map, 0);
 	tmp = data->map;
 	data->map = ft_substr(data->map, i, ft_strlen(data->map));
+	free(tmp);
 	tmp = ft_strtrim(data->map, "\n");
 	if (!tmp)
 		return (1);

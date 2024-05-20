@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params_checker-2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 18:09:18 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/05/07 14:07:02 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/20 08:50:08 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ int	are_textures_valid(t_data *data, t_utils *utils)
 		pr_msg(CHECK_TEXTUR, 1);
 		return (pr_error("A texture is invalid"));
 	}
+	free(data->north_texture);
+	free(data->east_texture);
+	free(data->west_texture);
+	free(data->south_texture);
 	pr_msg(CHECK_TEXTUR, 2);
 	return (0);
 }
@@ -72,6 +76,8 @@ int	are_colors_valid(t_data *data, t_utils *utils)
 	}
 	if (i != 3)
 		return (1);
+	free(data->floor_color);
+	free(data->ceiling_color);
 	return (0);
 }
 
