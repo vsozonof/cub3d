@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
+#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 14:09:59 by vsozonof          #+#    #+#              #
-#    Updated: 2024/05/17 08:49:04 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/05/20 11:20:35 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS_LIB = libft/libft.a \
 SRCS = main.c \
 	   parsing/main_parsing.c \
 	   parsing/init_struct.c \
+	   parsing/memory_handler.c \
 	   parsing/argument_checker.c \
 	   parsing/params_checker-1.c \
 	   parsing/params_checker-2.c \

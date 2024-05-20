@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:01:16 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/03/30 14:19:23 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/20 11:30:27 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	initialize_struct(t_data *data, t_utils *utils)
 {
+	data->map_name = NULL;
 	data->map = NULL;
 	data->north_texture = NULL;
 	data->south_texture = NULL;

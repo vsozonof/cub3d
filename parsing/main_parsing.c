@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 15:54:57 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/05/20 08:55:07 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/20 11:41:46 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ int	parsing_manage(t_data *data, int argc, char **argv, t_utils *utils)
 		return (1);
 	data->map_name = argv[1];
 	if (argument_checker(data))
-		return (1);
+		return (memory_handler(data, utils), 1);
 	if (map_file_parser(data))
-		return (1);
+		return (memory_handler(data, utils), 1);
 	if (are_params_valid(data, utils))
-		return (1);
+		return (memory_handler(data, utils), 1);
 	put_map_to_double_char(data, utils);
 	if (is_map_valid(data, utils))
-		return (1);
+		return (memory_handler(data, utils), 1);
 	free(data->map);
 	return (0);
 }

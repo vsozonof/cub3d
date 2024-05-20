@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:10:54 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/04/08 14:05:21 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/20 12:20:18 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ int	color_code_getter(t_data *data, int i)
 			else
 				return (1);
 		}
-		i++;
+		else
+			i++;
 	}
 	return (0);
 }

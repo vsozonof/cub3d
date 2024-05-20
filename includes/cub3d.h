@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/17 11:26:11 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/20 12:19:31 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <math.h>
+
+// ! ****************************************************
+// ? 			Structure Declaration
+// ! ****************************************************
 
 typedef struct s_data
 {
@@ -167,10 +171,16 @@ typedef struct s_info
 	int		token;
 }	t_info;
 
+// ! ****************************************************
+// ? 			MAIN && INITIALIZATION
+// ! ****************************************************
+
 int			main(int argc, char **argv);
 void		initialize_struct(t_data *data, t_utils *utils);
 
-// Basic parsing
+// ! ****************************************************
+// ? 			BASIC PARSING
+// ! ****************************************************
 
 int			parsing_manage(t_data *data, int argc, char **argv, t_utils *utils);
 int			is_there_enough_args(int n);
@@ -179,7 +189,9 @@ int			read_map(t_data *data);
 int			open_map(char *map_name);
 int			is_valid_name(char *map_name);
 
-// File parsing
+// ! ****************************************************
+// ? 			MAP FILE PARSING
+// ! ****************************************************
 
 int			map_file_parser(t_data *data);
 int			texture_path_getter(t_data *data, int i);
@@ -189,28 +201,35 @@ int			double_checker_2(char *str, int *i, int mode, t_data *data);
 char		*extract_path(char *str, int *i);
 int			are_params_valid(t_data *data, t_utils *utils);
 
-// Map parsing
+// ! ****************************************************
+// ? 			GAME MAP PARSING
+// ! ****************************************************
 
 int			is_map_valid(t_data *data, t_utils *utils);
 int			check_map(char **map, int len);
 
-// WALL CHECKING
+// ! ****************************************************
+// ? 			CHECKING WALLS VALIDITY
+// ! ****************************************************
+
 int			are_walls_placed_correctly(t_utils *utils);
 int			check_first_line(char *f_line, int *len);
 int			check_last_line(char *line);
 void		replace_wspace_by_walls(char **map);
 
-// PARSING UTILS
+// ! ****************************************************
+// ? 			PARSING UTILS
+// ! ****************************************************
 
 int			get_n_lines(char *map);
 int			double_tab_len(char **p);
-
-// ! Printing
 void		pr_parsing_start(void);
 void		pr_msg(char *msg, int mode);
 void		pr_error_spe(char *msg, int *i);
 
-//graphic
+// ! ****************************************************
+// ? 			Graphics Handler
+// ! ****************************************************
 
 int			render(t_info *info);
 void		game_start(t_info *ptr);
@@ -262,5 +281,14 @@ void		start_simulation(t_info ptr);
 void		free_db_tab(char **map);
 void		free_all(t_info ptr, t_data *data);
 void		setup_cardinal_helper(t_math *ma, t_info *ptr);
+
+// ! ****************************************************
+// ? 			Program Memory Handler
+// ! ****************************************************
+
+void		memory_handler(t_data *data, t_utils *utils);
+void		free_memory_data(t_data *data);
+void		free_memory_utils(t_utils *utils);
+void		free_memory_utils_2(t_utils *utils);
 
 #endif

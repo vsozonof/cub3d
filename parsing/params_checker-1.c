@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:03:08 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/05/20 08:32:09 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/20 12:01:17 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int	iterate_to_map_location(char *map, int i)
 			skip_parameter(map, &i, &n);
 		else if (map[i] == 'F' && map[i + 1] == ' ')
 			skip_parameter(map, &i, &n);
-		i++;
+		else
+			i++;
 	}
 	return (i);
 }
