@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 08:24:12 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/20 08:54:02 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/22 10:53:28 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,28 @@
 
 void	close_windows_esc(t_info *ptr)
 {
-	mlx_destroy_image(ptr->mlx, ptr->utils->north);
-	mlx_destroy_image(ptr->mlx, ptr->utils->west);
-	mlx_destroy_image(ptr->mlx, ptr->utils->east);
-	mlx_destroy_image(ptr->mlx, ptr->utils->south);
+	free_parsing_fonction(ptr);
 	mlx_destroy_window(ptr->mlx, ptr->win);
+	mlx_destroy_image(ptr->mlx, ptr->img.mlx_img);
+	mlx_destroy_image(ptr->mlx, ptr->tex[0].save);
+	mlx_destroy_image(ptr->mlx, ptr->tex[1].save);
+	mlx_destroy_image(ptr->mlx, ptr->tex[2].save);
+	mlx_destroy_image(ptr->mlx, ptr->tex[3].save);
 	mlx_destroy_display(ptr->mlx);
 	free(ptr->mlx);
-	free_db_tab(ptr->utils->map);
-	free(ptr->utils->floor_color[0]);
-	free(ptr->utils->floor_color[1]);
-	free(ptr->utils->floor_color[2]);
-	free(ptr->utils->ceiling_color[0]);
-	free(ptr->utils->ceiling_color[1]);
-	free(ptr->utils->ceiling_color[2]);
-	free(ptr->utils->floor_color);
-	free(ptr->utils->ceiling_color);
 	exit(0);
 }
 
 int	mouse_hook(t_info *ptr)
 {
+	free_parsing_fonction(ptr);
 	mlx_destroy_window(ptr->mlx, ptr->win);
+	mlx_destroy_image(ptr->mlx, ptr->img.mlx_img);
+	mlx_destroy_image(ptr->mlx, ptr->tex[0].save);
+	mlx_destroy_image(ptr->mlx, ptr->tex[1].save);
+	mlx_destroy_image(ptr->mlx, ptr->tex[2].save);
+	mlx_destroy_image(ptr->mlx, ptr->tex[3].save);
 	mlx_destroy_display(ptr->mlx);
 	free(ptr->mlx);
-	free_db_tab(ptr->utils->map);
-	exit (0);
+	exit(0);
 }

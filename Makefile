@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
+#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 14:09:59 by vsozonof          #+#    #+#              #
-#    Updated: 2024/05/20 13:06:35 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/05/22 14:46:12 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ SRCS = main.c \
 	   graphic/keys_hook.c \
 	   graphic/init_struct.c\
 	   graphic/img_creation.c \
-	   graphic/free_all.c \
+	   graphic/free_function.c \
+	   graphic/init_image.c \
 
 
 OBJS = $(SRCS:.c=.o)

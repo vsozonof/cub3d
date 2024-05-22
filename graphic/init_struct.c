@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/17 10:35:39 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/22 15:56:37 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,26 @@
 int	init_struct(t_info *ptr, t_utils *util, t_math *ma)
 {
 	ptr->mlx = util->mlx;
-	if (ptr->mlx == NULL)
-		return (MLX_ERROR);
 	ptr->win = mlx_new_window(ptr->mlx, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "my window");
 	if (ptr->win == NULL)
 	{
-		free(ptr->win);
-		return (MLX_ERROR);
+		free_parsing_fonction(ptr);
+		free(ptr->mlx);
+		return (1);
 	}
 	ptr->p_mov = 0;
 	ptr->pa = 90;
 	ptr->ma = ma_init(ma, ptr);
+	ptr->img.mlx_img = mlx_new_image(ptr->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!ptr->img.mlx_img)
+	{
+		free_parsing_fonction(ptr);
+		mlx_destroy_window(ptr->mlx, ptr->win);
+		mlx_destroy_display(ptr->mlx);
+		free(ptr->mlx);
+		return (1);
+	}
 	return (0);
 }
 
@@ -81,23 +89,17 @@ void	setup_cardinal_helper(t_math *ma, t_info *ptr)
 	}
 }
 
-t_info	initialize_tex(t_info ptr)
+void	initialize_tex(t_info *ptr)
 {
-	ptr.tex[0].save = mlx_xpm_file_to_image(ptr.utils->mlx,
-			"texture/colorstone.xpm", &ptr.tex[0].w, &ptr.tex[0].h);
-	ptr.tex[1].save = mlx_xpm_file_to_image(ptr.utils->mlx,
-			"texture/eagle.xpm", &ptr.tex[1].w, &ptr.tex[1].h);
-	ptr.tex[2].save = mlx_xpm_file_to_image(ptr.utils->mlx,
-			"texture/greystone.xpm", &ptr.tex[2].w, &ptr.tex[2].h);
-	ptr.tex[3].save = mlx_xpm_file_to_image(ptr.utils->mlx,
-			"texture/redbrick.xpm", &ptr.tex[3].w, &ptr.tex[3].h);
-	ptr.tex[0].addr = (int *)mlx_get_data_addr(ptr.tex[0].save, &ptr.tex[0].bpp,
-			&ptr.tex[0].line_len, &ptr.tex[0].endian);
-	ptr.tex[1].addr = (int *)mlx_get_data_addr(ptr.tex[1].save, &ptr.tex[1].bpp,
-			&ptr.tex[1].line_len, &ptr.tex[1].endian);
-	ptr.tex[2].addr = (int *)mlx_get_data_addr(ptr.tex[2].save, &ptr.tex[2].bpp,
-			&ptr.tex[2].line_len, &ptr.tex[2].endian);
-	ptr.tex[3].addr = (int *)mlx_get_data_addr(ptr.tex[3].save, &ptr.tex[3].bpp,
-			&ptr.tex[3].line_len, &ptr.tex[3].endian);
-	return (ptr);
+	ptr->tex[0].save = mlx_xpm_file_to_image(ptr->utils->mlx,
+		ptr->data->north_texture, &ptr->tex[0].w, &ptr->tex[0].h);
+	ptr->tex[1].save = mlx_xpm_file_to_image(ptr->utils->mlx,
+		ptr->data->east_texture, &ptr->tex[1].w, &ptr->tex[1].h);
+	ptr->tex[2].save = mlx_xpm_file_to_image(ptr->utils->mlx,
+		ptr->data->south_texture, &ptr->tex[2].w, &ptr->tex[2].h);
+	ptr->tex[3].save = mlx_xpm_file_to_image(ptr->utils->mlx,
+		ptr->data->west_texture, &ptr->tex[3].w, &ptr->tex[3].h);
+	printf("voici ce qu'il y a dans texture %s\n", ptr->data->north_texture);
+	check_xpm(ptr);
+	initialize_addr(ptr);
 }

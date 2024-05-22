@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/20 13:04:51 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/22 14:38:34 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,6 @@ int			mouse_hook(t_info *ptr);
 int			get_key_hook(int keycode, t_info *ptr);
 void		close_windows_esc(t_info *ptr);
 int			found_player_type(t_utils *utils);
-int			refresh_player_pos(char **argv, t_info *ptr);
 int			found_player_pos_x(char **argv);
 int			found_player_pos_y(char **argv);
 void		struct_map(char **map, t_info *ptr);
@@ -245,17 +244,15 @@ void		img_pix_put(t_img *img, int x, int y, int color);
 void		render_background(t_img *img, int color);
 int			render_rect(t_img *img, t_rect rect);
 int			handle_keypress(int keysym, t_info *ptr);
-int			window_creation(t_utils *utils);
+int			window_creation(t_utils *utils, t_data *data);
 int			get_key_hook(int keycode, t_info *ptr);
 int			try_moove(t_info *ptr);
 int			init_struct(t_info *ptr, t_utils *util, t_math *ma);
 void		found_pos_player_minimap(t_info *ptr);
 int			check_keycode(int keycode);
 void		player_pov_rotation(t_math *ma, int input);
-void		player_creation_minimap(t_info *ptr);
 void		make_ray(t_info *ptr, int fi_x, int fi_y);
 void		raycasting(t_info *ptr);
-int			make_map(t_info *ptr, int i);
 void		digital_dif_analyser(t_math *ma, t_info *ptr);
 void		player_movement_map(t_math *ma, int input, t_info *ptr);
 void		delta_distance_calculation(t_math *ma, int x);
@@ -268,19 +265,17 @@ void		player_movement_front(double x, double y, t_info *ptr, t_math *ma);
 void		player_movement_side(double x, double y, t_info *ptr, t_math *ma);
 int			len_db_tab(char **map);
 int			setup_color_ceiling_floor(t_info *ptr);
-int			tmp_image(t_info *ptr);
 void		print_img_simulation(t_info *ptr, int x, int j, t_math *ma);
-void		*get_image(t_info *ptr, t_math *ma);
-void		image_helper(t_info *ptr, int x, int j, t_math *ma);
 int			verify_texture(t_info *ptr, int texn, int y, int x);
-int			get_size_tex(t_info *ptr);
-void		init_tex(t_text *tex, t_info *ptr);
 t_math		*ma_init(t_math *ma, t_info *ptr);
-t_info		initialize_tex(t_info ptr);
-void		start_simulation(t_info ptr);
+void		initialize_tex(t_info *ptr);
 void		free_db_tab(char **map);
-void		free_all(t_info ptr, t_data *data);
 void		setup_cardinal_helper(t_math *ma, t_info *ptr);
+void		free_all_img(t_info *ptr);
+void		free_parsing_fonction(t_info *ptr);
+void		check_xpm(t_info *ptr);
+void		initialize_addr(t_info *ptr);
+void		initialize_addr_help(t_info *ptr);
 
 // ! ****************************************************
 // ? 			Program Memory Handler

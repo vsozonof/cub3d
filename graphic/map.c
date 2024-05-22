@@ -6,42 +6,40 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/17 11:19:07 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/22 15:51:40 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	window_creation(t_utils *utils)
+int	window_creation(t_utils *utils, t_data *data)
 {
 	t_info	ptr;
 	t_math	ma;
 	int		i;
 
 	i = 0;
+	ptr.data = data;
 	ptr.utils = utils;
 	if (init_struct(&ptr, utils, &ma) == 1)
-		return (1);
-	ptr.img.mlx_img = mlx_new_image(ptr.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	ptr = initialize_tex(ptr);
+		exit (1);
+	initialize_tex(&ptr);
 	while (i < 4)
 	{
 		if (ptr.tex[i].w != 64 || ptr.tex[i].h != 64)
-			exit(1);
+			free_all_img(&ptr);
 		i++;
 	}
 	ptr.img.addr = mlx_get_data_addr(ptr.img.mlx_img, &ptr.img.bpp,
 			&ptr.img.line_len, &ptr.img.endian);
-	start_simulation(ptr);
-	return (0);
-}
-
-void	start_simulation(t_info ptr)
-{
+	if (!ptr.img.addr)
+		free_all_img(&ptr);
+	printf("coucouc\n");
 	mlx_loop_hook(ptr.mlx, &render, &ptr);
 	mlx_hook(ptr.win, 17, 0, mouse_hook, &ptr);
 	mlx_key_hook(ptr.win, get_key_hook, &ptr);
 	mlx_loop(ptr.mlx);
+	return (0);
 }
 
 void	print_img_simulation(t_info *ptr, int x, int j, t_math *ma)
