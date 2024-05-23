@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 18:09:18 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/05/20 13:17:49 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/23 11:52:21 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	are_textures_valid(t_data *data, t_utils *utils)
 		pr_msg(CHECK_TEXTUR, 1);
 		return (pr_error("A texture is invalid"));
 	}
-	free_and_set_to_null_2(data);
 	pr_msg(CHECK_TEXTUR, 2);
 	return (0);
 }
