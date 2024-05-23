@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:10:02 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/05/23 11:42:42 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:20:02 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(int argc, char **argv)
 	initialize_struct(&data, &utils);
 	if (parsing_manage(&data, argc, argv, &utils))
 		return (1);
-	printf("voici ce qu'il y a dans texture %s\n", data.north_texture);
 	window_creation(&utils, &data);
 	return (0);
 }

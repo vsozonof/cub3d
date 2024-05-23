@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/23 11:42:26 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:27:28 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,15 @@ void	initialize_tex(t_info *ptr)
 	ptr->tex[3].save = mlx_xpm_file_to_image(ptr->utils->mlx,
 		ptr->data->west_texture, &ptr->tex[3].w, &ptr->tex[3].h);
 	check_xpm(ptr);
+	ptr->tex[0].addr = (int *)mlx_get_data_addr(ptr->tex[0].save, &ptr->tex[0].bpp,
+			&ptr->tex[0].line_len, &ptr->tex[0].endian);
+	ptr->tex[1].addr = (int *)mlx_get_data_addr(ptr->tex[1].save, &ptr->tex[1].bpp,
+			&ptr->tex[1].line_len, &ptr->tex[1].endian);
+	ptr->tex[2].addr = (int *)mlx_get_data_addr(ptr->tex[2].save, &ptr->tex[2].bpp,
+			&ptr->tex[2].line_len, &ptr->tex[2].endian);
+	ptr->tex[3].addr = (int *)mlx_get_data_addr(ptr->tex[3].save, &ptr->tex[3].bpp,
+			&ptr->tex[3].line_len, &ptr->tex[3].endian);
+	ptr->img.addr = mlx_get_data_addr(ptr->img.mlx_img, &ptr->img.bpp,
+			&ptr->img.line_len, &ptr->img.endian);
 	initialize_addr(ptr);
 }

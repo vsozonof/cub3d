@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/23 08:11:33 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:26:33 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ int	window_creation(t_utils *utils, t_data *data)
 			free_all_img(&ptr);
 		i++;
 	}
-	ptr.img.addr = mlx_get_data_addr(ptr.img.mlx_img, &ptr.img.bpp,
-			&ptr.img.line_len, &ptr.img.endian);
-	if (!ptr.img.addr)
-		free_all_img(&ptr);
-	printf("coucouc\n");
 	mlx_loop_hook(ptr.mlx, &render, &ptr);
 	mlx_hook(ptr.win, 17, 0, mouse_hook, &ptr);
 	mlx_key_hook(ptr.win, get_key_hook, &ptr);

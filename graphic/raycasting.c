@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 09:28:36 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/22 09:53:34 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:29:58 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,8 @@ void	ray_calculation(t_math *ma)
 
 void	digital_dif_analyser(t_math *ma, t_info *ptr)
 {
-	int		i;
-
 	while (ma->hit == 0)
 	{
-		i = 0;
 		if (ma->sidedistx < ma->sidedisty)
 		{
 			ma->sidedistx += ma->deltadistx;

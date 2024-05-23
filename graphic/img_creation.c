@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:12:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/22 14:07:56 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:28:48 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ int	render(t_info *ptr)
 	if (ptr->win == NULL)
 		return (1);
 	render_background(&ptr->img, BLACK_PIXEL);
-	render_rect(&ptr->img, (t_rect){0, 0,
-		WINDOW_WIDTH, WINDOW_HEIGHT, BLACK_PIXEL});
 	raycasting(ptr);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img.mlx_img, 0, 0);
 	return (0);

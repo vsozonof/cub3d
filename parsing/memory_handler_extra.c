@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:05:40 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/05/20 13:07:08 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/23 11:53:51 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	free_and_set_to_null_1(t_data *data)
 		free(data->ceiling_color);
 		data->ceiling_color = NULL;
 	}
-	free_and_set_to_null_2(data);
 }
 
 void	free_and_set_to_null_2(t_data *data)
