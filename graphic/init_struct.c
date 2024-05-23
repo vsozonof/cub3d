@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/22 15:56:37 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/23 11:42:26 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	initialize_tex(t_info *ptr)
 		ptr->data->south_texture, &ptr->tex[2].w, &ptr->tex[2].h);
 	ptr->tex[3].save = mlx_xpm_file_to_image(ptr->utils->mlx,
 		ptr->data->west_texture, &ptr->tex[3].w, &ptr->tex[3].h);
-	printf("voici ce qu'il y a dans texture %s\n", ptr->data->north_texture);
 	check_xpm(ptr);
 	initialize_addr(ptr);
 }
