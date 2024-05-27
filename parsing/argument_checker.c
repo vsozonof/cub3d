@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:46:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/05/20 11:37:33 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/27 02:56:55 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	read_map(t_data *data)
 			return (pr_error("Malloc() error."));
 		}
 		line = get_next_line(data->fd);
+		if (ft_strlen(line) > 100)
+			return (pr_msg(READ_MAP, 1), pr_error("The map is too big."));
 	}
 	pr_msg(READ_MAP, 2);
 	return (0);
