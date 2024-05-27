@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 10:36:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/27 09:11:10 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/27 09:35:28 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	free_parsing_fonction(t_info *ptr)
 	free(ptr->utils->ceiling_color);
 }
 
-void		free_all_bef(t_info *ptr)
+void	free_all_bef(t_info *ptr)
 {
 	if (ptr->tex[0].save)
 		mlx_destroy_image(ptr->mlx, ptr->tex[0].save);
