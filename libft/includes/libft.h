@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 22:14:34 by vsozonoff         #+#    #+#             */
-/*   Updated: 2024/05/27 02:51:18 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/27 09:31:44 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void		ft_pointer_converter(void *p);
 #  define BUFFER_SIZE 1000
 # endif
 
-char		*get_next_line(int fd);
+char		*get_next_line(int fd, int key);
 char		*read_and_fill_stash(int fd, char *stash);
 char		*extract_from_stash(char *stash);
 char		*get_line(char *stash);
