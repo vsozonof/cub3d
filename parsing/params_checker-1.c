@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:03:08 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/05/20 13:25:11 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/27 09:41:42 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	update_map_var(t_data *data)
 	data->map = tmp;
 	if (!data->map || ft_strlen(data->map) == 0)
 		return (1);
-	printf("\n%s\n", data->map);
 	return (0);
 }
 
