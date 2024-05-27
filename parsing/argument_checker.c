@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:46:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/05/27 02:56:55 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/27 09:35:41 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	read_map(t_data *data)
 	char	*line;
 
 	pr_msg(READ_MAP, 0);
-	line = get_next_line(data->fd);
+	line = get_next_line(data->fd, 0);
 	if (!line)
 	{
 		pr_msg(READ_MAP, 1);
@@ -62,9 +62,10 @@ int	read_map(t_data *data)
 			pr_msg(READ_MAP, 1);
 			return (pr_error("Malloc() error."));
 		}
-		line = get_next_line(data->fd);
+		line = get_next_line(data->fd, 0);
 		if (ft_strlen(line) > 100)
-			return (pr_msg(READ_MAP, 1), pr_error("The map is too big."));
+			return (pr_msg(READ_MAP, 1), free(get_next_line(data->fd, 1)),
+				free(line), pr_error("The map is too big."));
 	}
 	pr_msg(READ_MAP, 2);
 	return (0);

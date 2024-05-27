@@ -6,19 +6,21 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 14:02:00 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/03/09 21:41:54 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/05/27 09:30:27 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int key)
 {
 	char			*line;
 	static char		*stash[FOPEN_MAX];
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
+	if (stash[fd] && key == 1)
+		return (stash[fd]);
 	stash[fd] = read_and_fill_stash(fd, stash[fd]);
 	if (!stash[fd])
 		return (NULL);
