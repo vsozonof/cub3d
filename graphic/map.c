@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:59:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/23 13:26:33 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/27 09:11:34 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	window_creation(t_utils *utils, t_data *data)
 	while (i < 4)
 	{
 		if (ptr.tex[i].w != 64 || ptr.tex[i].h != 64)
-			free_all_img(&ptr);
+			free_all_bef(&ptr);
 		i++;
 	}
 	mlx_loop_hook(ptr.mlx, &render, &ptr);
