@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:00:23 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/22 14:38:34 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/27 09:10:47 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,7 +275,7 @@ void		free_all_img(t_info *ptr);
 void		free_parsing_fonction(t_info *ptr);
 void		check_xpm(t_info *ptr);
 void		initialize_addr(t_info *ptr);
-void		initialize_addr_help(t_info *ptr);
+void		free_all_bef(t_info *ptr);
 
 // ! ****************************************************
 // ? 			Program Memory Handler

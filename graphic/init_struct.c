@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:59:10 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/05/23 13:27:28 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/05/27 09:16:32 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	init_struct(t_info *ptr, t_utils *util, t_math *ma)
 	if (ptr->win == NULL)
 	{
 		free_parsing_fonction(ptr);
+		mlx_destroy_display(ptr->mlx);
 		free(ptr->mlx);
 		return (1);
 	}
